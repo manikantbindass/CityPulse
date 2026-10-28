@@ -70,7 +70,10 @@ const result = {
   verified: proof.valid,
   tamperedVerified: tampered.valid,
   eventTopic: ethers.id('DatasetAttested(bytes32,address,bytes32,bytes32,uint8,bytes32,uint64)'),
-  rpc: process.env.CITYPULSE_EPHEMERAL_DEMO === '1' ? null : 'http://127.0.0.1:8545',
+  rpc:
+    process.env.CITYPULSE_EPHEMERAL_DEMO === '1'
+      ? null
+      : (process.env.LOCAL_CHAIN_RPC_URL ?? 'http://127.0.0.1:8545'),
 };
 await fs.writeFile(path.join(output, 'local-demo-result.json'), JSON.stringify(result, null, 2));
 await fs.writeFile(path.join(output, 'deployment.json'), JSON.stringify(result, null, 2));

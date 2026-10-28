@@ -41,3 +41,7 @@ Use [developer commands](development.md), [ingestion demo](ingestion.md), [backe
 - [Desktop report view](assets/workspace-desktop.png) and [mobile report view](assets/workspace-mobile.png) are actual screenshots from the successful initial CI interaction flow, with synthetic data.
 
 No claim is made that pending final CI or unavailable Docker-local checks have passed.
+
+- A subsequent persistent local node on loopback port 8547 completed deployment and attestation, and a separate read-only process verified the exported report through RPC. [Persistent local evidence](reports/blockchain-persistent-demo.json) captures the actual receipt and addresses. No public network deployment was performed.
+
+- Updated PR revision `97d21fe`: GitHub Linux web job passed all browser checks, Java job passed, and contracts job passed. Its remaining ingestion-test setup failure was a missing temporary parent directory on a clean checkout; the test suite now creates that directory explicitly. The AI tests themselves passed in that CI run. Final head checks must still be read from GitHub Actions.

@@ -11,6 +11,6 @@ export default defineConfig({
       url: configVariable('TESTNET_RPC_URL'),
       accounts: [configVariable('TESTNET_PRIVATE_KEY')],
     },
-    localhost: { type: 'http', url: 'http://127.0.0.1:8545' },
+    localhost: { type: 'http', url: process.env.LOCAL_CHAIN_RPC_URL ?? 'http://127.0.0.1:8545' },
   },
 });

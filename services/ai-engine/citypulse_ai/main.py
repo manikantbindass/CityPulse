@@ -16,7 +16,7 @@ app.add_middleware(BodyLimitMiddleware)
 
 
 def require_token(authorization: Annotated[str | None, Header()] = None) -> None:
-    token = os.environ.get("LOCAL_API_TOKEN", "")
+    token = os.environ.get("AI_SERVICE_TOKEN") or os.environ.get("LOCAL_API_TOKEN", "")
     if len(token) < 32 or token.startswith("replace-"):
         raise HTTPException(503, "Service authentication is not configured")
     if not hmac.compare_digest(authorization or "", f"Bearer {token}"):

@@ -57,3 +57,13 @@ Run `npm run node --workspace blockchain`, then `npm run deploy:local --workspac
 ## Troubleshooting
 
 Start Docker Desktop in Linux-container mode if the engine pipe is missing. Inspect `docker compose logs api db redis` for readiness failures. Changing `.env` does not change an existing database user's password; update the role or intentionally reset disposable volumes. Verify API URL/token if registry status is offline. Map tiles need internet; tables stay usable. Start AI to use the optional baseline request.
+
+## Forecast training and model registry
+
+With the AI virtual environment active, run `python scripts/train_models.py` to reproduce eight synthetic segment comparisons and build `.models`. Start the AI service from the repository root so its default registry path resolves there, or set MODEL_REGISTRY_DIR to an absolute directory. Docker builds the synthetic registry into its image. Job persistence uses AI_STORAGE_DIR (a Compose volume). See [model card](model-card.md) for evaluation, intervals, rollback and scheduled benchmark support.
+
+## Blockchain demonstration
+
+See [local-chain guide](blockchain.md) for role-controlled contracts, `demo:local`, `demo:ephemeral`, independent report verification, key boundaries and optional testnet configuration. No public deployment is performed automatically.
+
+The local Flyway profile permits out-of-order migrations because its synthetic fixture has reserved version 9000. This lets subsequent schema versions apply to existing development volumes. The non-local profile uses only schema migrations and keeps Flyway default ordering. Never edit an applied migration to change fixtures; add a new migration.

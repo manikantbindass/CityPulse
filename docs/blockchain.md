@@ -29,6 +29,8 @@ npm run verify:report --workspace blockchain
 
 For a self-contained ephemeral chain without an RPC server, run `npm run demo:ephemeral --workspace blockchain`. This deploys, transacts, checks the real receipt, and reads the independent verifier during the same run; the chain ends with the process and cannot be queried later. [Captured local evidence](reports/blockchain-local-demo.json) records an actual ephemeral run. It is not a public deployment.
 
+[Persistent local demo evidence](reports/blockchain-persistent-demo.json) also records a separate-process report verification on local port 8547. Set `LOCAL_CHAIN_RPC_URL` to select a nondefault loopback RPC when port 8545 is in use.
+
 The demo restricts itself to chain 31337 and creates a report in `.data/blockchain/sample-report.csv`. It estimates gas before sending, waits for the actual receipt, records gas used, transaction/block hashes, addresses, chain ID and contract version, and independently reads the verification contract. Tampered bytes must return false. Keys printed by Hardhat are disposable development keys and must never secure public assets. Chain restart invalidates old local deployments; the independent verifier checks network and deployed bytecode.
 
 Exact-byte SHA-256 is used for file content. UTF-8 strings must preserve newlines and whitespace. Off-chain reference strings are SHA-256 hashed before submission, avoiding accidental publication of signed URLs or private paths. Keep a controlled off-chain mapping from reference digest to storage location. A digest of predictable personal data can still leak information through guessing; do not attest personal records without a reviewed privacy design.

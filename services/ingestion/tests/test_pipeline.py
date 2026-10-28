@@ -11,6 +11,10 @@ CATALOG={"sourceUri":"urn:test:synthetic","licenseReference":"synthetic test","t
 ROW={"cityId":"10000000-0000-0000-0000-000000000001","zoneId":"20000000-0000-0000-0000-000000000001","sourceId":"40000000-0000-0000-0000-000000000001","externalId":"row-1","kind":"demand","commodity":" Rice ","quantity":10,"unit":"kg","observedAt":"2026-01-01T05:30:00+05:30","periodEnd":"2026-01-02T05:30:00+05:30","longitude":77.5,"latitude":12.5}
 
 class PipelineTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        (Path(__file__).resolve().parents[3] / ".data").mkdir(parents=True, exist_ok=True)
+
     def test_cleaning_and_timezone(self):
         value=normalize(ROW,CATALOG)
         self.assertEqual(value["commodity"],"rice")

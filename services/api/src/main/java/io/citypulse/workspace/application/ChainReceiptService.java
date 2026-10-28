@@ -85,7 +85,7 @@ public class ChainReceiptService {
             var value = json.readTree(response.body());
             if (value.has("error")) throw new IllegalStateException();
             if (!value.has("result")) throw new IllegalStateException();
-      return value.get("result");
+            return value.get("result");
         } catch (InterruptedException error) {
             Thread.currentThread().interrupt();
             throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, "RPC interrupted");
