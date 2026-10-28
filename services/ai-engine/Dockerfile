@@ -1,7 +1,7 @@
 FROM python:3.12-slim
 WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 MODEL_REGISTRY_DIR=/app/models AI_STORAGE_DIR=/app/var
-RUN useradd --create-home --uid 10001 citypulse
+RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 && rm -rf /var/lib/apt/lists/* && useradd --create-home --uid 10001 citypulse
 COPY services/ai-engine/pyproject.toml ./
 COPY services/ai-engine/citypulse_ai ./citypulse_ai
 COPY services/ai-engine/requirements.lock ./requirements.lock

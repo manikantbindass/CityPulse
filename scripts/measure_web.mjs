@@ -68,6 +68,8 @@ try {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(origin + '/dashboard');
   await page.locator('main#main').waitFor();
+  await page.locator('.recharts-surface').first().waitFor({ timeout: 15000 });
+  await page.waitForTimeout(250);
   await page.screenshot({
     path: path.join(root, 'docs/assets/dashboard-mobile.png'),
     fullPage: true,

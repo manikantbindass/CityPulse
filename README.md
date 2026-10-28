@@ -123,11 +123,11 @@ For host commands, AI virtual environments, local chain startup, and troubleshoo
 
 ## Screenshots
 
-![Desktop report workspace with synthetic data](docs/assets/workspace-desktop.png)
+![CityPulse dashboard with synthetic data](docs/assets/dashboard-desktop.png)
 
-[Mobile report screenshot](docs/assets/workspace-mobile.png) · [Measured synthetic model comparison](docs/assets/model-comparison.png)
+[Mobile dashboard screenshot](docs/assets/dashboard-mobile.png) · [Report workspace](docs/assets/workspace-desktop.png) · [Measured synthetic model comparison](docs/assets/model-comparison.png)
 
-These are real browser captures from the PR CI interaction flow. See [validation report](docs/validation.md) for actual captures and test results. The UI labels seeded data consistently. Screenshots do not represent live city intelligence.
+These are real browser captures from the local production build and PR CI interaction flow. See [validation report](docs/validation.md) for actual captures and test results. The UI labels seeded data consistently. Screenshots do not represent live city intelligence.
 
 ## Testing
 
