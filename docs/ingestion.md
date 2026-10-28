@@ -1,0 +1,48 @@
+# Ingestion and urban analytics
+
+## Reproducible local demo
+
+```sh
+python scripts/data_pipeline.py demo --city bengaluru --seed 42
+python scripts/data_pipeline.py demo --city amsterdam --seed 42 --out .data/amsterdam
+python -m unittest discover -s services/ingestion/tests -v
+```
+
+These create 28 days of synthetic supply/demand, CSV/JSON/Point-GeoJSON variants, catalog metadata, normalized records, quality report, dead letters and metrics. Seed, profile and UTC epoch are fixed. Ingestion timestamps record actual execution separately. Example boxes are not administrative boundaries. INR/EUR are explicit catalog currencies; no price model or currency conversion is implied.
+
+## Pipeline and refresh
+
+```sh
+python scripts/data_pipeline.py ingest --input data/sample/generated-bengaluru/observations.csv --catalog data/sample/generated-bengaluru/catalog.json --out .data/csv-import
+python scripts/data_pipeline.py ingest --input data/sample/generated-bengaluru/observations.geojson --catalog data/sample/generated-bengaluru/catalog.json --out .data/geo-import
+# With the API stack running and .env configured:
+python scripts/data_pipeline.py publish
+```
+
+Stages are bounded raw read, required/schema checks, whitespace/category cleanup, finite decimal validation, offset-to-UTC normalization, IANA timezone/currency checks, WGS84 bounds and configured rectangle checks, source/external-ID digest deduplication, explicit quality scoring, grouped temporal metrics, and API publication into PostGIS-indexed storage. Polygon containment on publication is enforced by the registry. Quality is a transparent rule score (1 with validated coordinates, 0.8 with IDs only), not statistical confidence or source truth.
+
+Unknown columns are rejected to avoid accidental personal-data collection. No individual location traces are generated. Dead letters contain row numbers and reasons, not raw private input. Duplicate identical records are skipped; changed duplicate digests are quarantined. Local checkpoints support incremental refresh. Use one process per checkpoint directory; distributed execution is not implemented. File-level schema errors fail the job before checkpointing.
+
+Publication creates/replays a city, zone and synthetic source through real scoped APIs, then writes observations with deterministic idempotency keys. It retries only temporary HTTP/network failures up to three attempts with bounded delays. Failed publication writes a replayable dead-letter diagnostic and never records a false success. Run publish again after restoring connectivity. Database receipts ensure successful writes are replayed. Local state is not an exactly-once distributed system.
+
+## Public API adapter
+
+```sh
+python scripts/fetch_open_data.py data/official-census-source.json
+```
+
+The reviewed example uses official [TIGERweb States](https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0?f=pjson) and [Census federal-work policy](https://www2.census.gov/foia/ds_policies/ds027.pdf). It snapshots a bounded 2026-vintage Delaware boundary, not city demand. Raw licensed geography requires a reviewed domain mapping before publishing as a city/area. It never becomes demand observations automatically. No private or real-time feed is claimed.
+
+The fetcher requires an exact reviewed HTTPS host, explicit verified license reference, no URL credentials, no redirects, JSON validation and a 10 MB cap. ETag enables unchanged-snapshot refresh when supported. Network failure is reported. It stores provider metadata, license, fetch time and payload digest separately from raw data.
+
+[Amsterdam areas documentation](https://api.data.amsterdam.nl/v1/docs/datasets/gebieden.html) marks the dataset public but leaves its license field unspecified; the catalog therefore blocks it pending license review. [India OGD](https://www.data.gov.in/help) describes API-key access; none is configured. The [Government Open Data License India](https://data.gov.in/Godl) does not imply access to every endpoint. No keys or access are fabricated.
+
+## Metrics and publication
+
+Offline metrics partition commodity, unit, mode and interval duration before sums. They return demand/supply ratio (null for zero supply), shortage/surplus, gap share, observed-interval standard deviation and coefficient of variation, time series, and same-time previous-week comparisons. Missing rows are unknown, not verified zero. Week-over-week differences do not establish seasonality. Resource utilization is returned only when compatible supply capacity is present; otherwise null.
+
+Observation locations can form connected components within 1 km using haversine distance (not DBSCAN or population clusters). Local computation caps unique locations at 2000 and reports when skipped. Real registered businesses use PostGIS DBSCAN with local UTM, business density per geodesic square kilometer, and a business-neighbor-within-1km proxy. This proxy is not resident accessibility, walking time, or transport access. City-scale clustering assumes one UTM zone and excludes polar regions.
+
+`GET /api/v1/analytics/metrics` publishes tenant-scoped stored metrics with cityId, commodity, unit, from, to. It separates source mode and interval duration and includes UTC daily buckets, volatility, category-level business density, geographic clusters and proxy disclosures. Supply/demand imbalance and scoring endpoints remain documented separately. The intelligence UI has a real local-evidence panel alongside explicitly synthetic charts.
+
+Population-weighted accessibility, real capacity utilization, validated seasonality, travel-network routing, source coverage assurance and public-feed schedules require licensed datasets and remain unsupported where inputs are absent. No substitute numbers are invented.

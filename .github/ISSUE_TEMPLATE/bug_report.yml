@@ -1,0 +1,14 @@
+name: Bug report
+description: Report a reproducible problem
+title: '[Bug]: '
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected behavior, and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: OS, browser, service versions and sanitized logs

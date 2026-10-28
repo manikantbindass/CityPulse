@@ -1,0 +1,19 @@
+{
+  "name": "@citypulse/blockchain",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "hardhat compile",
+    "test": "hardhat test",
+    "node": "hardhat node --hostname 0.0.0.0",
+    "deploy:local": "hardhat run scripts/deploy.ts --network localhost"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^4.2.1",
+    "@nomicfoundation/hardhat-node-test-runner": "^3.1.2",
+    "ethers": "^6.17.0",
+    "hardhat": "3.21.1",
+    "typescript": "5.9.3"
+  }
+}

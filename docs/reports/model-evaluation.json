@@ -1,0 +1,827 @@
+{
+  "id": "daily-v1-49ffebe53361",
+  "datasetFingerprint": "49ffebe53361be13ce46d58eb1a819a86b1fb9ba1936bc149224e74d7d3ddbff",
+  "dataMode": "synthetic",
+  "features": ["lag_1", "lag_7", "lag_14", "mean_previous_7", "weekday_sin", "weekday_cos"],
+  "protocol": "per-geographic-segment chronological 60/20/20; rolling one-step evaluation; select on validation MAE; deployed artifact uses training split only; untouched test report",
+  "segments": {
+    "amsterdam/central/groceries": {
+      "selectedModel": "ridge",
+      "artifact": "8c51970b5b955d25.ridge.json",
+      "candidates": {
+        "seasonal-naive": {
+          "validation": {
+            "mae": 5.483994444444445,
+            "rmse": 6.453706630516898,
+            "smape_percent": 4.236954029607163,
+            "mean_underforecast": 3.3664111111111112,
+            "mean_overforecast": 2.1175833333333336,
+            "samples": 36
+          },
+          "test": {
+            "mae": 4.171954054054052,
+            "rmse": 5.493396670327706,
+            "smape_percent": 3.115420871165504,
+            "mean_underforecast": 2.549972972972972,
+            "mean_overforecast": 1.62198108108108,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.918918918918919,
+          "validationResidualRadius": 10.663599999999988
+        },
+        "moving-average": {
+          "validation": {
+            "mae": 8.917726190476193,
+            "rmse": 10.835287996947356,
+            "smape_percent": 6.806583458456682,
+            "mean_underforecast": 5.030202777777778,
+            "mean_overforecast": 3.887523412698414,
+            "samples": 36
+          },
+          "test": {
+            "mae": 7.8838714285714255,
+            "rmse": 9.845413041580406,
+            "smape_percent": 5.777210403579177,
+            "mean_underforecast": 4.1557409266409255,
+            "mean_overforecast": 3.7281305019305018,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.8918918918918919,
+          "validationResidualRadius": 17.30462857142858
+        },
+        "ridge": {
+          "validation": {
+            "mae": 4.457353306570142,
+            "rmse": 5.8501400273371305,
+            "smape_percent": 3.4234147001534327,
+            "mean_underforecast": 3.319727617133706,
+            "mean_overforecast": 1.1376256894364367,
+            "samples": 36
+          },
+          "test": {
+            "mae": 4.545566428487243,
+            "rmse": 5.7098658512989715,
+            "smape_percent": 3.3776344666600933,
+            "mean_underforecast": 3.7388368481707333,
+            "mean_overforecast": 0.8067295803165099,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.9459459459459459,
+          "validationResidualRadius": 10.176793596055973
+        },
+        "xgboost": {
+          "validation": {
+            "mae": 6.895116886054145,
+            "rmse": 8.677299888487484,
+            "smape_percent": 5.23685139391058,
+            "mean_underforecast": 6.153059944661459,
+            "mean_overforecast": 0.7420569413926867,
+            "samples": 36
+          },
+          "test": {
+            "mae": 9.281630441036741,
+            "rmse": 11.384767386552271,
+            "smape_percent": 6.885638724901234,
+            "mean_underforecast": 9.096018870750633,
+            "mean_overforecast": 0.18561157028610628,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.8378378378378378,
+          "validationResidualRadius": 15.744923010253899
+        }
+      },
+      "trainingCount": 109,
+      "validationCount": 36,
+      "testCount": 37,
+      "trainedThrough": "2025-10-17T00:00:00+00:00",
+      "testStartsAt": "2025-11-23T00:00:00+00:00",
+      "intervalRadius": 10.176793596055973,
+      "featureImportance": {
+        "lag_1": 0.005211735074266969,
+        "lag_7": 0.3052785216698923,
+        "lag_14": 0.5207587425748892,
+        "mean_previous_7": -0.029429172767790307,
+        "weekday_sin": -1.16778018514245,
+        "weekday_cos": -0.3880134296683873
+      },
+      "featureImportanceMeaning": "XGBoost split gain or Ridge raw coefficients; association, not causality or comparable normalized importance",
+      "trainingMean": 120.01809724770644,
+      "trainingStdDev": 10.426338674321096
+    },
+    "amsterdam/central/mobility": {
+      "selectedModel": "ridge",
+      "artifact": "26be70447c403ab6.ridge.json",
+      "candidates": {
+        "seasonal-naive": {
+          "validation": {
+            "mae": 3.5000249999999973,
+            "rmse": 4.451905514152836,
+            "smape_percent": 2.629880897389667,
+            "mean_underforecast": 1.9387138888888873,
+            "mean_overforecast": 1.56131111111111,
+            "samples": 36
+          },
+          "test": {
+            "mae": 3.570594594594597,
+            "rmse": 4.634679889234605,
+            "smape_percent": 2.6588183792176485,
+            "mean_underforecast": 2.347624324324325,
+            "mean_overforecast": 1.2229702702702716,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.9459459459459459,
+          "validationResidualRadius": 7.772899999999993
+        },
+        "moving-average": {
+          "validation": {
+            "mae": 9.061277380952383,
+            "rmse": 10.761870880542691,
+            "smape_percent": 6.868553582765351,
+            "mean_underforecast": 4.790261904761905,
+            "mean_overforecast": 4.271015476190474,
+            "samples": 36
+          },
+          "test": {
+            "mae": 8.222374131274131,
+            "rmse": 10.07307616069252,
+            "smape_percent": 6.140820426328783,
+            "mean_underforecast": 4.357478378378378,
+            "mean_overforecast": 3.8648957528957526,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.918918918918919,
+          "validationResidualRadius": 18.208242857142864
+        },
+        "ridge": {
+          "validation": {
+            "mae": 3.2671422196136928,
+            "rmse": 4.07734651419699,
+            "smape_percent": 2.4673572273975046,
+            "mean_underforecast": 1.9599228119869758,
+            "mean_overforecast": 1.307219407626717,
+            "samples": 36
+          },
+          "test": {
+            "mae": 3.346054782434872,
+            "rmse": 4.305838143668551,
+            "smape_percent": 2.494218585491403,
+            "mean_underforecast": 2.5310167796721443,
+            "mean_overforecast": 0.8150380027627278,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.8918918918918919,
+          "validationResidualRadius": 7.178769310066912
+        },
+        "xgboost": {
+          "validation": {
+            "mae": 4.855355648125543,
+            "rmse": 6.121961391232832,
+            "smape_percent": 3.614812797993821,
+            "mean_underforecast": 4.2470713019477,
+            "mean_overforecast": 0.6082843461778427,
+            "samples": 36
+          },
+          "test": {
+            "mae": 6.847105769306902,
+            "rmse": 8.314188846471826,
+            "smape_percent": 5.1046387595237865,
+            "mean_underforecast": 6.620145439519107,
+            "mean_overforecast": 0.2269603297877953,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.8378378378378378,
+          "validationResidualRadius": 10.386232543945312
+        }
+      },
+      "trainingCount": 109,
+      "validationCount": 36,
+      "testCount": 37,
+      "trainedThrough": "2025-10-17T00:00:00+00:00",
+      "testStartsAt": "2025-11-23T00:00:00+00:00",
+      "intervalRadius": 7.178769310066912,
+      "featureImportance": {
+        "lag_1": 0.05215865688257395,
+        "lag_7": 0.4735101770560305,
+        "lag_14": 0.37495446731609083,
+        "mean_previous_7": -0.06178377876541096,
+        "weekday_sin": -0.7644759835932045,
+        "weekday_cos": -0.6402213322213026
+      },
+      "featureImportanceMeaning": "XGBoost split gain or Ridge raw coefficients; association, not causality or comparable normalized importance",
+      "trainingMean": 120.09941559633026,
+      "trainingStdDev": 11.199528987033702
+    },
+    "amsterdam/north/groceries": {
+      "selectedModel": "ridge",
+      "artifact": "f32bf4c3b7ccb6ec.ridge.json",
+      "candidates": {
+        "seasonal-naive": {
+          "validation": {
+            "mae": 3.6896361111111102,
+            "rmse": 4.577961323407081,
+            "smape_percent": 2.8518866068614885,
+            "mean_underforecast": 2.1206694444444434,
+            "mean_overforecast": 1.5689666666666662,
+            "samples": 36
+          },
+          "test": {
+            "mae": 4.759567567567568,
+            "rmse": 5.863892766293957,
+            "smape_percent": 3.5878521567250186,
+            "mean_underforecast": 3.1724432432432437,
+            "mean_overforecast": 1.5871243243243245,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.7567567567567568,
+          "validationResidualRadius": 7.889899999999997
+        },
+        "moving-average": {
+          "validation": {
+            "mae": 8.276711904761903,
+            "rmse": 10.296225135288267,
+            "smape_percent": 6.375874582971439,
+            "mean_underforecast": 4.572492857142855,
+            "mean_overforecast": 3.7042190476190484,
+            "samples": 36
+          },
+          "test": {
+            "mae": 7.662111969111969,
+            "rmse": 9.474235812524315,
+            "smape_percent": 5.662672580111977,
+            "mean_underforecast": 4.142706563706565,
+            "mean_overforecast": 3.5194054054054043,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.8918918918918919,
+          "validationResidualRadius": 17.493499999999983
+        },
+        "ridge": {
+          "validation": {
+            "mae": 3.600805461436574,
+            "rmse": 4.150720540203853,
+            "smape_percent": 2.7601839381164854,
+            "mean_underforecast": 2.0509839348823244,
+            "mean_overforecast": 1.54982152655425,
+            "samples": 36
+          },
+          "test": {
+            "mae": 4.657688985176151,
+            "rmse": 5.424490991756098,
+            "smape_percent": 3.45999013602666,
+            "mean_underforecast": 3.577609117941388,
+            "mean_overforecast": 1.0800798672347625,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.7027027027027027,
+          "validationResidualRadius": 6.276652622499171
+        },
+        "xgboost": {
+          "validation": {
+            "mae": 4.349104475233289,
+            "rmse": 5.727411742261287,
+            "smape_percent": 3.320212664507504,
+            "mean_underforecast": 3.829107070583766,
+            "mean_overforecast": 0.5199974046495228,
+            "samples": 36
+          },
+          "test": {
+            "mae": 8.402446839698584,
+            "rmse": 10.051910762676167,
+            "smape_percent": 6.261896040300425,
+            "mean_underforecast": 8.074653894372888,
+            "mean_overforecast": 0.3277929453256966,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.6756756756756757,
+          "validationResidualRadius": 10.172519116210935
+        }
+      },
+      "trainingCount": 109,
+      "validationCount": 36,
+      "testCount": 37,
+      "trainedThrough": "2025-10-17T00:00:00+00:00",
+      "testStartsAt": "2025-11-23T00:00:00+00:00",
+      "intervalRadius": 6.276652622499171,
+      "featureImportance": {
+        "lag_1": -0.008011839304010506,
+        "lag_7": 0.3623446887723124,
+        "lag_14": 0.4759595481731268,
+        "mean_previous_7": 0.06842152057682258,
+        "weekday_sin": -1.2532094075410114,
+        "weekday_cos": -0.4227451567701518
+      },
+      "featureImportanceMeaning": "XGBoost split gain or Ridge raw coefficients; association, not causality or comparable normalized importance",
+      "trainingMean": 120.19448807339448,
+      "trainingStdDev": 10.670871978451432
+    },
+    "amsterdam/north/mobility": {
+      "selectedModel": "ridge",
+      "artifact": "bdb168779a5c628d.ridge.json",
+      "candidates": {
+        "seasonal-naive": {
+          "validation": {
+            "mae": 3.8368194444444463,
+            "rmse": 4.950148209313202,
+            "smape_percent": 2.9354830674530543,
+            "mean_underforecast": 2.198063888888889,
+            "mean_overforecast": 1.638755555555557,
+            "samples": 36
+          },
+          "test": {
+            "mae": 4.300245945945946,
+            "rmse": 5.674603400905439,
+            "smape_percent": 3.2480712513773944,
+            "mean_underforecast": 2.6255432432432433,
+            "mean_overforecast": 1.6747027027027024,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.8648648648648649,
+          "validationResidualRadius": 8.8921
+        },
+        "moving-average": {
+          "validation": {
+            "mae": 7.637385714285713,
+            "rmse": 9.01540079369792,
+            "smape_percent": 5.824921148090902,
+            "mean_underforecast": 4.3061115079365075,
+            "mean_overforecast": 3.331274206349207,
+            "samples": 36
+          },
+          "test": {
+            "mae": 8.260551737451738,
+            "rmse": 10.744197817648374,
+            "smape_percent": 6.149055958155691,
+            "mean_underforecast": 4.21638532818533,
+            "mean_overforecast": 4.044166409266408,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.7837837837837838,
+          "validationResidualRadius": 15.251814285714289
+        },
+        "ridge": {
+          "validation": {
+            "mae": 2.9466003863503443,
+            "rmse": 3.7728396903778334,
+            "smape_percent": 2.2399278493014823,
+            "mean_underforecast": 1.1109000376352371,
+            "mean_overforecast": 1.8357003487151071,
+            "samples": 36
+          },
+          "test": {
+            "mae": 4.350763858296085,
+            "rmse": 5.7283482884697206,
+            "smape_percent": 3.290869295279651,
+            "mean_underforecast": 1.8416154713098856,
+            "mean_overforecast": 2.5091483869861992,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.7837837837837838,
+          "validationResidualRadius": 7.5286218057330245
+        },
+        "xgboost": {
+          "validation": {
+            "mae": 3.9174630971272797,
+            "rmse": 4.730916397280608,
+            "smape_percent": 2.9933736192178872,
+            "mean_underforecast": 2.1066967854817706,
+            "mean_overforecast": 1.8107663116455082,
+            "samples": 36
+          },
+          "test": {
+            "mae": 5.227276870315138,
+            "rmse": 6.62915465446012,
+            "smape_percent": 3.8943076080672325,
+            "mean_underforecast": 3.483964859256228,
+            "mean_overforecast": 1.7433120110589102,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.7567567567567568,
+          "validationResidualRadius": 7.724323754882818
+        }
+      },
+      "trainingCount": 109,
+      "validationCount": 36,
+      "testCount": 37,
+      "trainedThrough": "2025-10-17T00:00:00+00:00",
+      "testStartsAt": "2025-11-23T00:00:00+00:00",
+      "intervalRadius": 7.5286218057330245,
+      "featureImportance": {
+        "lag_1": 0.014487433270906215,
+        "lag_7": 0.3723080289021701,
+        "lag_14": 0.5217320116923683,
+        "mean_previous_7": 0.10046291082514916,
+        "weekday_sin": -0.7100100932899888,
+        "weekday_cos": -0.26200728301313453
+      },
+      "featureImportanceMeaning": "XGBoost split gain or Ridge raw coefficients; association, not causality or comparable normalized importance",
+      "trainingMean": 120.97770366972478,
+      "trainingStdDev": 10.836372643533805
+    },
+    "bengaluru/central/groceries": {
+      "selectedModel": "ridge",
+      "artifact": "cef95a1d7ff05d6f.ridge.json",
+      "candidates": {
+        "seasonal-naive": {
+          "validation": {
+            "mae": 4.848852777777779,
+            "rmse": 6.069249781320222,
+            "smape_percent": 3.7418989151220376,
+            "mean_underforecast": 2.9315527777777786,
+            "mean_overforecast": 1.9172999999999998,
+            "samples": 36
+          },
+          "test": {
+            "mae": 3.302527027027025,
+            "rmse": 4.308143673010137,
+            "smape_percent": 2.491952976734217,
+            "mean_underforecast": 2.0532648648648633,
+            "mean_overforecast": 1.2492621621621618,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.972972972972973,
+          "validationResidualRadius": 11.338000000000008
+        },
+        "moving-average": {
+          "validation": {
+            "mae": 8.795613888888887,
+            "rmse": 10.464061478853496,
+            "smape_percent": 6.718944621769569,
+            "mean_underforecast": 4.954480555555555,
+            "mean_overforecast": 3.8411333333333335,
+            "samples": 36
+          },
+          "test": {
+            "mae": 7.316324324324323,
+            "rmse": 9.236141682925952,
+            "smape_percent": 5.422057810542718,
+            "mean_underforecast": 3.7179945945945936,
+            "mean_overforecast": 3.598329729729729,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.8648648648648649,
+          "validationResidualRadius": 16.34741428571428
+        },
+        "ridge": {
+          "validation": {
+            "mae": 4.136341574910755,
+            "rmse": 5.259484350035094,
+            "smape_percent": 3.175680163277203,
+            "mean_underforecast": 2.4332231257306023,
+            "mean_overforecast": 1.703118449180153,
+            "samples": 36
+          },
+          "test": {
+            "mae": 3.254728323994545,
+            "rmse": 4.102762411860935,
+            "smape_percent": 2.4642345337996217,
+            "mean_underforecast": 1.9470458103366748,
+            "mean_overforecast": 1.30768251365787,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 1.0,
+          "validationResidualRadius": 9.63042633191779
+        },
+        "xgboost": {
+          "validation": {
+            "mae": 5.634796701727974,
+            "rmse": 6.6554989415640415,
+            "smape_percent": 4.308759848532064,
+            "mean_underforecast": 4.600211077202692,
+            "mean_overforecast": 1.0345856245252816,
+            "samples": 36
+          },
+          "test": {
+            "mae": 7.409025809623097,
+            "rmse": 8.315305831033246,
+            "smape_percent": 5.528156407561762,
+            "mean_underforecast": 6.791716365339947,
+            "mean_overforecast": 0.6173094442831505,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.7837837837837838,
+          "validationResidualRadius": 10.446090136718752
+        }
+      },
+      "trainingCount": 109,
+      "validationCount": 36,
+      "testCount": 37,
+      "trainedThrough": "2025-10-17T00:00:00+00:00",
+      "testStartsAt": "2025-11-23T00:00:00+00:00",
+      "intervalRadius": 9.63042633191779,
+      "featureImportance": {
+        "lag_1": 0.041105873842041486,
+        "lag_7": 0.5581703140118477,
+        "lag_14": 0.3249534973282586,
+        "mean_previous_7": 0.012643035423740352,
+        "weekday_sin": -0.04179482508813402,
+        "weekday_cos": -0.4303004148732426
+      },
+      "featureImportanceMeaning": "XGBoost split gain or Ridge raw coefficients; association, not causality or comparable normalized importance",
+      "trainingMean": 120.88378532110092,
+      "trainingStdDev": 10.518576253762037
+    },
+    "bengaluru/central/mobility": {
+      "selectedModel": "ridge",
+      "artifact": "f72acf878f85091c.ridge.json",
+      "candidates": {
+        "seasonal-naive": {
+          "validation": {
+            "mae": 5.391069444444444,
+            "rmse": 6.239244824918939,
+            "smape_percent": 4.134446029483354,
+            "mean_underforecast": 3.154622222222222,
+            "mean_overforecast": 2.2364472222222225,
+            "samples": 36
+          },
+          "test": {
+            "mae": 4.869294594594595,
+            "rmse": 5.904541568789872,
+            "smape_percent": 3.7390131459075873,
+            "mean_underforecast": 2.8536972972972974,
+            "mean_overforecast": 2.0155972972972975,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.8378378378378378,
+          "validationResidualRadius": 9.516100000000009
+        },
+        "moving-average": {
+          "validation": {
+            "mae": 9.211622222222221,
+            "rmse": 11.356740829457204,
+            "smape_percent": 7.02427328670346,
+            "mean_underforecast": 4.979367460317461,
+            "mean_overforecast": 4.232254761904761,
+            "samples": 36
+          },
+          "test": {
+            "mae": 8.23539382239382,
+            "rmse": 9.9536997239893,
+            "smape_percent": 6.123366196963948,
+            "mean_underforecast": 4.230722007722005,
+            "mean_overforecast": 4.004671814671816,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.9459459459459459,
+          "validationResidualRadius": 17.385557142857152
+        },
+        "ridge": {
+          "validation": {
+            "mae": 4.259042375327933,
+            "rmse": 5.473878166275117,
+            "smape_percent": 3.291775586847037,
+            "mean_underforecast": 2.6383307060701378,
+            "mean_overforecast": 1.620711669257796,
+            "samples": 36
+          },
+          "test": {
+            "mae": 3.8419661985784153,
+            "rmse": 4.880864088008465,
+            "smape_percent": 2.902807125998104,
+            "mean_underforecast": 2.580605995924263,
+            "mean_overforecast": 1.261360202654153,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.9459459459459459,
+          "validationResidualRadius": 8.841456954679899
+        },
+        "xgboost": {
+          "validation": {
+            "mae": 5.69466833597819,
+            "rmse": 7.415285248150676,
+            "smape_percent": 4.315909333721173,
+            "mean_underforecast": 5.241551689656576,
+            "mean_overforecast": 0.4531166463216149,
+            "samples": 36
+          },
+          "test": {
+            "mae": 9.797274197305219,
+            "rmse": 11.021031246132226,
+            "smape_percent": 7.451681371377917,
+            "mean_underforecast": 9.708519610760664,
+            "mean_overforecast": 0.08875458654455239,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.6216216216216216,
+          "validationResidualRadius": 11.91897000732422
+        }
+      },
+      "trainingCount": 109,
+      "validationCount": 36,
+      "testCount": 37,
+      "trainedThrough": "2025-10-17T00:00:00+00:00",
+      "testStartsAt": "2025-11-23T00:00:00+00:00",
+      "intervalRadius": 8.841456954679899,
+      "featureImportance": {
+        "lag_1": 0.09753019042841671,
+        "lag_7": 0.4013474366308424,
+        "lag_14": 0.3850010919647786,
+        "mean_previous_7": 0.017536841598274226,
+        "weekday_sin": -0.8414490228733722,
+        "weekday_cos": -1.1507798035267662
+      },
+      "featureImportanceMeaning": "XGBoost split gain or Ridge raw coefficients; association, not causality or comparable normalized importance",
+      "trainingMean": 120.89492752293576,
+      "trainingStdDev": 10.868546854852456
+    },
+    "bengaluru/north/groceries": {
+      "selectedModel": "ridge",
+      "artifact": "f96866c74394e45b.ridge.json",
+      "candidates": {
+        "seasonal-naive": {
+          "validation": {
+            "mae": 4.968638888888889,
+            "rmse": 6.013080269665825,
+            "smape_percent": 3.855741811744153,
+            "mean_underforecast": 3.1407666666666665,
+            "mean_overforecast": 1.8278722222222226,
+            "samples": 36
+          },
+          "test": {
+            "mae": 4.318113513513513,
+            "rmse": 5.251947359815242,
+            "smape_percent": 3.2285742085285563,
+            "mean_underforecast": 2.368435135135135,
+            "mean_overforecast": 1.9496783783783787,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 1.0,
+          "validationResidualRadius": 11.210799999999992
+        },
+        "moving-average": {
+          "validation": {
+            "mae": 7.6569369047619,
+            "rmse": 9.905025681584076,
+            "smape_percent": 5.855274627946737,
+            "mean_underforecast": 4.510434920634919,
+            "mean_overforecast": 3.146501984126982,
+            "samples": 36
+          },
+          "test": {
+            "mae": 8.149903861003866,
+            "rmse": 9.761519892744285,
+            "smape_percent": 6.050625303299486,
+            "mean_underforecast": 4.091061776061777,
+            "mean_overforecast": 4.058842084942086,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.9459459459459459,
+          "validationResidualRadius": 18.002028571428568
+        },
+        "ridge": {
+          "validation": {
+            "mae": 4.117494904028891,
+            "rmse": 5.095823620935904,
+            "smape_percent": 3.1772295558037147,
+            "mean_underforecast": 2.610757241663041,
+            "mean_overforecast": 1.5067376623658493,
+            "samples": 36
+          },
+          "test": {
+            "mae": 3.7048969154251705,
+            "rmse": 4.424417220811658,
+            "smape_percent": 2.748521310502978,
+            "mean_underforecast": 2.170574062282116,
+            "mean_overforecast": 1.5343228531430533,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 1.0,
+          "validationResidualRadius": 9.975531248163833
+        },
+        "xgboost": {
+          "validation": {
+            "mae": 6.15070953301324,
+            "rmse": 7.33563392292396,
+            "smape_percent": 4.709158846525408,
+            "mean_underforecast": 5.095573090616863,
+            "mean_overforecast": 1.0551364423963758,
+            "samples": 36
+          },
+          "test": {
+            "mae": 6.510106184675888,
+            "rmse": 8.126123620322039,
+            "smape_percent": 4.86411247203432,
+            "mean_underforecast": 6.210677315376901,
+            "mean_overforecast": 0.2994288692989868,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.8648648648648649,
+          "validationResidualRadius": 11.772755639648437
+        }
+      },
+      "trainingCount": 109,
+      "validationCount": 36,
+      "testCount": 37,
+      "trainedThrough": "2025-10-17T00:00:00+00:00",
+      "testStartsAt": "2025-11-23T00:00:00+00:00",
+      "intervalRadius": 9.975531248163833,
+      "featureImportance": {
+        "lag_1": 0.03036040668024689,
+        "lag_7": 0.5180570027603476,
+        "lag_14": 0.3260768680160926,
+        "mean_previous_7": 0.02959711415709246,
+        "weekday_sin": -0.9317923054187505,
+        "weekday_cos": -0.5105880907721854
+      },
+      "featureImportanceMeaning": "XGBoost split gain or Ridge raw coefficients; association, not causality or comparable normalized importance",
+      "trainingMean": 120.44521192660552,
+      "trainingStdDev": 10.950843923063141
+    },
+    "bengaluru/north/mobility": {
+      "selectedModel": "seasonal-naive",
+      "artifact": null,
+      "candidates": {
+        "seasonal-naive": {
+          "validation": {
+            "mae": 3.0370583333333356,
+            "rmse": 4.31531835966685,
+            "smape_percent": 2.3251789847425526,
+            "mean_underforecast": 2.013000000000001,
+            "mean_overforecast": 1.0240583333333346,
+            "samples": 36
+          },
+          "test": {
+            "mae": 5.196467567567565,
+            "rmse": 6.2335861509528625,
+            "smape_percent": 3.885740927325635,
+            "mean_underforecast": 3.1094864864864853,
+            "mean_overforecast": 2.08698108108108,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.6216216216216216,
+          "validationResidualRadius": 6.5563999999999965
+        },
+        "moving-average": {
+          "validation": {
+            "mae": 7.748540476190474,
+            "rmse": 9.661051002986246,
+            "smape_percent": 5.916387967612557,
+            "mean_underforecast": 4.347350793650792,
+            "mean_overforecast": 3.4011896825396826,
+            "samples": 36
+          },
+          "test": {
+            "mae": 7.873048262548265,
+            "rmse": 9.795319130532965,
+            "smape_percent": 5.879994163466006,
+            "mean_underforecast": 4.065481081081083,
+            "mean_overforecast": 3.8075671814671823,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.918918918918919,
+          "validationResidualRadius": 17.52851428571428
+        },
+        "ridge": {
+          "validation": {
+            "mae": 3.232862519507173,
+            "rmse": 4.368723576529542,
+            "smape_percent": 2.4714937054290633,
+            "mean_underforecast": 1.740135722256441,
+            "mean_overforecast": 1.4927267972507319,
+            "samples": 36
+          },
+          "test": {
+            "mae": 4.240219317356322,
+            "rmse": 5.35017651352904,
+            "smape_percent": 3.176005444243189,
+            "mean_underforecast": 2.4209602641860655,
+            "mean_overforecast": 1.8192590531702564,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.8378378378378378,
+          "validationResidualRadius": 7.07535490409785
+        },
+        "xgboost": {
+          "validation": {
+            "mae": 4.03753495619032,
+            "rmse": 5.281229223956644,
+            "smape_percent": 3.0537183475915475,
+            "mean_underforecast": 3.071987356906466,
+            "mean_overforecast": 0.9655475992838534,
+            "samples": 36
+          },
+          "test": {
+            "mae": 6.576723663824959,
+            "rmse": 8.12887265160929,
+            "smape_percent": 4.886709190780877,
+            "mean_underforecast": 5.505222484691725,
+            "mean_overforecast": 1.0715011791332347,
+            "samples": 37
+          },
+          "oneStepTestIntervalCoverage": 0.7297297297297297,
+          "validationResidualRadius": 8.531398779296865
+        }
+      },
+      "trainingCount": 109,
+      "validationCount": 36,
+      "testCount": 37,
+      "trainedThrough": "2025-10-17T00:00:00+00:00",
+      "testStartsAt": "2025-11-23T00:00:00+00:00",
+      "intervalRadius": 6.5563999999999965,
+      "featureImportance": {},
+      "featureImportanceMeaning": "XGBoost split gain or Ridge raw coefficients; association, not causality or comparable normalized importance",
+      "trainingMean": 120.51906055045872,
+      "trainingStdDev": 10.353206166695182
+    }
+  },
+  "intervalMethod": "90th percentile absolute validation residual; sqrt(h) widening is heuristic and has no multi-horizon coverage guarantee"
+}

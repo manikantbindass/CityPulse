@@ -1,0 +1,31 @@
+# Validation record
+
+29 October 2026. This branch is a development foundation, not a production release.
+
+## Observed results
+
+- Repository metadata: name remains `CityPulse`; requested description and eleven topics applied and read back through authenticated GitHub CLI.
+- Original commit `16f980485447371d9c412a7173a508328c9e0fb4` preserved; all work occurs on `feat/citypulse-foundation`.
+- Next.js production build completed for the initial workspace routes. The latest advanced ML additions require a fresh final build recorded below when available.
+- Four React component/state tests passed.
+- Nine initial FastAPI/domain tests passed, with a Starlette/httpx deprecation warning. Advanced model tests are included; final expanded results must be checked separately.
+- Java verification passed: eleven tests discovered, seven executed successfully, four Docker-dependent tests skipped. New ML orchestration requires final verification.
+- Five offline ingestion tests passed: invalid fields, quantities, timezones, geographic bounds, duplicates, conflicting digests, normalization, GeoJSON and metric calculations.
+- Bengaluru and Amsterdam synthetic generators each produced 56 observations. Incremental replay skipped all 56 identical observations without new writes.
+- A real public Census TIGERweb query returned one historical-vintage state boundary FeatureCollection. This is licensed geography, not a live supply/demand source. Provenance metadata is committed; raw output remains local.
+- Reproducible ML training evaluated eight synthetic city/district/category segments with chronological splits and actual MAE/RMSE/sMAPE reports in `model-evaluation.json`. No real-world accuracy is claimed.
+- Local Solidity compilation and attestation test passed after upgrading the test runner.
+- Production npm dependency audit reported zero vulnerabilities after compatible updates. Development-tool advisories must be assessed separately.
+- Technical report rendered to seven PDF pages. Presentation exported, rendered, inspected and passed package/layout/import validation.
+
+## Remaining verification and deployment boundaries
+
+Docker Desktop has not provided a reachable Linux engine in this session. Compose startup, real PostGIS migrations, cross-service persistence and Testcontainers assertions therefore cannot be claimed verified locally. `docker compose config --quiet` checks configuration without running containers. CI defines Docker-backed integration tests on Linux.
+
+Browser screenshots, automated accessibility, full end-to-end flows and runtime performance measurements require the running production web build and Playwright; do not interpret the presence of tests as a passing result. No coverage percentage, SLO, load capacity or production security claim is made.
+
+OIDC issuer setup and real web sessions, owner-specific policy within shared business tenants, public hosting, tenant onboarding/deletion, retention automation, real provider feeds, LLM chat and chain transaction submission remain incomplete and explicitly documented.
+
+## Reproduce
+
+Use [developer commands](development.md), [ingestion demo](ingestion.md), [backend behavior](api/backend.md), and [model card](model-card.md). Inspect GitHub Actions for branch-specific results. A badge without a completed workflow is not test evidence.

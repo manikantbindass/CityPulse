@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: CityPulse starter contracts
+  version: 1.0.0
+  description: Core city and AI interfaces. Full expanded Java API is generated at authenticated /v3/api-docs; see docs/api/backend.md.
+servers:
+  - url: http://localhost:8080
+    description: Java API (use localhost:8000 for the AI path)
+security:
+  - bearerAuth: []
+paths:
+  /api/v1/cities:
+    get:
+      operationId: listCities
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 0, maximum: 100000, default: 0 }
+        - in: query
+          name: size
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+      responses:
+        '200':
+          description: Stable tenant-scoped page ordered by name then UUID
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items, page, size]
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      required: [id, name, countryCode, timezone]
+                      properties:
+                        id: { type: string, format: uuid }
+                        name: { type: string }
+                        countryCode: { type: string }
+                        timezone: { type: string }
+                  page: { type: integer }
+                  size: { type: integer }
+        '400': { description: Invalid paging }
+        '401': { description: Authentication required }
+        '403': { description: Insufficient scope or membership }
+  /api/v1/forecasts:
+    post:
+      operationId: createAiForecast
+      servers:
+        - url: http://localhost:8000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [values]
+              properties:
+                values:
+                  type: array
+                  minItems: 3
+                  maxItems: 10000
+                  items: { type: number, minimum: 0, maximum: 1000000000000 }
+                horizon: { type: integer, minimum: 1, maximum: 168, default: 3 }
+                interval_minutes: { type: integer, minimum: 1, maximum: 1440, default: 60 }
+      responses:
+        '200':
+          description: Bounded baseline without calibrated uncertainty
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [model, predictions, interval_minutes, synthetic_safe_baseline]
+                properties:
+                  model: { type: string }
+                  predictions: { type: array, items: { type: number } }
+                  interval_minutes: { type: integer }
+                  synthetic_safe_baseline: { type: boolean }
+        '401': { description: Invalid service token }
+        '422': { description: Input validation failed }
+components:
+  securitySchemes:
+    bearerAuth: { type: http, scheme: bearer }
+  schemas:
+    Problem:
+      type: object
+      required: [type, title, status]
+      properties:
+        type: { type: string, format: uri }
+        title: { type: string }
+        status: { type: integer }
+        detail: { type: string }
+        instance: { type: string }
+        code: { type: string }

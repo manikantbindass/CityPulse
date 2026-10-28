@@ -1,0 +1,28 @@
+{
+  "sources": [
+    {
+      "id": "synthetic-bengaluru-v1",
+      "provider": "CityPulse deterministic generator",
+      "sourceUri": "urn:citypulse:synthetic:bengaluru:seed-42",
+      "licenseReference": "synthetic development data; repository license pending",
+      "updateFrequency": "manual generation",
+      "schema": "schemas/observation.schema.json",
+      "qualityStatus": "requires pipeline validation",
+      "dataMode": "synthetic",
+      "timezone": "Asia/Kolkata",
+      "currency": "INR"
+    },
+    {
+      "id": "amsterdam-areas-candidate",
+      "provider": "Gemeente Amsterdam",
+      "sourceUri": "https://api.data.amsterdam.nl/v1/gebieden/wijken/?_format=geojson",
+      "licenseReference": "dataset docs do not specify a license; verify before use",
+      "updateFrequency": "weekly according to municipal documentation",
+      "schema": "official provider schema; not observation data",
+      "qualityStatus": "blocked-license-review",
+      "dataMode": "historical",
+      "timezone": "Europe/Amsterdam",
+      "currency": "EUR"
+    }
+  ]
+}

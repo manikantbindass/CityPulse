@@ -1,0 +1,14 @@
+package-lock.json
+**/target
+**/node_modules
+**/.next
+**/artifacts
+**/cache
+**/.venv
+**/__pycache__
+**/*.java
+**/*.py
+**/*.sol
+**/*.svg
+**/*.csv
+**/*.geojson
