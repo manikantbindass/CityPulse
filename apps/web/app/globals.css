@@ -1655,14 +1655,14 @@ details p {
   background: radial-gradient(ellipse at 50% 60%, #51407422, transparent 70%), #0d131f;
   border-right: 1px solid var(--border);
 }
-.auth-art h1 {
+.auth-art .auth-art-title {
   font-size: 44px;
   font-weight: 400;
   letter-spacing: -1.5px;
   line-height: 1.2;
   margin-top: 25px;
 }
-.auth-art h1 span {
+.auth-art .auth-art-title span {
   color: var(--mint);
 }
 .auth-art > div > p:last-child {
@@ -1676,7 +1676,7 @@ details p {
   max-width: 410px;
   margin: 70px auto;
 }
-.auth-form h2 {
+.auth-form h1 {
   font-size: 32px;
   font-weight: 400;
   letter-spacing: -0.8px;
@@ -1862,7 +1862,7 @@ details p {
   .auth-art {
     padding: 35px;
   }
-  .auth-art h1 {
+  .auth-art .auth-art-title {
     font-size: 34px;
   }
   .auth-form-wrap {

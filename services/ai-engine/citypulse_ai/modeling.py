@@ -63,7 +63,7 @@ def predict_one(name: str, model, history: list[float], date: datetime) -> float
 
 
 def errors(actual: list[float], predictions: list[float]) -> dict:
-    y, p = np.asarray(actual), np.asarray(predictions)
+    y, p = np.asarray(actual, dtype=float), np.asarray(predictions, dtype=float)
     denominator = np.abs(y) + np.abs(p)
     smape = np.divide(
         200 * np.abs(y - p), denominator, out=np.zeros_like(y), where=denominator != 0

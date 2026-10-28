@@ -45,7 +45,12 @@ export function BackendEvidence() {
       {query.data && (
         <>
           <p className="fine-print">{query.data.source} · synthetic fixture, not live city data</p>
-          <div className="table-scroll">
+          <div
+            className="table-scroll"
+            tabIndex={0}
+            role="region"
+            aria-label="Scrollable data table"
+          >
             <table>
               <caption className="sr-only">
                 Stored local fixture imbalance results in kilograms

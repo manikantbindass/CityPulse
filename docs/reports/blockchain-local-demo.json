@@ -1,0 +1,27 @@
+{
+  "local": true,
+  "ephemeral": true,
+  "synthetic": true,
+  "contractVersion": "1.0.0",
+  "chainId": 31337,
+  "contracts": {
+    "AuthorizedSourceRegistry": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "DatasetAttestationRegistry": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "VerificationRecord": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+  },
+  "attestationId": "0x0e71c34accab84cdecdc74c03c8830b174a7499df2268cfc93cf548b79aef749",
+  "eventId": "0xaa01d9cd366fbe1ff52b56edb698af9bb4e5a72c74632c4cca119dd79917a1ad",
+  "contentHash": "0x0ae5438b4d9fdb3f819c6a549c40bb3f0600eda44f285c8eb62463a575b2c11b",
+  "offchainReference": "urn:citypulse:local:sample-report.csv",
+  "referenceHash": "0x4b7bd8fb7bff6d4624e66fd9e8d1a377b2f5378b8fd0e3773745c6f2053bcbba",
+  "submitter": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "gasEstimate": "150788",
+  "gasUsed": "150788",
+  "transactionHash": "0x18bde77e2414e0f080fd928c106a5640d71aeb07107f0784d55cf17eb5b168a8",
+  "blockNumber": 5,
+  "blockHash": "0x6ed87674da98727849569b17c71602d45954e08c87257f7665b1d4d3d1b23a29",
+  "verified": true,
+  "tamperedVerified": false,
+  "eventTopic": "0x8a056f79ae2e8a500e068b115fbb803f386123f444234013f9d56c2958e38ae5",
+  "rpc": null
+}

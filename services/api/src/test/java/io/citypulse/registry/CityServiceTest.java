@@ -1,16 +1,20 @@
 package io.citypulse.registry;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import io.citypulse.registry.application.CityService;
 import io.citypulse.registry.domain.City;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CityServiceTest {
+
     @Test
     void rejectsUnboundedQueriesBeforeAccessingRepository() {
-        var service = new CityService((offset, size) -> { throw new AssertionError("Must not query"); });
+        var service = new CityService((offset, size) -> {
+            throw new AssertionError("Must not query");
+        });
         assertThrows(IllegalArgumentException.class, () -> service.list(-1, 20));
         assertThrows(IllegalArgumentException.class, () -> service.list(0, 101));
         assertThrows(IllegalArgumentException.class, () -> service.list(100001, 20));

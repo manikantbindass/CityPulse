@@ -30,6 +30,7 @@ import { useWorkspace } from '../lib/store';
 import { exportCsv, getCities, getForecast } from '../lib/api';
 import { Button } from './ui/button';
 import { CityNetwork } from './network';
+import { ChainRecords } from './chain-records';
 import { MlForecast } from './ml-forecast';
 import { BackendEvidence } from './backend-evidence';
 const DemandChart = dynamic(() => import('./charts').then((m) => m.DemandChart), {
@@ -142,7 +143,7 @@ function DistrictTable({
           Export
         </Button>
       </div>
-      <div className="table-scroll">
+      <div className="table-scroll" tabIndex={0} role="region" aria-label="Scrollable data table">
         <table>
           <caption className="sr-only">Synthetic district observations in units per day</caption>
           <thead>
@@ -638,6 +639,7 @@ export function WorkspacePage({ section }: { section: string }) {
       {(section === 'dashboard' || section === 'predictions') && <MlForecast />}
       {section === 'optimization' && <Allocation data={data} />}
       {section === 'verification' && <Verification />}
+      {(section === 'verification' || section === 'admin') && <ChainRecords />}
       {section === 'analyst' && <Analyst />}
       {section === 'reports' && <Reports data={data} />}
       {section === 'notifications' && (

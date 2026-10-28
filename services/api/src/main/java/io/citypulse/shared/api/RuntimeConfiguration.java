@@ -11,6 +11,27 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 @Configuration
 @EnableCaching
 public class RuntimeConfiguration {
-    @Bean RedisCacheConfiguration cacheDefaults(){return RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofSeconds(30)).disableCachingNullValues();}
-    @Bean Jackson2ObjectMapperBuilderCustomizer jsonLimits(){return builder->builder.postConfigurer(mapper->mapper.getFactory().setStreamReadConstraints(StreamReadConstraints.builder().maxStringLength(200000).maxNestingDepth(30).maxNumberLength(100).build()));}
+
+    @Bean
+    RedisCacheConfiguration cacheDefaults() {
+        return RedisCacheConfiguration.defaultCacheConfig()
+            .entryTtl(Duration.ofSeconds(30))
+            .disableCachingNullValues();
+    }
+
+    @Bean
+    Jackson2ObjectMapperBuilderCustomizer jsonLimits() {
+        return builder ->
+            builder.postConfigurer(mapper ->
+                mapper
+                    .getFactory()
+                    .setStreamReadConstraints(
+                        StreamReadConstraints.builder()
+                            .maxStringLength(200000)
+                            .maxNestingDepth(30)
+                            .maxNumberLength(100)
+                            .build()
+                    )
+            );
+    }
 }

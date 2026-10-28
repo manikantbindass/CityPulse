@@ -80,3 +80,5 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci && npm run test:contracts
+      - run: npm run lint --workspace blockchain
+      - run: npm run demo:ephemeral --workspace blockchain

@@ -88,5 +88,5 @@ test('mobile navigation and reduced motion remain usable', async ({ page }, info
     await page.getByRole('dialog').getByRole('link', { name: 'City explorer' }).click();
     await expect(page.getByRole('heading', { name: 'Explore every district.' })).toBeVisible();
   }
-  await expect(page.locator('main')).toBeVisible();
+  await expect(page.locator('main#main')).toBeVisible();
 });

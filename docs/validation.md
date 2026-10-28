@@ -29,3 +29,15 @@ OIDC issuer setup and real web sessions, owner-specific policy within shared bus
 ## Reproduce
 
 Use [developer commands](development.md), [ingestion demo](ingestion.md), [backend behavior](api/backend.md), and [model card](model-card.md). Inspect GitHub Actions for branch-specific results. A badge without a completed workflow is not test evidence.
+
+## Subsequent validation and blockchain extension
+
+- Advanced FastAPI/model tests: all 13 passed after correcting integer-array sMAPE handling; Ruff passed.
+- Expanded Java build: 14 tests discovered, 10 executed successfully, 4 Docker tests skipped locally. The earlier PR revision also passed Java integration CI on Linux.
+- Four Solidity tests passed, including malicious callers, source revocation, pause, duplicates and independent proof comparison. Solhint: 0 errors / 6 warnings, detailed in the blockchain guide. No audit is claimed.
+- Actual ephemeral EVM demo deployed three contracts, estimated and used 150788 gas for a synthetic report attestation, verified the original report, and rejected altered content. Captured evidence is in [local demo JSON](reports/blockchain-local-demo.json). The ephemeral chain ended; its transaction is not a public-network transaction. Persistent local RPC connectivity has been unreliable on this host.
+- Next.js Webpack production compilation, TypeScript, prerendering and build tracing completed. Turbopack worker launch failed on this Windows environment; Linux CI had built the previous revision successfully.
+- Initial Linux browser run: 7 passed / 3 failed. Fixes address hidden mobile auth heading, unnamed search button, scrollable table keyboard access and loading landmark/test ambiguity. A new browser/CI run is required for the final revision.
+- [Desktop report view](assets/workspace-desktop.png) and [mobile report view](assets/workspace-mobile.png) are actual screenshots from the successful initial CI interaction flow, with synthetic data.
+
+No claim is made that pending final CI or unavailable Docker-local checks have passed.

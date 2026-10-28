@@ -11,7 +11,7 @@
 
 > **Development foundation.** Workspace analytics, district overlays, KPI deltas and example insights are synthetic. Real Spring API and FastAPI endpoints run locally. No production deployment, real city partnership, forecast accuracy, public demo or on-chain submission is claimed.
 
-[Static header](docs/assets/citypulse-header-static.svg) · [Product requirements](docs/PRD.md) · [Architecture](docs/architecture/README.md) · [API behavior](docs/api/backend.md) · [Model card](docs/model-card.md) · [Developer guide](docs/development.md) · [Ingestion demo](docs/ingestion.md) · [Data dictionary](docs/data-dictionary.md)
+[Static header](docs/assets/citypulse-header-static.svg) · [Product requirements](docs/PRD.md) · [Architecture](docs/architecture/README.md) · [API behavior](docs/api/backend.md) · [Blockchain guide](docs/blockchain.md) · [Model card](docs/model-card.md) · [Developer guide](docs/development.md) · [Ingestion demo](docs/ingestion.md) · [Data dictionary](docs/data-dictionary.md)
 
 ## Navigation
 
@@ -123,7 +123,11 @@ For host commands, AI virtual environments, local chain startup, and troubleshoo
 
 ## Screenshots
 
-Rendered screenshots, when available, are stored in `docs/assets/`; see [validation report](docs/validation.md) for actual captures and test results. The UI labels seeded data consistently. Screenshots do not represent live city intelligence.
+![Desktop report workspace with synthetic data](docs/assets/workspace-desktop.png)
+
+[Mobile report screenshot](docs/assets/workspace-mobile.png) · [Measured synthetic model comparison](docs/assets/model-comparison.png)
+
+These are real browser captures from the PR CI interaction flow. See [validation report](docs/validation.md) for actual captures and test results. The UI labels seeded data consistently. Screenshots do not represent live city intelligence.
 
 ## Testing
 

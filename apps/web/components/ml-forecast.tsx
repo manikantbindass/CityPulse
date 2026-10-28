@@ -110,7 +110,12 @@ export function MlForecast() {
           {query.data.fallbackReason && <p className="fine-print">{query.data.fallbackReason}</p>}
           <ModelChart rows={query.data.predictions} />
           <p className="fine-print">{query.data.intervalMethod}</p>
-          <div className="table-scroll">
+          <div
+            className="table-scroll"
+            tabIndex={0}
+            role="region"
+            aria-label="Scrollable data table"
+          >
             <table>
               <caption className="sr-only">Actual AI output from synthetic daily inputs</caption>
               <thead>

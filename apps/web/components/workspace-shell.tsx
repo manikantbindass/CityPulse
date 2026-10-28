@@ -145,7 +145,11 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
             <strong>{current?.label ?? 'Overview'}</strong>
           </div>
           <div className="topbar-actions">
-            <button className="search-trigger" onClick={() => setCommand(true)}>
+            <button
+              className="search-trigger"
+              aria-label="Search workspace pages"
+              onClick={() => setCommand(true)}
+            >
               <Search size={15} />
               <span>Search anything…</span>
               <kbd>⌘ K</kbd>

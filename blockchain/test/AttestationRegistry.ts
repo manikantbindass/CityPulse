@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 import { network } from 'hardhat';
 
 describe('AttestationRegistry', async () => {
-  const { ethers } = await network.connect();
+  const { ethers } = await network.create();
 
   it('records a submitter digest and rejects duplicates and empty values', async () => {
     const registry = await ethers.deployContract('AttestationRegistry');

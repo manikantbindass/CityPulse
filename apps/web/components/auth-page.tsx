@@ -20,11 +20,11 @@ export function AuthPage({ register = false }: { register?: boolean }) {
         </Link>
         <div>
           <p className="eyebrow">A MORE CONNECTED PERSPECTIVE</p>
-          <h1>
+          <p className="auth-art-title">
             Understand the city.
             <br />
             <span>See the possibility.</span>
-          </h1>
+          </p>
           <CityNetwork />
           <p>Urban supply and demand intelligence, grounded in evidence.</p>
         </div>
@@ -36,7 +36,7 @@ export function AuthPage({ register = false }: { register?: boolean }) {
         </Link>
         <div className="auth-form">
           <p className="eyebrow">YOUR CITY WORKSPACE</p>
-          <h2>{register ? 'Make room for better decisions.' : 'Welcome back.'}</h2>
+          <h1>{register ? 'Make room for better decisions.' : 'Welcome back.'}</h1>
           <p>
             {register
               ? 'Registration preview. Account provisioning is planned.'

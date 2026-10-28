@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/cities")
 public class CityController {
+
     private final CityService service;
 
     public CityController(CityService service) {
@@ -18,8 +19,10 @@ public class CityController {
     }
 
     @GetMapping
-    public CityPage list(@RequestParam(defaultValue = "0") int page,
-                         @RequestParam(defaultValue = "20") int size) {
+    public CityPage list(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "20") int size
+    ) {
         return new CityPage(service.list(page, size), page, size);
     }
 
