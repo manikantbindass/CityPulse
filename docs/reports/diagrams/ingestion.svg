@@ -41,7 +41,7 @@
 			<path d="M 409,103 L 409,96 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
 			<polygon points="409 96, 411.6098 101.4027, 406.3902 101.4027" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
 			<rect x="8" y="206" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="17" y="251" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,502) scale(1,-1)">CSV / JSON / GeoJSON</text>
+			<text x="17" y="251" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,502) scale(1,-1)">CSV  /  JSON  /  GeoJSON</text>
 			<text x="17" y="226" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,452) scale(1,-1)">Bounded, licensed or</text>
 			<text x="17" y="216" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,432) scale(1,-1)">synthetic</text>
 			<rect x="172" y="206" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
@@ -52,7 +52,7 @@
 			<text x="345" y="226" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,452) scale(1,-1)">Coordinates and explicit</text>
 			<text x="345" y="216" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,432) scale(1,-1)">mode</text>
 			<rect x="8" y="120" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="17" y="165" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,330) scale(1,-1)">Deduplicate / quality</text>
+			<text x="17" y="165" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,330) scale(1,-1)">Deduplicate  /  quality</text>
 			<text x="17" y="140" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,280) scale(1,-1)">Source/external ID and score</text>
 			<rect x="172" y="120" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
 			<text x="181" y="165" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,330) scale(1,-1)">Durable local output</text>
@@ -67,7 +67,7 @@
 			<text x="17" y="54" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,108) scale(1,-1)">Canonical records and</text>
 			<text x="17" y="44" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,88) scale(1,-1)">provenance</text>
 			<rect x="172" y="34" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="181" y="79" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,158) scale(1,-1)">Reject / dead letter</text>
+			<text x="181" y="79" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,158) scale(1,-1)">Reject  /  dead letter</text>
 			<text x="181" y="54" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,108) scale(1,-1)">No invented successful</text>
 			<text x="181" y="44" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,88) scale(1,-1)">upload</text>
 			<rect x="336" y="34" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>

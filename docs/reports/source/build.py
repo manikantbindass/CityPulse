@@ -245,7 +245,8 @@ def graph(spec):
     for ident, title, description in nodes:
         x,y,w,h = positions[ident]
         drawing.add(Rect(x,y,w,h,rx=7,ry=7,fillColor=PALE,strokeColor=RULE,strokeWidth=.7))
-        for j,line in enumerate(textwrap.wrap(title, 24)):
+        display=title.replace('/', ' / ').replace('SourceRegistry','Source Registry').replace('AttestationRegistry','Attestation Registry')
+        for j,line in enumerate(textwrap.wrap(display, 24, break_long_words=False, break_on_hyphens=False)):
             drawing.add(String(x+9,y+h-17-j*12,line,fontName="VeraBold",fontSize=8.1,fillColor=INK))
         for j,line in enumerate(textwrap.wrap(description, 28)[:2]):
             drawing.add(String(x+9,y+20-j*10,line,fontName="Vera",fontSize=7,fillColor=MUTED))

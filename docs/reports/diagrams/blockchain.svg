@@ -47,15 +47,16 @@
 			<text x="181" y="251" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,502) scale(1,-1)">Off-chain digest</text>
 			<text x="181" y="226" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,452) scale(1,-1)">Versioned canonical policy</text>
 			<rect x="336" y="206" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="345" y="251" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,502) scale(1,-1)">AuthorizedSourceRegistry</text>
+			<text x="345" y="251" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,502) scale(1,-1)">AuthorizedSource</text>
+			<text x="345" y="239" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,478) scale(1,-1)">Registry</text>
 			<text x="345" y="226" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,452) scale(1,-1)">Enabled authorized identity</text>
 			<rect x="8" y="120" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="17" y="165" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,330) scale(1,-1)">DatasetAttestationRegist</text>
-			<text x="17" y="153" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,306) scale(1,-1)">ry</text>
+			<text x="17" y="165" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,330) scale(1,-1)">DatasetAttestation</text>
+			<text x="17" y="153" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,306) scale(1,-1)">Registry</text>
 			<text x="17" y="140" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,280) scale(1,-1)">Attester role + event</text>
 			<text x="17" y="130" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,260) scale(1,-1)">uniqueness</text>
 			<rect x="172" y="120" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="181" y="165" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,330) scale(1,-1)">Receipt / event</text>
+			<text x="181" y="165" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,330) scale(1,-1)">Receipt  /  event</text>
 			<text x="181" y="140" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,280) scale(1,-1)">Chain, address, digest and</text>
 			<text x="181" y="130" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,260) scale(1,-1)">block</text>
 			<rect x="336" y="120" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>

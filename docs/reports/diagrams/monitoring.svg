@@ -58,7 +58,7 @@
 			<text x="17" y="251" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,502) scale(1,-1)">Next instrumentation</text>
 			<text x="17" y="226" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,452) scale(1,-1)">Optional OTLP export</text>
 			<rect x="172" y="206" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="181" y="251" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,502) scale(1,-1)">Spring / Micrometer</text>
+			<text x="181" y="251" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,502) scale(1,-1)">Spring  /  Micrometer</text>
 			<text x="181" y="226" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,452) scale(1,-1)">Private metrics + W3C traces</text>
 			<rect x="336" y="206" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
 			<text x="345" y="251" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,502) scale(1,-1)">FastAPI middleware</text>

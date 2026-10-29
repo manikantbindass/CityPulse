@@ -51,14 +51,14 @@
 			<path d="M 409,189 L 409,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
 			<polygon points="409 182, 411.6098 187.4027, 406.3902 187.4027" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
 			<rect x="8" y="292" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="17" y="337" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,674) scale(1,-1)">tenant / user_account</text>
+			<text x="17" y="337" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,674) scale(1,-1)">tenant  /  user_account</text>
 			<text x="17" y="312" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,624) scale(1,-1)">Subject membership and role</text>
 			<rect x="172" y="292" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="181" y="337" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,674) scale(1,-1)">tenant_city / city</text>
+			<text x="181" y="337" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,674) scale(1,-1)">tenant_city  /  city</text>
 			<text x="181" y="312" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,624) scale(1,-1)">Assigned shared city</text>
 			<text x="181" y="302" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,604) scale(1,-1)">definition</text>
 			<rect x="336" y="292" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="345" y="337" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,674) scale(1,-1)">zone / geographic_area</text>
+			<text x="345" y="337" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,674) scale(1,-1)">zone  /  geographic_area</text>
 			<text x="345" y="312" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,624) scale(1,-1)">Boundary and parent</text>
 			<text x="345" y="302" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,604) scale(1,-1)">hierarchy</text>
 			<rect x="8" y="206" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
@@ -69,7 +69,8 @@
 			<text x="181" y="226" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,452) scale(1,-1)">Tenant, license, mode,</text>
 			<text x="181" y="216" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,432) scale(1,-1)">schema</text>
 			<rect x="336" y="206" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="345" y="251" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,502) scale(1,-1)">observation / inventory</text>
+			<text x="345" y="251" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,502) scale(1,-1)">observation  /</text>
+			<text x="345" y="239" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,478) scale(1,-1)">inventory</text>
 			<text x="345" y="226" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,452) scale(1,-1)">Event flow / stock snapshot</text>
 			<rect x="8" y="120" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
 			<text x="17" y="165" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,330) scale(1,-1)">operation_receipt</text>
@@ -81,11 +82,12 @@
 			<text x="345" y="165" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,330) scale(1,-1)">audit_event</text>
 			<text x="345" y="140" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,280) scale(1,-1)">Tenant/action/time</text>
 			<rect x="8" y="34" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="17" y="79" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,158) scale(1,-1)">pulseai_session/message</text>
+			<text x="17" y="79" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,158) scale(1,-1)">pulseai_session /</text>
+			<text x="17" y="67" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,134) scale(1,-1)">message</text>
 			<text x="17" y="54" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,108) scale(1,-1)">Tenant + subject ownership</text>
 			<rect x="172" y="34" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
-			<text x="181" y="79" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,158) scale(1,-1)">decision_snapshot/scenar</text>
-			<text x="181" y="67" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,134) scale(1,-1)">io</text>
+			<text x="181" y="79" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,158) scale(1,-1)">decision_snapshot /</text>
+			<text x="181" y="67" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,134) scale(1,-1)">scenario</text>
 			<text x="181" y="54" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,108) scale(1,-1)">Owned immutable</text>
 			<text x="181" y="44" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,88) scale(1,-1)">inputs/results</text>
 			<rect x="336" y="34" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>

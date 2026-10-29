@@ -35,9 +35,9 @@
     "docs/reports/diagrams/settings-dark.png": "5cfc3a5cb2b832f32cc34d83e9b1df7b4a60a2b9f60dd946f03657a8c870c9c5",
     "docs/reports/model-evaluation.json": "a1ccce6f4bbc1a60ae2004b88d8704af391f8e0fe8f16b8af3d44341242ea55e",
     "docs/reports/operations/k6-local-ai.json": "80ffea47db30fa3b8206d68d9141b3e4e170243409d796b1ce6c45475f53d24a",
-    "docs/reports/source/build.py": "592c6e0fe8944694d9566eb8e23071dd55551120e9f282b2e5d73ca0e56e4e94",
+    "docs/reports/source/build.py": "7b0fb02677c1780b540fdaabfb7b99955dd6d55321deb5ea070971a64baf46c8",
     "docs/reports/source/diagrams.json": "3168b6312a9c2711349412f8bf1889e417bc39a0eb7322b14e8755a31dd0ec7a",
-    "docs/reports/source/evidence.json": "d2222967e59c3cb28f75f5ff694f33e0ec992eaa102c7f1d8d16b215aec1b46e",
+    "docs/reports/source/evidence.json": "7497d1d13b874a1478c9e703a0ebe69f88865e65720016f786f4794a426ab6b5",
     "docs/reports/source/narrative.md": "f6262e75b31d5cf22036da9ea1afec645cc022d1757435d6124b6b0fe3e1594b",
     "docs/reports/source/report.json": "7aad8b35899e23d28034c2d95a5e694e9ac896d0e11d08b56fa5585edbf9d503",
     "docs/reports/source/routing.py": "9167c313b4e5954cfe5e2ee8da31f87a087776239ae70cf153ad0f9cf6d2e945",
@@ -61,7 +61,7 @@
     "services/api/src/main/resources/db/migration/V2__tenant_operations.sql": "acaa969e0eedce157b648e17f617b2b49288883d92c0eeada328e05dcc030d41",
     "services/ingestion/citypulse_ingestion/pipeline.py": "64e933a7532bb6162891a32312130553f09e02132c87ddf39a627464e0f613cf"
   },
-  "outputSha256": "0f532aba1d0313f062196839db49f7fb6447377547d2a8da204557b55202364a",
+  "outputSha256": "570e4d350115cc94e553430bd0e178ad66eff383b2cd74fba993f46ddc6ab3cf",
   "notes": "Every slide has source-linked speaker notes; charts/architecture labels are editable native objects; fade transition only",
   "limitations": "Synthetic evidence; no production, public-chain or real-city accuracy claim"
 }

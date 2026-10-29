@@ -49,7 +49,7 @@
     "docs/reports/diagrams/settings-light.png": "ab9a3a690f7dada259f4e2ca69084a10cd79bb61495ca62984aa84d3b3dbee5d",
     "docs/reports/model-evaluation.json": "a1ccce6f4bbc1a60ae2004b88d8704af391f8e0fe8f16b8af3d44341242ea55e",
     "docs/reports/operations/k6-local-ai.json": "80ffea47db30fa3b8206d68d9141b3e4e170243409d796b1ce6c45475f53d24a",
-    "docs/reports/source/build.py": "592c6e0fe8944694d9566eb8e23071dd55551120e9f282b2e5d73ca0e56e4e94",
+    "docs/reports/source/build.py": "7b0fb02677c1780b540fdaabfb7b99955dd6d55321deb5ea070971a64baf46c8",
     "docs/reports/source/chapters/01.md": "1cff2ba66d91236200392b970cb21a3eac944955ee5dbb98119c9d88466e862e",
     "docs/reports/source/chapters/02.md": "2173229c3c8443aa4da9de6032a36be9da0cf5519f533008d349c4099ca0509f",
     "docs/reports/source/chapters/03.md": "5a9abc92f43f274ae34e441280cd6f8bb9699271ab325a3262c4592c6d94570d",
@@ -136,7 +136,7 @@
     "services/api/src/main/resources/db/migration/V6__decision_engine.sql": "dafbe31a93b8ed136c22f79e994a00576a0fea442242ef6d095ca33be21d6a10",
     "services/ingestion/citypulse_ingestion/pipeline.py": "64e933a7532bb6162891a32312130553f09e02132c87ddf39a627464e0f613cf"
   },
-  "outputSha256": "7f1be4eb31d3b1349cc4e3f62f836b533c72e2c6df8b65693a3b4b697675d848",
+  "outputSha256": "bf88070d83abac6e6675ca8cb11e5b09e6e2821338c536c7310b7e0533caf22c",
   "reportlab": "5.1.0",
   "limitations": [
     "No real IdP/MFA rollout, cloud apply, penetration test, contract audit or restore drill",
