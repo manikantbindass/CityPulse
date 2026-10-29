@@ -27,6 +27,7 @@ public class ApiErrors {
 
     @ExceptionHandler({
         IllegalArgumentException.class,
+        com.fasterxml.jackson.core.JsonProcessingException.class,
         java.time.DateTimeException.class,
         MethodArgumentTypeMismatchException.class,
         MethodArgumentNotValidException.class,

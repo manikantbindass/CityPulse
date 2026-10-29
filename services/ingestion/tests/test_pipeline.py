@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from citypulse_ingestion.pipeline import ingest, normalize, metrics, haversine
+from citypulse_ingestion.pipeline import ingest, normalize, metrics, haversine, read_rows
 
 CATALOG={"sourceUri":"urn:test:synthetic","licenseReference":"synthetic test","timezone":"Asia/Kolkata","currency":"INR","dataMode":"synthetic","bounds":[77,12,78,13]}
 ROW={"cityId":"10000000-0000-0000-0000-000000000001","zoneId":"20000000-0000-0000-0000-000000000001","sourceId":"40000000-0000-0000-0000-000000000001","externalId":"row-1","kind":"demand","commodity":" Rice ","quantity":10,"unit":"kg","observedAt":"2026-01-01T05:30:00+05:30","periodEnd":"2026-01-02T05:30:00+05:30","longitude":77.5,"latitude":12.5}
@@ -14,6 +14,13 @@ class PipelineTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         (Path(__file__).resolve().parents[3] / ".data").mkdir(parents=True, exist_ok=True)
+
+    def test_csv_duplicate_headers_and_ragged_rows(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[3] / ".data") as temp:
+            path=Path(temp)/"invalid.csv"
+            for text in ["quantity,quantity\n10,20\n", "quantity,unit\n10,kg,unexpected\n", "quantity,unit\n10\n", "quantity,unit\n10,kg\x00\n"]:
+                path.write_text(text,encoding="utf-8")
+                with self.assertRaises(ValueError):read_rows(path)
 
     def test_cleaning_and_timezone(self):
         value=normalize(ROW,CATALOG)

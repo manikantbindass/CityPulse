@@ -92,7 +92,7 @@ jobs:
           python-version: '3.12'
       - run: python scripts/setup-env.py
       - run: docker compose up --build -d --wait --wait-timeout 300
-      - run: python scripts/smoke.py
+      - run: python scripts/smoke.py && python scripts/check_database_privileges.py
       - run: python scripts/data_pipeline.py demo && python scripts/data_pipeline.py publish
       - run: docker compose logs --no-color
         if: failure()
