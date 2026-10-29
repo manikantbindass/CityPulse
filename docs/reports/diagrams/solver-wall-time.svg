@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="491.27599999999995" height="280" preserveAspectRatio="xMinYMin meet" viewBox="0 0 491 280" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="491.27599999999995" height="280"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-280)" style="clip-path: url(#clip)">
+		<g transform="">
+			<path d="M 45,68 L 476.276,68 Z" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.6;"/>
+			<text x="26.86767578125" y="65.0" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,130) scale(1,-1)">0.0</text>
+			<path d="M 45,111.75 L 476.276,111.75 Z" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.6;"/>
+			<text x="22.4140625" y="108.75" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,217) scale(1,-1)">18.8</text>
+			<path d="M 45,155.5 L 476.276,155.5 Z" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.6;"/>
+			<text x="22.4140625" y="152.5" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,305) scale(1,-1)">37.6</text>
+			<path d="M 45,199.25 L 476.276,199.25 Z" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.6;"/>
+			<text x="22.4140625" y="196.25" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,392) scale(1,-1)">56.4</text>
+			<path d="M 45,243 L 476.276,243 Z" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.6;"/>
+			<text x="22.4140625" y="240.0" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,480) scale(1,-1)">75.2</text>
+			<rect x="82.87933333333332" y="68" width="33.0" height="46.22907703482571" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<rect x="116.87933333333332" y="68" width="32.999999999999986" height="50.02853585140605" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<text x="102.57488997395832" y="53" style="font-family: Vera; font-size: 6.5px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,106) scale(1,-1)">3 groups</text>
+			<rect x="226.63799999999998" y="68" width="33.0" height="61.09399403474325" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<rect x="260.638" y="68" width="33.0" height="61.18944612511075" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<text x="244.26580761718748" y="53" style="font-family: Vera; font-size: 6.5px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,106) scale(1,-1)">15 groups</text>
+			<rect x="370.3966666666666" y="68" width="33.0" height="145.34792453231802" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<rect x="404.3966666666666" y="68" width="33.0" height="152.17391304347828" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<text x="388.0244742838541" y="53" style="font-family: Vera; font-size: 6.5px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,106) scale(1,-1)">30 groups</text>
+			<text x="45" y="260" style="font-family: VeraBold; font-size: 11px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,520) scale(1,-1)">Measured local solver wall time</text>
+			<text x="4" y="245" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,490) scale(1,-1)">Milliseconds; three repeats per size</text>
+			<rect x="45" y="8" width="8" height="8" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<text x="57" y="9" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,18) scale(1,-1)">Median</text>
+			<rect x="153" y="8" width="8" height="8" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<text x="165" y="9" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,18) scale(1,-1)">Maximum</text>
+		</g>
+	</g>
+</svg>

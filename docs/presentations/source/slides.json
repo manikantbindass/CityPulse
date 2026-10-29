@@ -1,0 +1,425 @@
+{
+  "title": "CityPulse",
+  "date": "2026-10-29",
+  "snapshot": "2385ea7a3c6f9349c9c9ee67a56ace5f279fa992",
+  "repository": "https://github.com/manikantbindass/CityPulse",
+  "slides": [
+    {
+      "title": "CityPulse",
+      "points": ["Predict Demand. Optimize Supply.", "Build Smarter Cities."],
+      "kind": "cover",
+      "visual": null,
+      "notes": "Introduce CityPulse as an engineering project for urban intelligence and blockchain analytics. The repository owner is the verified GitHub account manikantbindass. The project uses synthetic demonstrations and has no claimed municipal deployment or real-data partnership.",
+      "sources": ["README.md", "docs/reports/source/report.json"]
+    },
+    {
+      "title": "One-minute project overview",
+      "points": [
+        "Urban evidence with geography, time and provenance",
+        "Forecasts and constrained scenarios, with explicit limits",
+        "A working local/CI platform; no production claim"
+      ],
+      "kind": "editorial",
+      "visual": null,
+      "notes": "The integrated path is Next.js, Spring, PostGIS/Redis and FastAPI, with an operator-driven local blockchain demonstration. Explain that implemented code, demonstrated results and proposed operating targets are separate evidence levels. The companion report contains the full scope and source hashes.",
+      "sources": ["README.md", "compose.yaml"]
+    },
+    {
+      "title": "Urban supply and demand problem",
+      "points": [
+        "Different units and time windows distort comparisons",
+        "Missing observations can look like zero",
+        "A recommendation can lose its source and assumptions"
+      ],
+      "kind": "editorial",
+      "visual": null,
+      "notes": "Use an example of a supply flow and an inventory stock: they cannot be summed without a period assumption. A business location is not service capacity. These are modeling problems before they are algorithm problems. No real-city outcome improvement has been measured.",
+      "sources": [
+        "docs/data-dictionary.md",
+        "services/api/src/main/java/io/citypulse/workspace/application/AnalyticsService.java"
+      ]
+    },
+    {
+      "title": "Limits of disconnected analysis",
+      "points": [
+        "GIS explains where; a notebook predicts what may happen",
+        "An allocation script needs policy constraints",
+        "Exports often need a reconstructable evidence trail"
+      ],
+      "kind": "editorial",
+      "visual": null,
+      "notes": "This is a qualitative gap analysis of integration boundaries, not a survey claiming competing tools lack features. Spreadsheets, GIS, notebooks and ledgers remain valid. CityPulse adds explicit transition contracts and provenance around them.",
+      "sources": ["docs/reports/source/narrative.md"]
+    },
+    {
+      "title": "CityPulse proposed solution",
+      "points": [
+        "Observe compatible records",
+        "Forecast with named methods and uncertainty",
+        "Simulate constraints, explain, export and verify"
+      ],
+      "kind": "process",
+      "visual": "solution",
+      "notes": "The user remains the decision owner. Observation, forecast and optimization are distinct objects. A hash establishes integrity, not truth. The solution diagram is editable and summarizes implemented capabilities without implying a queue worker or automatic resource dispatch.",
+      "sources": ["README.md", "docs/decision-engine.md"]
+    },
+    {
+      "title": "Product vision and objectives",
+      "points": [
+        "Reconstruct a result from source records and fingerprints",
+        "Keep authorization independent of UI and model instructions",
+        "Measure methods against transparent baselines"
+      ],
+      "kind": "editorial",
+      "visual": null,
+      "notes": "Vision should be framed as a testable engineering objective. Field effectiveness, real source completeness and production SLOs require separate pilot evaluation. Avoid claims of guaranteed profit, autonomous city management or certified security.",
+      "sources": ["docs/PRD.md", "docs/reports/source/narrative.md"]
+    },
+    {
+      "title": "Users and business applications",
+      "points": [
+        "Analysts and planners: compare evidence and coverage",
+        "Businesses and providers: inspect and publish permitted data",
+        "Administrators and citizens: role-appropriate access"
+      ],
+      "kind": "roles",
+      "visual": null,
+      "notes": "Current general business data is tenant-scoped, not individually owner-scoped. That is a deployment gate for mixed-owner tenants. Demo persona settings change navigation only; the server evaluates real membership and scopes on every protected request.",
+      "sources": ["docs/api/backend.md", "docs/security/architecture.md"]
+    },
+    {
+      "title": "Core features",
+      "points": [
+        "Geospatial registry, ingestion and historical analytics",
+        "Forecast jobs, opportunity scores and saved scenarios",
+        "PulseAI evidence and local content attestations"
+      ],
+      "kind": "editorial",
+      "visual": null,
+      "notes": "The application is modular. Admin/reporting folders do not imply separate deployed services. Licensed live connectors, durable queue consumers, Kubernetes and a public-chain deployment are future work. Each capability should be demonstrated at its actual evidence boundary.",
+      "sources": ["README.md", "docs/decision-engine.md"]
+    },
+    {
+      "title": "Working product demonstration",
+      "points": ["Actual local application", "Clearly labeled synthetic data"],
+      "kind": "screenshot",
+      "visual": "docs/assets/readme-dashboard.png",
+      "notes": "This is a real Chromium capture from the running local app, not a design mockup. KPI values are sample data. Local Docker was unavailable; Linux CI supplies full-stack evidence. Do not point at a sample KPI as real city intelligence.",
+      "sources": ["docs/assets/readme-provenance.json"]
+    },
+    {
+      "title": "Technology stack",
+      "points": [
+        "Next.js + TypeScript for the web workspace",
+        "Java 21 / Spring Boot 4 for canonical business operations",
+        "FastAPI / SciPy / scikit-learn for numerical isolation"
+      ],
+      "kind": "stack",
+      "visual": null,
+      "notes": "PostgreSQL/PostGIS is authoritative; Redis supports sessions, limits and caching. Solidity uses OpenZeppelin/Ethers and Hardhat. Compose precedes the unprovisioned AWS ECS path. A temporary Jackson-2 compatibility bridge remains a documented migration obligation.",
+      "sources": [
+        "apps/web/package.json",
+        "services/api/pom.xml",
+        "services/ai-engine/pyproject.toml"
+      ]
+    },
+    {
+      "title": "System architecture",
+      "points": [
+        "Browser identity resolves at the Next server boundary",
+        "Spring authorizes and persists; Python computes"
+      ],
+      "kind": "diagram",
+      "visual": "containers",
+      "notes": "Labels match the report C4 container view. Use private service identity and server-derived tenant context. An explicitly enabled local synthetic adapter is a narrower exception, unsaved and unsuitable as proof of production authorization. No asynchronous worker is implied.",
+      "sources": ["docs/reports/source/diagrams.json", "compose.yaml"]
+    },
+    {
+      "title": "Frontend architecture and design",
+      "points": [
+        "Typed routes, query state and local preferences",
+        "Charts/maps with table and keyboard alternatives",
+        "One theme for workspace, portals and notifications"
+      ],
+      "kind": "screenshot",
+      "visual": "docs/reports/diagrams/settings-dark.png",
+      "notes": "Issue #22 exposed shell-only theme inheritance and Sonner defaults. PR #23 moved theme to the document root, explicitly themed notifications, gated selection on hydration and corrected light success-toast contrast. Eighteen desktop/mobile tests include this regression. This screenshot is actual local UI.",
+      "sources": ["apps/web/components/providers.tsx", "apps/web/e2e/theme.spec.ts"]
+    },
+    {
+      "title": "Java Spring Boot backend",
+      "points": [
+        "Controllers validate; services enforce policy and transactions",
+        "Tenant-scoped repositories and idempotent receipts",
+        "Standard errors, rate limits, audit and safe imports"
+      ],
+      "kind": "process",
+      "visual": "backend",
+      "notes": "Do not imply every endpoint is individually owner-scoped. General operational data is tenant-scoped; conversations/scenarios narrow by subject ownership. JWT acceptance alone cannot expand database role permissions. Current enabled membership narrows signed scopes.",
+      "sources": [
+        "services/api/src/main/java/io/citypulse/identity/MembershipFilter.java",
+        "docs/api/backend.md"
+      ]
+    },
+    {
+      "title": "Database and PostGIS architecture",
+      "points": [
+        "WGS84 boundaries and longitude-first points",
+        "Separate flow observations, stock snapshots and provenance",
+        "Composite references protect sensitive tenant relationships"
+      ],
+      "kind": "diagram",
+      "visual": "erd",
+      "notes": "The physical report appendix is definitive. tenant_city assigns shared city definitions rather than making every city directly tenant-owned. GiST supports spatial queries; tenant/time indexes support protected history. Parent-boundary edits need controlled revalidation.",
+      "sources": [
+        "services/api/src/main/resources/db/migration/V1__canonical_geospatial_schema.sql",
+        "services/api/src/main/resources/db/migration/V2__tenant_operations.sql"
+      ]
+    },
+    {
+      "title": "Data ingestion and processing",
+      "points": [
+        "CSV, JSON and Point GeoJSON",
+        "Validate, normalize, deduplicate and score quality",
+        "Checkpoint locally; publish with scoped replay receipts"
+      ],
+      "kind": "diagram",
+      "visual": "ingestion",
+      "notes": "Input size, headers, units, timestamps and geography are bounded. Quality is a rule-based diagnostic, not proof of source truth or model confidence. A local checkpoint is not evidence that all remote publication completed. Live provider access requires licensing and configuration.",
+      "sources": ["services/ingestion/citypulse_ingestion/pipeline.py", "scripts/data_pipeline.py"]
+    },
+    {
+      "title": "AI/ML forecasting workflow",
+      "points": [
+        "Past-only lag and weekday features",
+        "Chronological train / validation / test",
+        "Versioned JSON artifacts, fallback and rollback"
+      ],
+      "kind": "diagram",
+      "visual": "ml",
+      "notes": "Eight synthetic city/district/category scopes contain 182 daily observations each. Train/validation/test is chronological 60/20/20. Validation MAE selects among seasonal-naive, moving average, Ridge and XGBoost. Rolling one-step performance is not recursive multi-horizon or unseen-city performance.",
+      "sources": [
+        "services/ai-engine/citypulse_ai/modeling.py",
+        "docs/reports/model-evaluation.json"
+      ]
+    },
+    {
+      "title": "Actual model evaluation",
+      "points": [
+        "Eight synthetic segments; held-out one-step results",
+        "Selection and interval calibration have measurable limits"
+      ],
+      "kind": "model-chart",
+      "visual": null,
+      "notes": "The chart reads selected-model test MAE from committed evaluation JSON. Compare within synthetic segment. Validation-selected candidates are not always best on the test period. Empirical interval coverage varies materially; a 90th-percentile residual method is not guaranteed 90% future coverage. The report retains all candidate metrics.",
+      "sources": ["docs/reports/model-evaluation.json", "docs/model-card.md"]
+    },
+    {
+      "title": "City maps and demand forecasts",
+      "points": [
+        "Synthetic map overlays; no inferred road network",
+        "A real forecast response, with its stated interval method"
+      ],
+      "kind": "map-forecast",
+      "visual": null,
+      "notes": "The map is an actual local screenshot and remains labeled synthetic. The forecast chart is derived from an actual local FastAPI response saved with its input/provenance and no credentials. A forecast response is a demonstration, not measured future accuracy. Intervals and fallback status must be read from that response.",
+      "sources": ["docs/presentations/source/evidence/forecast-demo.json", "docs/model-card.md"]
+    },
+    {
+      "title": "Business opportunity engine",
+      "points": [
+        "Configurable scores expose assumptions",
+        "Budget, stock, capacity, lanes and coverage are explicit",
+        "Infeasibility is a result; no plan dispatch occurs"
+      ],
+      "kind": "screenshot",
+      "visual": "docs/assets/readme-decision.png",
+      "notes": "The screenshot follows an actual local SciPy calculation with synthetic data. Scores are indicators, not investment-success probabilities. A local result is unsaved; the Java path supports owned snapshots, saved/exported scenarios and reproduction. Cost minimization may validly allocate zero without a hard positive floor.",
+      "sources": [
+        "docs/reports/decision-evaluation.json",
+        "services/ai-engine/citypulse_ai/decisions.py"
+      ]
+    },
+    {
+      "title": "PulseAI conversational analyst",
+      "points": [
+        "Read-only tools retrieve permitted records",
+        "An optional model selects allowed statement IDs",
+        "Java constructs factual prose and citations"
+      ],
+      "kind": "diagram",
+      "visual": "pulseai",
+      "notes": "Neither retrieved text nor provider output can choose arbitrary SQL or introduce free-form factual claims. Missing records remain absent. The default disabled provider makes no paid external request. Stored forecasts require tenant checks and are not silently attributed to an unrelated city UUID.",
+      "sources": [
+        "services/api/src/main/java/io/citypulse/pulseai/PulseAiService.java",
+        "services/ai-engine/citypulse_ai/pulseai.py"
+      ]
+    },
+    {
+      "title": "Why attest selected content?",
+      "points": [
+        "Exports and audit evidence need integrity checks",
+        "A digest can be compared independently",
+        "Integrity does not establish observation truth"
+      ],
+      "kind": "editorial",
+      "visual": null,
+      "notes": "Blockchain is justified narrowly for selected attestations, not as the primary database or a guarantee of honest providers. References must exclude secrets and private personal data. Public immutability complicates deletion; local EVM behavior does not establish a deployed public system.",
+      "sources": ["docs/blockchain.md", "blockchain/contracts/DatasetAttestationRegistry.sol"]
+    },
+    {
+      "title": "Smart contracts and verification",
+      "points": [
+        "Authorize source and attester role",
+        "Record a unique event digest and receipt",
+        "Compare the original and tampered bytes"
+      ],
+      "kind": "diagram",
+      "visual": "blockchain",
+      "notes": "AuthorizedSourceRegistry, DatasetAttestationRegistry and VerificationRecord match report labels. IDs include chain/contract/submitter/event. The recorded local demo uses chain 31337 and 150,788 gas for one sample. This is not a public-network fee quote. Java separately distinguishes DIGEST_RECORDED from validated CHAIN_CONFIRMED.",
+      "sources": [
+        "docs/reports/blockchain-local-demo.json",
+        "services/api/src/main/java/io/citypulse/workspace/application/ChainReceiptService.java"
+      ]
+    },
+    {
+      "title": "Security, authentication and privacy",
+      "points": [
+        "OIDC/PKCE, encrypted sessions and current membership",
+        "Tenant/owner predicates, bounded inputs and safe exports",
+        "Real IdP/MFA rollout and external assurance remain pending"
+      ],
+      "kind": "security",
+      "visual": null,
+      "notes": "CSRF is retained except for explicit bearer API requests; invalid credentials still fail authorization. Session tokens are not in browser storage. Nonce CSP, strict parsing, minimized logs, runtime DB grants and dependency scans provide layers. No penetration test, professional contract audit or certification is claimed.",
+      "sources": ["docs/security/architecture.md", "docs/security/threat-model.md"]
+    },
+    {
+      "title": "Cloud infrastructure and deployment",
+      "points": [
+        "Compose is executable and verified in Linux CI",
+        "AWS private ECS/data modules are validated code",
+        "No cloud apply or paid resource provisioning occurred"
+      ],
+      "kind": "diagram",
+      "visual": "deployment",
+      "notes": "Fargate workloads, HTTPS ALB, managed data, EFS and private S3 are code-level designs. Counts default to zero pending bootstrap, but data/network resources would still cost money after apply. Internal HTTP, broad NAT egress and writable ephemeral cloud roots are documented hardening gaps. SQS has no connected consumer.",
+      "sources": ["infrastructure/terraform/main.tf.json", "docs/operations/deployment.md"]
+    },
+    {
+      "title": "Scalability and reliability",
+      "points": [
+        "Web/API scale within pool and DB budgets",
+        "SQLite-backed AI remains one writer",
+        "Recovery objectives require an actual restore rehearsal"
+      ],
+      "kind": "scaling",
+      "visual": null,
+      "notes": "At four API tasks with ten connections each, budget up to forty runtime connections plus operational headroom. EFS is persistence, not concurrent SQLite safety. Durable job metadata/leases/outbox and queue consumers precede horizontal AI scaling. RPO/RTO are targets, not measured recovery guarantees.",
+      "sources": ["docs/operations/scaling.md", "docs/operations/recovery.md"]
+    },
+    {
+      "title": "CI/CD and monitoring",
+      "points": [
+        "Build, test, scan and produce CycloneDX inventories",
+        "Private metrics and redacted OpenTelemetry traces",
+        "Alert rules exist; pager delivery is not configured"
+      ],
+      "kind": "diagram",
+      "visual": "monitoring",
+      "notes": "Main requires nine application/security/platform jobs. Manual packaging is separate from automatic provisioning. Compose verifies actual API/AI scrapes and spans stored in Tempo. CloudWatch is a configured ECS path, not a deployed logging service. Proposed SLOs are not attained service levels.",
+      "sources": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/security.yml",
+        "scripts/monitoring_smoke.py"
+      ]
+    },
+    {
+      "title": "Testing and quality assurance",
+      "points": [
+        "29 Java / 48 AI / 13 web unit tests",
+        "18 desktop/mobile / 6 ingestion / 4 contract tests",
+        "2 mocked Terraform plans; real Compose integration"
+      ],
+      "kind": "test-metrics",
+      "visual": null,
+      "notes": "These counts have revision-linked CI evidence in the report. Linux Java has zero skips; local Docker tests skip because the engine was unavailable. Browser tests include accessibility and theme persistence. Zero fixable HIGH/CRITICAL findings is a scoped scan gate, not a clean bill of security.",
+      "sources": ["docs/reports/source/evidence.json", "apps/web/e2e/theme.spec.ts"]
+    },
+    {
+      "title": "End-to-end user journey",
+      "points": [
+        "Load licensed or synthetic records",
+        "Investigate compatible evidence and forecast",
+        "Test constraints, save, explain, export and verify"
+      ],
+      "kind": "process",
+      "visual": "journey",
+      "notes": "Walk through ingestion/replay, an owned evidence session, a forecast job, a constrained scenario and an independent digest comparison. Keep failure paths visible: absent counterpart, invalid authorization, solver infeasibility and unmatched receipt. Human review remains the decision boundary.",
+      "sources": ["scripts/smoke.py", "docs/decision-engine.md", "docs/pulseai.md"]
+    },
+    {
+      "title": "Real results and key learnings",
+      "points": [
+        "74.68 ms p95 in a bounded direct-AI smoke",
+        "0% HTTP failures across 21 synthetic requests",
+        "Transparent limits matter as much as a successful response"
+      ],
+      "kind": "load-chart",
+      "visual": null,
+      "notes": "The k6 run is twenty seconds at one arrival per second, with twenty-one observed requests. It excludes Next, Java, DB and external network. It is not saturation or production SLO evidence. Local solver benchmarks cover three sizes with three repeats each; raw data is retained. Interval coverage and portal-theme tests exposed useful limitations rather than just confirming expected behavior.",
+      "sources": [
+        "docs/reports/operations/k6-local-ai.json",
+        "docs/reports/decision-evaluation.json"
+      ]
+    },
+    {
+      "title": "Challenges, tradeoffs and limitations",
+      "points": [
+        "Synthetic data and incomplete coverage limit conclusions",
+        "Local AI persistence limits distributed deployment",
+        "Licensing, identity, security review and DR need pilot evidence"
+      ],
+      "kind": "editorial",
+      "visual": null,
+      "notes": "General business rows require owner policy for mixed-owner tenants. Historical documents lagged implementation, so this report/deck use a code-first hierarchy. A Hardhat development advisory and deprecated Jackson bridge remain disclosed. Avoid promising profit, real-time intelligence, mainnet operation or certification.",
+      "sources": [
+        "docs/api/backend.md",
+        "docs/security/verification.md",
+        "docs/operations/scaling.md"
+      ]
+    },
+    {
+      "title": "Future roadmap",
+      "points": [
+        "Licensed, assessed sources and real IdP acceptance",
+        "Durable job metadata, workers and artifact storage",
+        "Measured capacity, recovery drills and independent review"
+      ],
+      "kind": "roadmap",
+      "visual": null,
+      "notes": "All three groups are future work, not deployed modules. Queue consumers and Kubernetes require measured need. Add multi-horizon calibration and field evaluation before expanding model complexity. Real provider cadence/completeness and a responsible decision owner are essential acceptance inputs.",
+      "sources": ["README.md", "docs/operations/scaling.md", "docs/model-card.md"]
+    },
+    {
+      "title": "Final summary",
+      "points": [
+        "A working platform for reconstructable urban analysis",
+        "Explicit evidence, uncertainty and policy constraints",
+        "The next milestone is a controlled real-data pilot"
+      ],
+      "kind": "editorial",
+      "visual": null,
+      "notes": "Summarize implemented integration, not a list of technologies alone. The value is that an analyst can inspect sources and assumptions and reproduce a scenario. The project does not claim operational city adoption, production uptime, independent audit or guaranteed outcomes.",
+      "sources": ["docs/reports/source/report.json", "README.md"]
+    },
+    {
+      "title": "Questions and discussion",
+      "points": ["Explore the repository", "Review the evidence and reproduce the demonstrations"],
+      "kind": "qa",
+      "visual": null,
+      "notes": "Invite questions about data compatibility, uncertainty, tenant/owner policy, optimization objectives, source-truth limits and the next pilot. The QR and text URL point to the actual GitHub repository. Speaker notes and the companion PDF provide implementation sources and verification limitations.",
+      "sources": ["README.md"]
+    }
+  ]
+}

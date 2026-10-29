@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Repository source snapshot",
+    "url": "https://github.com/manikantbindass/CityPulse/tree/2385ea7a3c6f9349c9c9ee67a56ace5f279fa992"
+  },
+  {
+    "title": "Core CI verification",
+    "url": "https://github.com/manikantbindass/CityPulse/actions/runs/40910819783"
+  },
+  {
+    "title": "Theme issue and regression",
+    "url": "https://github.com/manikantbindass/CityPulse/pull/23"
+  },
+  {
+    "title": "Theme CI",
+    "url": "https://github.com/manikantbindass/CityPulse/actions/runs/40922082151"
+  },
+  {
+    "title": "Security and SBOM verification",
+    "url": "https://github.com/manikantbindass/CityPulse/actions/runs/40922081880"
+  },
+  {
+    "title": "Spring Boot tracing",
+    "url": "https://docs.spring.io/spring-boot/4.0/reference/actuator/tracing.html"
+  },
+  {
+    "title": "Next.js instrumentation",
+    "url": "https://nextjs.org/docs/app/guides/instrumentation"
+  },
+  {
+    "title": "Ridge regression API",
+    "url": "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html"
+  },
+  {
+    "title": "SciPy mixed-integer linear programming",
+    "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.milp.html"
+  },
+  {
+    "title": "AWS RDS PostGIS management",
+    "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.PostGIS.html"
+  },
+  {
+    "title": "AWS ECS deployment behavior",
+    "url": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html"
+  },
+  {
+    "title": "k6 thresholds",
+    "url": "https://grafana.com/docs/k6/latest/using-k6/thresholds/"
+  },
+  {
+    "title": "ReportLab document composition",
+    "url": "https://docs.reportlab.com/reportlab/userguide/ch5_platypus/"
+  },
+  {
+    "title": "Fargate pricing inputs, not a quote",
+    "url": "https://aws.amazon.com/fargate/pricing/"
+  },
+  {
+    "title": "VPC cost inputs, not a quote",
+    "url": "https://aws.amazon.com/vpc/pricing/"
+  }
+]

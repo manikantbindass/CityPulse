@@ -35,10 +35,10 @@ for name in ["header", "footer"]:
     if "animation:" in static.read_text(encoding="utf-8"):
         errors.append(f"Animated static fallback {static.name}")
 if not (root / "docs/reports/CityPulse-Technical-Report.pdf").read_bytes().startswith(b"%PDF-"):
-    errors.append("Invalid draft PDF")
+    errors.append("Invalid PDF")
 with zipfile.ZipFile(root / "docs/presentations/CityPulse-Project-Presentation.pptx") as deck:
     if "ppt/presentation.xml" not in deck.namelist():
-        errors.append("Invalid draft presentation")
+        errors.append("Invalid presentation")
 if errors:
     sys.exit("\n".join(errors))
-print("README anchors, image alternatives, local targets, SVG/static motion policy and draft downloads passed")
+print("README anchors, image alternatives, local targets, SVG/static motion policy and document downloads passed")

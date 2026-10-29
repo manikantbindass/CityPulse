@@ -154,7 +154,7 @@ CityPulse/
 │   ├── monitoring/        # Collector, Prometheus, Tempo, Grafana
 │   ├── terraform/         # AWS network/data/compute modules; no apply performed
 │   └── kubernetes/        # Planned optional alternative
-├── docs/                  # PRD, ADRs, API, security, operations, assets and drafts
+├── docs/                  # PRD, ADRs, API, security, operations, assets and documents
 ├── tests/                 # Cross-service guidance and bounded k6 workloads
 ├── scripts/               # Setup, ingestion, smoke, model and verification tools
 ├── .github/workflows/     # CI, security, platform and manual packaging
@@ -272,7 +272,7 @@ Measurements are bounded local/CI experiments. No production throughput, availab
 
 [Download technical report PDF](docs/reports/CityPulse-Technical-Report.pdf) · [Download project presentation PPTX](docs/presentations/CityPulse-Project-Presentation.pptx)
 
-These existing documents are earlier implementation drafts. They are preserved and will be refreshed after the remaining phases are complete. Current Markdown and workflow evidence take precedence over stale draft claims.
+The **79-page technical report** and **33-slide presentation** document inspected application snapshot `2385ea7` and measured synthetic experiments. Both include editable sources, architecture diagrams, real application screenshots, limitations and references. [Report regeneration](docs/reports/README.md) · [Presentation regeneration](docs/presentations/README.md). Application changes after that snapshot require a fresh evidence review.
 
 ## Roadmap
 
@@ -284,7 +284,7 @@ These existing documents are earlier implementation drafts. They are preserved a
 - [ ] Real IdP/MFA rollout, restore rehearsal and cloud deployment validation
 - [ ] Distributed forecast/job persistence, transactional outbox and queue workers
 - [ ] Capacity certification, external security review and production SLO history
-- [ ] Final technical report and presentation after all phases complete
+- [x] Evidence-grounded technical report and editable project presentation
 
 ## FAQ
 
