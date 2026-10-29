@@ -1,3 +1,4 @@
+import { backendAuthorization } from '../../../../lib/server-auth';
 import { NextRequest } from 'next/server';
 
 async function proxy(request: NextRequest, context: { params: Promise<{ path?: string[] }> }) {
@@ -7,11 +8,7 @@ async function proxy(request: NextRequest, context: { params: Promise<{ path?: s
   const origin = request.headers.get('origin');
   if (origin && origin !== request.nextUrl.origin)
     return Response.json({ detail: 'Same-origin requests required' }, { status: 403 });
-  const authorization =
-    request.headers.get('authorization') ??
-    (process.env.PULSEAI_LOCAL_PREVIEW === 'true' && process.env.LOCAL_API_TOKEN
-      ? `Bearer ${process.env.LOCAL_API_TOKEN}`
-      : null);
+  const authorization = await backendAuthorization(request);
   if (!authorization)
     return Response.json(
       {

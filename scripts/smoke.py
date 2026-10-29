@@ -72,3 +72,15 @@ web_answer = check(f"{web}/api/pulseai/sessions/{web_session['id']}/messages", {
     "from": "2026-01-01T00:00:00Z", "to": "2026-01-02T00:00:00Z", "commodity": "rice", "unit": "kg",
 })
 assert not web_answer["empty"]
+
+scenario = json.loads(Path("data/sample/decisions/retail.json").read_text())
+decision = check(f"{api}/api/v1/decisions/scenarios", {"scenario": scenario}, True, "decision-smoke-v1")
+assert decision["persisted"] and decision["result"]["optimization"]["status"] == "optimal"
+assert decision["result"]["optimization"]["totalCost"] <= scenario["budget"] + 1e-5
+stored_decision = check(f"{api}/api/v1/decisions/scenarios/{decision['id']}", authenticated=True)
+assert stored_decision["result"]["inputFingerprint"] == decision["result"]["inputFingerprint"]
+exported = check(f"{api}/api/v1/decisions/scenarios/{decision['id']}/export", authenticated=True)
+assert exported["result"]["resultFingerprint"] == decision["result"]["resultFingerprint"]
+snapshot = check(f"{api}/api/v1/decisions/snapshots", {"cityIds":["10000000-0000-0000-0000-000000000001"],"categories":["rice"],"unit":"kg","from":"2026-01-01T00:00:00Z","to":"2026-01-01T03:00:00Z"}, True)
+assert snapshot["snapshot"]["districts"][0]["availability"] is None
+check(f"{api}/api/v1/security/me", authenticated=True)

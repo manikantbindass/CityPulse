@@ -24,6 +24,9 @@ public class RuntimeConfiguration {
         return builder ->
             builder.postConfigurer(mapper ->
                 mapper
+                    .enable(
+                        com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
+                    )
                     .getFactory()
                     .setStreamReadConstraints(
                         StreamReadConstraints.builder()

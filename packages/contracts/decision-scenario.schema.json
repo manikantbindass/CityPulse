@@ -1,0 +1,570 @@
+{
+  "$defs": {
+    "District": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9_-]{1,80}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "city": {
+          "pattern": "^[A-Za-z0-9_-]{1,80}$",
+          "title": "City",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 120,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "category": {
+          "pattern": "^[A-Za-z0-9_-]{1,80}$",
+          "title": "Category",
+          "type": "string"
+        },
+        "demand": {
+          "anyOf": [
+            {
+              "maximum": 10000000.0,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Demand"
+        },
+        "availability": {
+          "anyOf": [
+            {
+              "maximum": 10000000.0,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability"
+        },
+        "forecastDemand": {
+          "anyOf": [
+            {
+              "maximum": 10000000.0,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Forecastdemand"
+        },
+        "seasonalBaseline": {
+          "anyOf": [
+            {
+              "maximum": 10000000.0,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Seasonalbaseline"
+        },
+        "receivingCapacity": {
+          "default": 10000000.0,
+          "maximum": 10000000.0,
+          "minimum": 0,
+          "title": "Receivingcapacity",
+          "type": "number"
+        },
+        "minimumCoverage": {
+          "default": 0,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Minimumcoverage",
+          "type": "number"
+        },
+        "priority": {
+          "default": 1,
+          "maximum": 10,
+          "minimum": 0.1,
+          "title": "Priority",
+          "type": "number"
+        },
+        "risk": {
+          "default": 0.5,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Risk",
+          "type": "number"
+        },
+        "accessibility": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Accessibility"
+        },
+        "businessesPerKm2": {
+          "anyOf": [
+            {
+              "maximum": 10000000.0,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Businessesperkm2"
+        },
+        "latitude": {
+          "anyOf": [
+            {
+              "maximum": 90,
+              "minimum": -90,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latitude"
+        },
+        "longitude": {
+          "anyOf": [
+            {
+              "maximum": 180,
+              "minimum": -180,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Longitude"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "city",
+        "name",
+        "category"
+      ],
+      "title": "District",
+      "type": "object"
+    },
+    "Lane": {
+      "additionalProperties": false,
+      "properties": {
+        "sourceId": {
+          "pattern": "^[A-Za-z0-9_-]{1,80}$",
+          "title": "Sourceid",
+          "type": "string"
+        },
+        "districtId": {
+          "pattern": "^[A-Za-z0-9_-]{1,80}$",
+          "title": "Districtid",
+          "type": "string"
+        },
+        "unitCost": {
+          "maximum": 10000000.0,
+          "minimum": 0,
+          "title": "Unitcost",
+          "type": "number"
+        },
+        "capacity": {
+          "maximum": 10000000.0,
+          "minimum": 0,
+          "title": "Capacity",
+          "type": "number"
+        },
+        "travelMinutes": {
+          "maximum": 10000000.0,
+          "minimum": 0,
+          "title": "Travelminutes",
+          "type": "number"
+        }
+      },
+      "required": [
+        "sourceId",
+        "districtId",
+        "unitCost",
+        "capacity",
+        "travelMinutes"
+      ],
+      "title": "Lane",
+      "type": "object"
+    },
+    "ObjectiveWeights": {
+      "additionalProperties": false,
+      "properties": {
+        "throughput": {
+          "default": 0.6,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Throughput",
+          "type": "number"
+        },
+        "cost": {
+          "default": 0.2,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Cost",
+          "type": "number"
+        },
+        "fairness": {
+          "default": 0.2,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Fairness",
+          "type": "number"
+        }
+      },
+      "title": "ObjectiveWeights",
+      "type": "object"
+    },
+    "ScoreWeights": {
+      "additionalProperties": false,
+      "properties": {
+        "gap": {
+          "default": 0.5,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Gap",
+          "type": "number"
+        },
+        "risk": {
+          "default": 0.2,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Risk",
+          "type": "number"
+        },
+        "accessibility": {
+          "default": 0.15,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Accessibility",
+          "type": "number"
+        },
+        "density": {
+          "default": 0.1,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Density",
+          "type": "number"
+        },
+        "seasonality": {
+          "default": 0.05,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Seasonality",
+          "type": "number"
+        }
+      },
+      "title": "ScoreWeights",
+      "type": "object"
+    },
+    "Stock": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9_-]{1,80}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "category": {
+          "pattern": "^[A-Za-z0-9_-]{1,80}$",
+          "title": "Category",
+          "type": "string"
+        },
+        "quantity": {
+          "maximum": 10000000.0,
+          "minimum": 0,
+          "title": "Quantity",
+          "type": "number"
+        },
+        "unitCost": {
+          "maximum": 10000000.0,
+          "minimum": 0,
+          "title": "Unitcost",
+          "type": "number"
+        },
+        "name": {
+          "maxLength": 120,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "category",
+        "quantity",
+        "unitCost",
+        "name"
+      ],
+      "title": "Stock",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "useCase": {
+      "default": "retail",
+      "enum": [
+        "retail",
+        "logistics",
+        "public-service"
+      ],
+      "title": "Usecase",
+      "type": "string"
+    },
+    "origin": {
+      "default": "synthetic",
+      "enum": [
+        "synthetic",
+        "manual-assumptions",
+        "authorized-snapshot"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "snapshotId": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Snapshotid"
+    },
+    "networkId": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Networkid"
+    },
+    "dataMode": {
+      "default": "synthetic",
+      "enum": [
+        "synthetic",
+        "historical",
+        "live",
+        "assumed"
+      ],
+      "title": "Datamode",
+      "type": "string"
+    },
+    "unit": {
+      "enum": [
+        "count",
+        "kg",
+        "litre",
+        "kwh",
+        "trip"
+      ],
+      "title": "Unit",
+      "type": "string"
+    },
+    "currency": {
+      "pattern": "^[A-Z]{3}$",
+      "title": "Currency",
+      "type": "string"
+    },
+    "timeZone": {
+      "maxLength": 80,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_+/-]+$",
+      "title": "Timezone",
+      "type": "string"
+    },
+    "periodStart": {
+      "format": "date-time",
+      "title": "Periodstart",
+      "type": "string"
+    },
+    "periodEnd": {
+      "format": "date-time",
+      "title": "Periodend",
+      "type": "string"
+    },
+    "districts": {
+      "items": {
+        "$ref": "#/$defs/District"
+      },
+      "maxItems": 30,
+      "minItems": 1,
+      "title": "Districts",
+      "type": "array"
+    },
+    "stocks": {
+      "items": {
+        "$ref": "#/$defs/Stock"
+      },
+      "maxItems": 10,
+      "title": "Stocks",
+      "type": "array"
+    },
+    "lanes": {
+      "items": {
+        "$ref": "#/$defs/Lane"
+      },
+      "maxItems": 300,
+      "title": "Lanes",
+      "type": "array"
+    },
+    "budget": {
+      "maximum": 10000000.0,
+      "minimum": 0,
+      "title": "Budget",
+      "type": "number"
+    },
+    "demandBasis": {
+      "default": "observed",
+      "enum": [
+        "observed",
+        "forecast"
+      ],
+      "title": "Demandbasis",
+      "type": "string"
+    },
+    "demandMultiplier": {
+      "default": 1,
+      "maximum": 5,
+      "minimum": 0,
+      "title": "Demandmultiplier",
+      "type": "number"
+    },
+    "availabilityMultiplier": {
+      "default": 1,
+      "maximum": 5,
+      "minimum": 0,
+      "title": "Availabilitymultiplier",
+      "type": "number"
+    },
+    "minimumCoverage": {
+      "default": 0,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Minimumcoverage",
+      "type": "number"
+    },
+    "maxTravelMinutes": {
+      "anyOf": [
+        {
+          "maximum": 10000000.0,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maxtravelminutes"
+    },
+    "objective": {
+      "default": "balanced",
+      "enum": [
+        "throughput",
+        "coverage",
+        "cost",
+        "fairness",
+        "balanced"
+      ],
+      "title": "Objective",
+      "type": "string"
+    },
+    "objectiveWeights": {
+      "$ref": "#/$defs/ObjectiveWeights"
+    },
+    "scoreWeights": {
+      "$ref": "#/$defs/ScoreWeights"
+    },
+    "densityReferencePerKm2": {
+      "default": 100,
+      "exclusiveMinimum": 0,
+      "maximum": 10000000.0,
+      "title": "Densityreferenceperkm2",
+      "type": "number"
+    },
+    "integral": {
+      "default": false,
+      "title": "Integral",
+      "type": "boolean"
+    },
+    "includeTradeoffs": {
+      "default": true,
+      "title": "Includetradeoffs",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "name",
+    "unit",
+    "currency",
+    "timeZone",
+    "periodStart",
+    "periodEnd",
+    "districts",
+    "stocks",
+    "budget"
+  ],
+  "title": "Scenario",
+  "type": "object"
+}

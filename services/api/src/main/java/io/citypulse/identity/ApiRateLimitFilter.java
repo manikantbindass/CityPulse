@@ -44,8 +44,10 @@ final class ApiRateLimitFilter extends OncePerRequestFilter {
             String key =
                 "rate:" + context.tenantId() + ":" + WorkspaceService.digest(context.subject());
             boolean analyst = request.getRequestURI().startsWith("/api/v1/pulseai");
+            boolean decision = request.getRequestURI().startsWith("/api/v1/decisions");
             if (analyst) key += ":pulseai";
-            int limit = analyst ? 10 : 180;
+            if (decision) key += ":decisions";
+            int limit = analyst || decision ? 10 : 180;
             Long count = redis.execute(counter, List.of(key));
             if (count == null) {
                 reject(response, 503, "RATE_LIMIT_UNAVAILABLE");

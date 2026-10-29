@@ -31,6 +31,7 @@ import { Button } from './ui/button';
 import { CityNetwork } from './network';
 import { ChainRecords } from './chain-records';
 import { MlForecast } from './ml-forecast';
+import { DecisionWorkspace } from './decision-workspace';
 import { PulseAI } from './pulseai';
 import { BackendEvidence } from './backend-evidence';
 const DemandChart = dynamic(() => import('./charts').then((m) => m.DemandChart), {
@@ -619,26 +620,10 @@ export function WorkspacePage({ section }: { section: string }) {
           </Panel>
         </div>
       )}
-      {section === 'opportunities' && (
-        <>
-          <div className="opportunity-intro">
-            <Sparkles size={24} />
-            <div>
-              <h2>Gaps are a starting point for investigation.</h2>
-              <p>
-                Hand-authored examples. Validate real demand, permits, competition, and costs before
-                making a business decision.
-              </p>
-            </div>
-          </div>
-          <Panel title="Opportunity explorer" label="Sample suggestions based on supply gaps">
-            <DistrictTable data={data} opportunities />
-          </Panel>
-        </>
-      )}
+      {section === 'opportunities' && <DecisionWorkspace />}
       {section === 'intelligence' && <BackendEvidence />}
       {(section === 'dashboard' || section === 'predictions') && <MlForecast />}
-      {section === 'optimization' && <Allocation data={data} />}
+      {section === 'optimization' && <DecisionWorkspace initialView="simulator" />}
       {section === 'verification' && <Verification />}
       {(section === 'verification' || section === 'admin') && <ChainRecords />}
       {section === 'analyst' && <Analyst />}
@@ -753,74 +738,6 @@ function Insight({
         </Link>
       </div>
     </div>
-  );
-}
-function Allocation({ data }: { data: District[] }) {
-  const [budget, setBudget] = useState(300);
-  const total = data.reduce((n, r) => n + Math.max(0, r.demand - r.supply), 0);
-  const allocated = Math.min(budget, total);
-  return (
-    <Panel
-      title="Resource allocation scenario"
-      label="Proportional allocation to positive sample gaps. Nothing is dispatched."
-    >
-      <div className="allocation-control">
-        <label htmlFor="budget">
-          Available resource units <strong>{budget}</strong>
-        </label>
-        <input
-          id="budget"
-          type="range"
-          min="0"
-          max="1000"
-          step="10"
-          value={budget}
-          onChange={(e) => setBudget(Number(e.target.value))}
-        />
-        <p>
-          {allocated} units allocated · {budget - allocated} remain ·{' '}
-          {Math.max(0, total - allocated)} unmet
-        </p>
-      </div>
-      <div className="allocation-list">
-        {data.map((r) => {
-          const gap = Math.max(0, r.demand - r.supply),
-            amount = total ? (allocated * gap) / total : 0;
-          return (
-            <div key={r.id}>
-              <div>
-                <span>{r.name}</span>
-                <strong>{amount.toFixed(1)} units</strong>
-              </div>
-              <progress
-                max={Math.max(1, gap)}
-                value={amount}
-                aria-label={`Allocation for ${r.name}`}
-              />
-              <small>Sample gap: {gap} units</small>
-            </div>
-          );
-        })}
-      </div>
-      <Button
-        onClick={() => {
-          exportCsv(
-            data.map((r) => ({
-              dataset: 'SYNTHETIC_SCENARIO',
-              district: r.name,
-              allocation: total
-                ? ((allocated * Math.max(0, r.demand - r.supply)) / total).toFixed(2)
-                : 0,
-            })),
-            'citypulse-allocation.csv',
-          );
-          toast.success('Scenario exported');
-        }}
-      >
-        <Download size={15} />
-        Export scenario
-      </Button>
-    </Panel>
   );
 }
 function Verification() {

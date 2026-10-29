@@ -1,0 +1,16 @@
+# Illustrative SOC 2-style engineering control mapping
+
+This table is an educational engineering exercise. It is not a SOC 2 report,
+attestation, legal opinion, certification or statement that controls operated over
+an assessment period. Independent organizational evidence would be required.
+
+| Illustrative area             | Engineering mechanism                                                              | Evidence / remaining work                                                          |
+| ----------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Access control (CC6-style)    | OIDC, optional ACR, scoped memberships, tenant/owner predicates, final-admin guard | Automated regression tests; real IdP/MFA rollout and access-review records pending |
+| Change management (CC8-style) | PR workflow, protected main, immutable CI actions, dependency updates              | GitHub check results; separation of duties/approval records pending                |
+| Monitoring (CC7-style)        | Request IDs, minimal security logs, sensitive-action audit events, scanners        | Automated scan reports; operational alert routing and immutable log sink pending   |
+| Risk assessment (CC3-style)   | STRIDE threats, residual-risk register and trust boundaries                        | Threat document; organization-level risk acceptance pending                        |
+| Availability (A1-style)       | Bounded timeouts/requests, health checks, constrained workers                      | Local/CI tests; capacity planning, incident metrics and restore drills pending     |
+| Confidentiality (C1-style)    | Token encryption, TLS deployment requirements, PII minimization, runtime DB roles  | Session tests and SQL checks; managed key/backup deployment evidence pending       |
+| Data lifecycle                | Expiring conversations and configurable scenario/snapshot retention                | Code and integration tests; legal holds, tenant erasure and backup expiry pending  |
+| Incident handling             | Containment, recovery, rotation and disclosure runbooks                            | Written procedure; tabletop and production exercise evidence pending               |

@@ -75,6 +75,9 @@ test('analyst, digest, exports, and role-aware navigation work', async ({ page }
   expect((await download).suggestedFilename()).toContain('report');
   await page.goto('/settings');
   await page.getByLabel('Demo persona').selectOption('administrator');
+  await expect(
+    page.getByText('Demo navigation changed. Server permissions unchanged.'),
+  ).toBeVisible();
   await page.goto('/admin');
   await expect(page.getByRole('heading', { name: 'Local administrator persona' })).toBeVisible();
 });

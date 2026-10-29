@@ -1,11 +1,13 @@
+import { backendAuthorization } from '../../../lib/server-auth';
 export const dynamic = 'force-dynamic';
-export async function GET() {
+export async function GET(request: Request) {
   const base = process.env.API_BASE_URL;
-  const token = process.env.LOCAL_API_TOKEN;
-  if (!base || !token) return Response.json({ error: 'API not configured' }, { status: 503 });
+  const authorization = await backendAuthorization(request);
+  if (!authorization) return Response.json({ detail: 'Authentication required' }, { status: 401 });
+  if (!base) return Response.json({ error: 'API not configured' }, { status: 503 });
   try {
     const response = await fetch(`${base}/api/v1/cities?page=0&size=20`, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: authorization },
       cache: 'no-store',
       signal: AbortSignal.timeout(4000),
     });

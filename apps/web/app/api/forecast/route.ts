@@ -1,7 +1,9 @@
+import { backendAuthorization } from '../../../lib/server-auth';
 export async function POST(request: Request) {
   const base = process.env.API_BASE_URL;
-  const token = process.env.LOCAL_API_TOKEN;
-  if (!base || !token) return Response.json({ error: 'AI not configured' }, { status: 503 });
+  const authorization = await backendAuthorization(request);
+  if (!authorization) return Response.json({ detail: 'Authentication required' }, { status: 401 });
+  if (!base) return Response.json({ error: 'AI not configured' }, { status: 503 });
   try {
     const raw = await request.text();
     if (raw.length > 200000) return Response.json({ error: 'Request too large' }, { status: 413 });
@@ -9,7 +11,7 @@ export async function POST(request: Request) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: authorization,
         'Idempotency-Key': crypto.randomUUID(),
       },
       body: JSON.stringify({

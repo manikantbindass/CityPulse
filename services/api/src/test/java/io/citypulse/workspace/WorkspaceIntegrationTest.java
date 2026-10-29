@@ -248,4 +248,75 @@ class WorkspaceIntegrationTest {
             status().isNotFound()
         );
     }
+
+    @Test
+    void decisionSnapshotsPreserveMissingnessAndActorIsolation() throws Exception {
+        var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+        String body = """
+        {"cityIds":["10000000-0000-0000-0000-000000000001"],"categories":["rice"],"unit":"kg","from":"2026-01-01T00:00:00Z","to":"2026-01-01T03:00:00Z"}
+        """;
+        String response = mvc
+            .perform(
+                post("/api/v1/decisions/snapshots")
+                    .header("Authorization", TOKEN)
+                    .contentType("application/json")
+                    .content(body)
+            )
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+        var snapshot = mapper.readTree(response).get("snapshot");
+        assertEquals(60, snapshot.get("districts").get(0).get("demand").asInt());
+        assertTrue(snapshot.get("districts").get(0).get("availability").isNull());
+        java.util.UUID id = java.util.UUID.randomUUID();
+        jdbc.update(
+            "INSERT INTO decision_scenario(id,tenant_id,actor_subject,name,input,result,input_sha256,result_sha256,engine_version) VALUES(?,'00000000-0000-0000-0000-000000000001','another-owner','Private assumptions','{}','{}',repeat('0',64),repeat('1',64),'unit-contract')",
+            id
+        );
+        mvc.perform(
+            get("/api/v1/decisions/scenarios/" + id + "/export").header("Authorization", TOKEN)
+        ).andExpect(status().isNotFound());
+        String foreign = body.replace(
+            "10000000-0000-0000-0000-000000000001",
+            java.util.UUID.randomUUID().toString()
+        );
+        mvc.perform(
+            post("/api/v1/decisions/snapshots")
+                .header("Authorization", TOKEN)
+                .contentType("application/json")
+                .content(foreign)
+        ).andExpect(status().isNotFound());
+    }
+
+    @Test
+    void accountLifecycleAndStrictImportBoundary() throws Exception {
+        String id = jdbc.queryForObject(
+            "SELECT id::text FROM user_account WHERE subject='local-developer'",
+            String.class
+        );
+        mvc.perform(
+            patch("/api/v1/users/" + id + "/role")
+                .header("Authorization", TOKEN)
+                .contentType("application/json")
+                .content("{\"role\":\"CITIZEN\",\"enabled\":true}")
+        ).andExpect(status().isBadRequest());
+        mvc.perform(get("/api/v1/security/me").header("Authorization", TOKEN))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.tenantId").value("00000000-0000-0000-0000-000000000001"));
+        var file = new org.springframework.mock.web.MockMultipartFile(
+            "file",
+            "upload.json",
+            "application/json",
+            "[{\"unexpectedPersonalData\":\"not accepted\"}]".getBytes(
+                java.nio.charset.StandardCharsets.UTF_8
+            )
+        );
+        mvc.perform(
+            multipart("/api/v1/imports/observations")
+                .file(file)
+                .header("Authorization", TOKEN)
+                .header("Idempotency-Key", "invalid-import-security-01")
+        ).andExpect(status().isBadRequest());
+    }
 }

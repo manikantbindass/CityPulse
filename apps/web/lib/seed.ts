@@ -138,11 +138,12 @@ export const pageInfo: Record<string, { title: string; subtitle: string }> = {
   },
   opportunities: {
     title: 'Find room for possibility.',
-    subtitle: 'Explore business opportunities suggested by the sample supply gaps.',
+    subtitle:
+      'Discover bounded opportunities with explicit evidence, assumptions and risk weights.',
   },
   optimization: {
     title: 'Put resources where they matter.',
-    subtitle: 'Explore a local allocation scenario before making a decision.',
+    subtitle: 'Test inventory, budget, capacity and coverage constraints with the decision engine.',
   },
   verification: {
     title: 'Evidence you can trace.',

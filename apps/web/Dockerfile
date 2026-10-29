@@ -6,6 +6,7 @@ COPY apps/web/package.json apps/web/package.json
 COPY blockchain/package.json blockchain/package.json
 RUN npm ci --workspace apps/web --include-workspace-root
 COPY apps/web apps/web
+COPY data/sample/decisions data/sample/decisions
 RUN npm run build --workspace apps/web
 
 FROM node:22-alpine AS runtime

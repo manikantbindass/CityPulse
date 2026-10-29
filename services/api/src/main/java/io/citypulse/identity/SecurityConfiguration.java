@@ -27,6 +27,12 @@ public class SecurityConfiguration {
     private HttpSecurity base(HttpSecurity http) throws Exception {
         return http
             .csrf(csrf -> csrf.disable())
+            .cors(Customizer.withDefaults())
+            .headers(headers ->
+                headers.contentSecurityPolicy(csp ->
+                    csp.policyDirectives("default-src 'none'; frame-ancestors 'none'")
+                )
+            )
             .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
@@ -100,8 +106,12 @@ public class SecurityConfiguration {
     @Profile("!local")
     JwtDecoder decoder(
         @Value("${OIDC_ISSUER_URI}") String issuer,
-        @Value("${OIDC_AUDIENCE}") String audience
+        @Value("${OIDC_AUDIENCE}") String audience,
+        @Value("${OIDC_REQUIRED_ACR:}") String requiredAcr
     ) {
+        if (!issuer.startsWith("https://")) throw new IllegalArgumentException(
+            "HTTPS OIDC issuer required"
+        );
         NimbusJwtDecoder decoder = JwtDecoders.fromIssuerLocation(issuer);
         decoder.setJwtValidator(
             new DelegatingOAuth2TokenValidator<>(
@@ -109,7 +119,8 @@ public class SecurityConfiguration {
                 new JwtClaimValidator<java.util.List<String>>(
                     "aud",
                     aud -> aud != null && aud.contains(audience)
-                )
+                ),
+                new TokenPolicy(requiredAcr)
             )
         );
         return decoder;

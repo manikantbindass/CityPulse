@@ -1,0 +1,90 @@
+{
+  "name": "Synthetic public-service capacity",
+  "origin": "synthetic",
+  "dataMode": "synthetic",
+  "useCase": "public-service",
+  "unit": "count",
+  "currency": "INR",
+  "timeZone": "Asia/Kolkata",
+  "periodStart": "2026-01-01T00:00:00Z",
+  "periodEnd": "2026-01-08T00:00:00Z",
+  "budget": 600,
+  "objective": "fairness",
+  "minimumCoverage": 0.6,
+  "integral": true,
+  "districts": [
+    {
+      "id": "district-1",
+      "city": "bengaluru",
+      "name": "Central sample",
+      "category": "service",
+      "demand": 160,
+      "availability": 70,
+      "forecastDemand": 176.0,
+      "seasonalBaseline": 144.0,
+      "receivingCapacity": 100,
+      "minimumCoverage": 0.25,
+      "priority": 1.0,
+      "risk": 0.2,
+      "accessibility": 0.8,
+      "businessesPerKm2": 40,
+      "latitude": 12.9716,
+      "longitude": 77.5946,
+      "evidence": [
+        "synthetic:seed-v1"
+      ]
+    },
+    {
+      "id": "district-2",
+      "city": "bengaluru",
+      "name": "Eastern sample",
+      "category": "service",
+      "demand": 200,
+      "availability": 90,
+      "forecastDemand": 220.00000000000003,
+      "seasonalBaseline": 180.0,
+      "receivingCapacity": 100,
+      "minimumCoverage": 0.25,
+      "priority": 1.3,
+      "risk": 0.30000000000000004,
+      "accessibility": 0.7000000000000001,
+      "businessesPerKm2": 60,
+      "latitude": 12.99,
+      "longitude": 77.65,
+      "evidence": [
+        "synthetic:seed-v1"
+      ]
+    },
+    {
+      "id": "district-3",
+      "city": "pune",
+      "name": "Western sample",
+      "category": "service",
+      "demand": 120,
+      "availability": 60,
+      "forecastDemand": 132.0,
+      "seasonalBaseline": 108.0,
+      "receivingCapacity": 100,
+      "minimumCoverage": 0.25,
+      "priority": 1.6,
+      "risk": 0.4,
+      "accessibility": 0.6000000000000001,
+      "businessesPerKm2": 80,
+      "latitude": 18.52,
+      "longitude": 73.85,
+      "evidence": [
+        "synthetic:seed-v1"
+      ]
+    }
+  ],
+  "stocks": [
+    {
+      "id": "service-pool",
+      "name": "Synthetic service slots",
+      "category": "service",
+      "quantity": 160,
+      "unitCost": 3
+    }
+  ],
+  "includeTradeoffs": true
+}

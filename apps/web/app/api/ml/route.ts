@@ -1,5 +1,8 @@
+import { backendAuthorization } from '../../../lib/server-auth';
 export async function POST(request: Request) {
-  if (!process.env.API_BASE_URL || !process.env.LOCAL_API_TOKEN)
+  const authorization = await backendAuthorization(request);
+  if (!authorization) return Response.json({ detail: 'Authentication required' }, { status: 401 });
+  if (!process.env.API_BASE_URL)
     return Response.json(
       { error: 'Start the API and AI services to run a forecast.' },
       { status: 503 },
@@ -11,7 +14,7 @@ export async function POST(request: Request) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.LOCAL_API_TOKEN}`,
+        Authorization: authorization,
         'Idempotency-Key': crypto.randomUUID(),
       },
       body: raw,

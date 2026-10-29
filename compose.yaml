@@ -18,6 +18,20 @@ services:
       retries: 20
     restart: unless-stopped
 
+  db-permissions:
+    image: postgis/postgis:17-3.5
+    entrypoint: ['/bin/sh', '/roles.sh']
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:?Generate a distinct runtime database password}
+    volumes:
+      - ./infrastructure/docker/database-roles.sh:/roles.sh:ro
+    depends_on:
+      db: { condition: service_healthy }
+    restart: 'no'
+
   redis:
     image: redis:7.4-alpine
     environment:
@@ -35,11 +49,18 @@ services:
     restart: unless-stopped
 
   api:
+    security_opt: ['no-new-privileges:true']
+    cap_drop: ['ALL']
+    read_only: true
+    tmpfs: ['/tmp:rw,noexec,nosuid,size=64m']
+    pids_limit: 256
     build:
       context: .
       dockerfile: services/api/Dockerfile
     environment:
       SPRING_PROFILES_ACTIVE: local
+      DATABASE_USER: citypulse_app
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -50,7 +71,7 @@ services:
     ports:
       - '127.0.0.1:${API_PORT:-8080}:8080'
     depends_on:
-      db: { condition: service_healthy }
+      db-permissions: { condition: service_completed_successfully }
       redis: { condition: service_healthy }
     healthcheck:
       test: ['CMD', 'curl', '-fsS', 'http://localhost:8080/actuator/health/readiness']
@@ -61,6 +82,11 @@ services:
     restart: unless-stopped
 
   ai:
+    security_opt: ['no-new-privileges:true']
+    cap_drop: ['ALL']
+    read_only: true
+    tmpfs: ['/tmp:rw,noexec,nosuid,size=64m']
+    pids_limit: 256
     build:
       context: .
       dockerfile: services/ai-engine/Dockerfile
@@ -89,6 +115,11 @@ services:
     restart: unless-stopped
 
   web:
+    security_opt: ['no-new-privileges:true']
+    cap_drop: ['ALL']
+    read_only: true
+    tmpfs: ['/tmp:rw,noexec,nosuid,size=64m']
+    pids_limit: 256
     build:
       context: .
       dockerfile: apps/web/Dockerfile

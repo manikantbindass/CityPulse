@@ -22,7 +22,7 @@ export function exportCsv(rows: Record<string, unknown>[], name: string) {
   const columns = Object.keys(rows[0]);
   const cell = (value: unknown) => {
     const raw = String(value ?? '');
-    const safe = /^[=+@\-\t\r]/.test(raw) ? `'${raw}` : raw;
+    const safe = /^(?:\s*[=+@\-]|[\t\r\n])/.test(raw) ? `'${raw}` : raw;
     return `"${safe.replaceAll('"', '""')}"`;
   };
   const csv = [

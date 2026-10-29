@@ -1,0 +1,641 @@
+{
+  "engineVersion": "citypulse-decision-v1",
+  "dataMode": "synthetic",
+  "environment": {
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "interpretation": "Measured local examples; three warm/cold-mixed runs per benchmark, not production SLOs or investment outcomes.",
+  "cases": [
+    {
+      "case": "retail",
+      "dataMode": "synthetic",
+      "inputFingerprint": "5af6229683d0ba89c9cd69a749c28216bcd136f8b23bea41144e462bcb631a27",
+      "resultFingerprint": "6bb82f058a0135b56f89299d4fe571ba0210ee82afa8f1dbef2ba33fef54f22a",
+      "plan": {
+        "status": "optimal",
+        "objective": "balanced",
+        "allocations": [
+          {
+            "sourceId": "depot-rice",
+            "districtId": "district-1",
+            "quantity": 45.55555161242761,
+            "unitCost": 5.0
+          },
+          {
+            "sourceId": "depot-rice",
+            "districtId": "district-2",
+            "quantity": 54.44443951553451,
+            "unitCost": 5.0
+          },
+          {
+            "sourceId": "depot-rice",
+            "districtId": "district-3",
+            "quantity": 60.0,
+            "unitCost": 5.0
+          }
+        ],
+        "districts": [
+          {
+            "id": "district-1",
+            "received": 45.55555161242761,
+            "coverage": 0.7222221975776726,
+            "unmet": 44.44444838757239
+          },
+          {
+            "id": "district-2",
+            "received": 54.44443951553451,
+            "coverage": 0.7222221975776725,
+            "unmet": 55.55556048446549
+          },
+          {
+            "id": "district-3",
+            "received": 60.0,
+            "coverage": 1,
+            "unmet": 0
+          }
+        ],
+        "totalAllocated": 159.99999112796212,
+        "totalCost": 799.9999556398107,
+        "minimumCoverage": 0.7222221975776725,
+        "remainingUnmet": 100.00000887203788,
+        "maxConstraintViolation": 5.551115123125783e-17,
+        "dispatched": false,
+        "diagnostics": [
+          "Costs are planning inputs, not revenue or ROI. A cost-only objective can allocate zero when no coverage floor is required."
+        ]
+      },
+      "tradeoffs": [
+        {
+          "status": "optimal",
+          "objective": "throughput",
+          "allocations": [
+            {
+              "sourceId": "depot-rice",
+              "districtId": "district-1",
+              "quantity": 90.0,
+              "unitCost": 5.0
+            },
+            {
+              "sourceId": "depot-rice",
+              "districtId": "district-2",
+              "quantity": 9.999999989999992,
+              "unitCost": 5.0
+            },
+            {
+              "sourceId": "depot-rice",
+              "districtId": "district-3",
+              "quantity": 60.0,
+              "unitCost": 5.0
+            }
+          ],
+          "districts": [
+            {
+              "id": "district-1",
+              "received": 90.0,
+              "coverage": 1,
+              "unmet": 0
+            },
+            {
+              "id": "district-2",
+              "received": 9.999999989999992,
+              "coverage": 0.49999999994999994,
+              "unmet": 100.00000001000001
+            },
+            {
+              "id": "district-3",
+              "received": 60.0,
+              "coverage": 1,
+              "unmet": 0
+            }
+          ],
+          "totalAllocated": 159.99999999,
+          "totalCost": 799.99999995,
+          "minimumCoverage": 0.49999999994999994,
+          "remainingUnmet": 100.00000001000001,
+          "maxConstraintViolation": 0,
+          "dispatched": false,
+          "diagnostics": [
+            "Costs are planning inputs, not revenue or ROI. A cost-only objective can allocate zero when no coverage floor is required."
+          ]
+        },
+        {
+          "status": "optimal",
+          "objective": "cost",
+          "allocations": [],
+          "districts": [
+            {
+              "id": "district-1",
+              "received": 0,
+              "coverage": 0.4375,
+              "unmet": 90.0
+            },
+            {
+              "id": "district-2",
+              "received": 0,
+              "coverage": 0.45,
+              "unmet": 110.0
+            },
+            {
+              "id": "district-3",
+              "received": 0,
+              "coverage": 0.5,
+              "unmet": 60.0
+            }
+          ],
+          "totalAllocated": 0,
+          "totalCost": 0.0,
+          "minimumCoverage": 0.4375,
+          "remainingUnmet": 260.0,
+          "maxConstraintViolation": 0,
+          "dispatched": false,
+          "diagnostics": [
+            "Costs are planning inputs, not revenue or ROI. A cost-only objective can allocate zero when no coverage floor is required."
+          ]
+        },
+        {
+          "status": "optimal",
+          "objective": "fairness",
+          "allocations": [
+            {
+              "sourceId": "depot-rice",
+              "districtId": "district-1",
+              "quantity": 56.66666506666667,
+              "unitCost": 5.0
+            },
+            {
+              "sourceId": "depot-rice",
+              "districtId": "district-2",
+              "quantity": 68.33333133333333,
+              "unitCost": 5.0
+            },
+            {
+              "sourceId": "depot-rice",
+              "districtId": "district-3",
+              "quantity": 34.9999988,
+              "unitCost": 5.0
+            }
+          ],
+          "districts": [
+            {
+              "id": "district-1",
+              "received": 56.66666506666667,
+              "coverage": 0.7916666566666667,
+              "unmet": 33.33333493333333
+            },
+            {
+              "id": "district-2",
+              "received": 68.33333133333333,
+              "coverage": 0.7916666566666666,
+              "unmet": 41.666668666666666
+            },
+            {
+              "id": "district-3",
+              "received": 34.9999988,
+              "coverage": 0.7916666566666667,
+              "unmet": 25.0000012
+            }
+          ],
+          "totalAllocated": 159.9999952,
+          "totalCost": 799.9999760000001,
+          "minimumCoverage": 0.7916666566666666,
+          "remainingUnmet": 100.0000048,
+          "maxConstraintViolation": 0,
+          "dispatched": false,
+          "diagnostics": [
+            "Costs are planning inputs, not revenue or ROI. A cost-only objective can allocate zero when no coverage floor is required."
+          ]
+        }
+      ],
+      "computeMs": 106.352
+    },
+    {
+      "case": "logistics",
+      "dataMode": "synthetic",
+      "inputFingerprint": "174724e8b224161f79fc6ff205eefd80781a8f93f653927eb4deb4953480f92c",
+      "resultFingerprint": "184956878b0b040b5293c4b168487285a5d5051afc4fe2d2c80fa225445e6594",
+      "plan": {
+        "status": "optimal",
+        "objective": "balanced",
+        "allocations": [
+          {
+            "sourceId": "depot-rice",
+            "districtId": "district-1",
+            "quantity": 79.99990823529413,
+            "unitCost": 6.0
+          }
+        ],
+        "districts": [
+          {
+            "id": "district-1",
+            "received": 79.99990823529413,
+            "coverage": 0.9374994264705883,
+            "unmet": 10.000091764705871
+          },
+          {
+            "id": "district-2",
+            "received": 0,
+            "coverage": 0.45,
+            "unmet": 110.0
+          },
+          {
+            "id": "district-3",
+            "received": 0,
+            "coverage": 0.5,
+            "unmet": 60.0
+          }
+        ],
+        "totalAllocated": 79.99990823529413,
+        "totalCost": 479.9994494117648,
+        "minimumCoverage": 0.45,
+        "remainingUnmet": 180.00009176470587,
+        "maxConstraintViolation": 0,
+        "dispatched": false,
+        "diagnostics": [
+          "Costs are planning inputs, not revenue or ROI. A cost-only objective can allocate zero when no coverage floor is required."
+        ]
+      },
+      "tradeoffs": [
+        {
+          "status": "optimal",
+          "objective": "throughput",
+          "allocations": [
+            {
+              "sourceId": "depot-rice",
+              "districtId": "district-1",
+              "quantity": 79.99999999,
+              "unitCost": 6.0
+            }
+          ],
+          "districts": [
+            {
+              "id": "district-1",
+              "received": 79.99999999,
+              "coverage": 0.9374999999375,
+              "unmet": 10.000000009999994
+            },
+            {
+              "id": "district-2",
+              "received": 0,
+              "coverage": 0.45,
+              "unmet": 110.0
+            },
+            {
+              "id": "district-3",
+              "received": 0,
+              "coverage": 0.5,
+              "unmet": 60.0
+            }
+          ],
+          "totalAllocated": 79.99999999,
+          "totalCost": 479.99999994000007,
+          "minimumCoverage": 0.45,
+          "remainingUnmet": 180.00000001,
+          "maxConstraintViolation": 0,
+          "dispatched": false,
+          "diagnostics": [
+            "Costs are planning inputs, not revenue or ROI. A cost-only objective can allocate zero when no coverage floor is required."
+          ]
+        },
+        {
+          "status": "optimal",
+          "objective": "cost",
+          "allocations": [],
+          "districts": [
+            {
+              "id": "district-1",
+              "received": 0,
+              "coverage": 0.4375,
+              "unmet": 90.0
+            },
+            {
+              "id": "district-2",
+              "received": 0,
+              "coverage": 0.45,
+              "unmet": 110.0
+            },
+            {
+              "id": "district-3",
+              "received": 0,
+              "coverage": 0.5,
+              "unmet": 60.0
+            }
+          ],
+          "totalAllocated": 0,
+          "totalCost": 0.0,
+          "minimumCoverage": 0.4375,
+          "remainingUnmet": 260.0,
+          "maxConstraintViolation": 0,
+          "dispatched": false,
+          "diagnostics": [
+            "Costs are planning inputs, not revenue or ROI. A cost-only objective can allocate zero when no coverage floor is required."
+          ]
+        },
+        {
+          "status": "optimal",
+          "objective": "fairness",
+          "allocations": [
+            {
+              "sourceId": "depot-rice",
+              "districtId": "district-1",
+              "quantity": 1.9999984000000026,
+              "unitCost": 6.0
+            }
+          ],
+          "districts": [
+            {
+              "id": "district-1",
+              "received": 1.9999984000000026,
+              "coverage": 0.44999999000000007,
+              "unmet": 88.00000159999999
+            },
+            {
+              "id": "district-2",
+              "received": 0,
+              "coverage": 0.45,
+              "unmet": 110.0
+            },
+            {
+              "id": "district-3",
+              "received": 0,
+              "coverage": 0.5,
+              "unmet": 60.0
+            }
+          ],
+          "totalAllocated": 1.9999984000000026,
+          "totalCost": 11.999990400000016,
+          "minimumCoverage": 0.44999999000000007,
+          "remainingUnmet": 258.0000016,
+          "maxConstraintViolation": 0,
+          "dispatched": false,
+          "diagnostics": [
+            "Costs are planning inputs, not revenue or ROI. A cost-only objective can allocate zero when no coverage floor is required."
+          ]
+        }
+      ],
+      "computeMs": 90.8
+    },
+    {
+      "case": "public-service",
+      "dataMode": "synthetic",
+      "inputFingerprint": "3de94843af6d20947a29804c7496d721f40ce2e2caabbe9c8523cf49be570f65",
+      "resultFingerprint": "f70d12fbfedc3af7e2612fe53727667b3c669641ea5285f337be1c00ef73e7ea",
+      "plan": {
+        "status": "optimal",
+        "objective": "fairness",
+        "allocations": [
+          {
+            "sourceId": "service-pool",
+            "districtId": "district-1",
+            "quantity": 57.0,
+            "unitCost": 3.0
+          },
+          {
+            "sourceId": "service-pool",
+            "districtId": "district-2",
+            "quantity": 68.0,
+            "unitCost": 3.0
+          },
+          {
+            "sourceId": "service-pool",
+            "districtId": "district-3",
+            "quantity": 35.0,
+            "unitCost": 3.0
+          }
+        ],
+        "districts": [
+          {
+            "id": "district-1",
+            "received": 57.0,
+            "coverage": 0.79375,
+            "unmet": 33.0
+          },
+          {
+            "id": "district-2",
+            "received": 68.0,
+            "coverage": 0.79,
+            "unmet": 42.0
+          },
+          {
+            "id": "district-3",
+            "received": 35.0,
+            "coverage": 0.7916666666666666,
+            "unmet": 25.0
+          }
+        ],
+        "totalAllocated": 160.0,
+        "totalCost": 480.0,
+        "minimumCoverage": 0.79,
+        "remainingUnmet": 100.0,
+        "maxConstraintViolation": 0,
+        "dispatched": false,
+        "diagnostics": [
+          "Costs are planning inputs, not revenue or ROI. A cost-only objective can allocate zero when no coverage floor is required."
+        ]
+      },
+      "tradeoffs": [
+        {
+          "status": "optimal",
+          "objective": "throughput",
+          "allocations": [
+            {
+              "sourceId": "service-pool",
+              "districtId": "district-1",
+              "quantity": 26.0,
+              "unitCost": 3.0
+            },
+            {
+              "sourceId": "service-pool",
+              "districtId": "district-2",
+              "quantity": 74.0,
+              "unitCost": 3.0
+            },
+            {
+              "sourceId": "service-pool",
+              "districtId": "district-3",
+              "quantity": 60.0,
+              "unitCost": 3.0
+            }
+          ],
+          "districts": [
+            {
+              "id": "district-1",
+              "received": 26.0,
+              "coverage": 0.6,
+              "unmet": 64.0
+            },
+            {
+              "id": "district-2",
+              "received": 74.0,
+              "coverage": 0.82,
+              "unmet": 36.0
+            },
+            {
+              "id": "district-3",
+              "received": 60.0,
+              "coverage": 1,
+              "unmet": 0
+            }
+          ],
+          "totalAllocated": 160.0,
+          "totalCost": 480.0,
+          "minimumCoverage": 0.6,
+          "remainingUnmet": 100.0,
+          "maxConstraintViolation": 0,
+          "dispatched": false,
+          "diagnostics": [
+            "Costs are planning inputs, not revenue or ROI. A cost-only objective can allocate zero when no coverage floor is required."
+          ]
+        },
+        {
+          "status": "optimal",
+          "objective": "cost",
+          "allocations": [
+            {
+              "sourceId": "service-pool",
+              "districtId": "district-1",
+              "quantity": 26.0,
+              "unitCost": 3.0
+            },
+            {
+              "sourceId": "service-pool",
+              "districtId": "district-2",
+              "quantity": 30.0,
+              "unitCost": 3.0
+            },
+            {
+              "sourceId": "service-pool",
+              "districtId": "district-3",
+              "quantity": 12.0,
+              "unitCost": 3.0
+            }
+          ],
+          "districts": [
+            {
+              "id": "district-1",
+              "received": 26.0,
+              "coverage": 0.6,
+              "unmet": 64.0
+            },
+            {
+              "id": "district-2",
+              "received": 30.0,
+              "coverage": 0.6,
+              "unmet": 80.0
+            },
+            {
+              "id": "district-3",
+              "received": 12.0,
+              "coverage": 0.6,
+              "unmet": 48.0
+            }
+          ],
+          "totalAllocated": 68.0,
+          "totalCost": 204.0,
+          "minimumCoverage": 0.6,
+          "remainingUnmet": 192.0,
+          "maxConstraintViolation": 0,
+          "dispatched": false,
+          "diagnostics": [
+            "Costs are planning inputs, not revenue or ROI. A cost-only objective can allocate zero when no coverage floor is required."
+          ]
+        },
+        {
+          "status": "optimal",
+          "objective": "fairness",
+          "allocations": [
+            {
+              "sourceId": "service-pool",
+              "districtId": "district-1",
+              "quantity": 57.0,
+              "unitCost": 3.0
+            },
+            {
+              "sourceId": "service-pool",
+              "districtId": "district-2",
+              "quantity": 68.0,
+              "unitCost": 3.0
+            },
+            {
+              "sourceId": "service-pool",
+              "districtId": "district-3",
+              "quantity": 35.0,
+              "unitCost": 3.0
+            }
+          ],
+          "districts": [
+            {
+              "id": "district-1",
+              "received": 57.0,
+              "coverage": 0.79375,
+              "unmet": 33.0
+            },
+            {
+              "id": "district-2",
+              "received": 68.0,
+              "coverage": 0.79,
+              "unmet": 42.0
+            },
+            {
+              "id": "district-3",
+              "received": 35.0,
+              "coverage": 0.7916666666666666,
+              "unmet": 25.0
+            }
+          ],
+          "totalAllocated": 160.0,
+          "totalCost": 480.0,
+          "minimumCoverage": 0.79,
+          "remainingUnmet": 100.0,
+          "maxConstraintViolation": 0,
+          "dispatched": false,
+          "diagnostics": [
+            "Costs are planning inputs, not revenue or ROI. A cost-only objective can allocate zero when no coverage floor is required."
+          ]
+        }
+      ],
+      "computeMs": 129.34
+    }
+  ],
+  "benchmarks": [
+    {
+      "groups": 3,
+      "sources": 1,
+      "candidateLanes": 3,
+      "repeats": 3,
+      "medianWallMs": 19.857,
+      "maxWallMs": 21.489,
+      "statuses": [
+        "optimal",
+        "optimal",
+        "optimal"
+      ]
+    },
+    {
+      "groups": 15,
+      "sources": 5,
+      "candidateLanes": 75,
+      "repeats": 3,
+      "medianWallMs": 26.242,
+      "maxWallMs": 26.283,
+      "statuses": [
+        "optimal",
+        "optimal",
+        "optimal"
+      ]
+    },
+    {
+      "groups": 30,
+      "sources": 10,
+      "candidateLanes": 300,
+      "repeats": 3,
+      "medianWallMs": 62.432,
+      "maxWallMs": 65.364,
+      "statuses": [
+        "optimal",
+        "optimal",
+        "optimal"
+      ]
+    }
+  ]
+}

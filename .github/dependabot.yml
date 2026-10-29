@@ -3,6 +3,7 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule: { interval: weekly }
+    open-pull-requests-limit: 5
   - package-ecosystem: maven
     directory: /services/api
     schedule: { interval: weekly }

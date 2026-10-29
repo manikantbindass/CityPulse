@@ -3,8 +3,8 @@ spring:
     name: citypulse-api
   datasource:
     url: ${DATABASE_URL}
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
+    username: ${DATABASE_USER:${POSTGRES_USER}}
+    password: ${DATABASE_PASSWORD:${POSTGRES_PASSWORD}}
     hikari:
       maximum-pool-size: 10
       connection-timeout: 5000
@@ -24,7 +24,13 @@ spring:
       max-file-size: 1MB
       max-request-size: 1MB
   flyway:
-    locations: classpath:db/migration
+    enabled: ${FLYWAY_ENABLED:true}
+    user: ${MIGRATION_USER:${POSTGRES_USER}}
+    password: ${MIGRATION_PASSWORD:${POSTGRES_PASSWORD}}
+    locations: classpath:db/migration,classpath:db/callback
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
   mvc:
     problemdetails:
       enabled: true
@@ -43,6 +49,11 @@ management:
           include: readinessState,db,redis
 server:
   shutdown: graceful
+  forward-headers-strategy: none
+  max-http-request-header-size: 16KB
+  tomcat:
+    max-swallow-size: 1MB
+    max-http-form-post-size: 1MB
   error:
     include-message: never
     include-stacktrace: never
@@ -55,7 +66,7 @@ spring:
     activate:
       on-profile: local
   flyway:
-    locations: classpath:db/migration,classpath:db/local
+    locations: classpath:db/migration,classpath:db/local,classpath:db/callback
     # The version-9000 local seed must not block later lower-numbered migrations.
     out-of-order: true
 citypulse:

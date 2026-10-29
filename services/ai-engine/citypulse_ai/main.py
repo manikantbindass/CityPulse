@@ -95,3 +95,7 @@ app.include_router(build_router(require_token))
 from citypulse_ai.pulseai import build_pulseai_router  # noqa: E402
 
 app.include_router(build_pulseai_router(require_token))
+
+from citypulse_ai.decisions import build_decision_router  # noqa: E402
+
+app.include_router(build_decision_router(require_token))

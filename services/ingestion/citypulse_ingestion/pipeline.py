@@ -33,7 +33,19 @@ def read_rows(path: Path) -> list[dict]:
         raise ValueError("Input exceeds 10 MB local pipeline limit")
     content = path.read_text(encoding="utf-8-sig")
     if path.suffix.lower() == ".csv":
-        result = list(csv.DictReader(io.StringIO(content)))
+        if "\x00" in content:
+            raise ValueError("NUL bytes are not supported")
+        reader = csv.DictReader(io.StringIO(content))
+        headers = reader.fieldnames or []
+        if not headers or len(headers) != len(set(headers)) or len(headers)>30:
+            raise ValueError("CSV requires unique bounded headers")
+        result = []
+        for row in reader:
+            if None in row or any(value is None for value in row.values()):
+                raise ValueError("CSV row does not match its header")
+            result.append(row)
+            if len(result)>100000:
+                raise ValueError("Too many CSV rows")
     else:
         value = json.loads(content)
         if isinstance(value, dict) and value.get("type") == "FeatureCollection":

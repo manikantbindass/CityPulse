@@ -11,7 +11,7 @@
 
 > **Development foundation.** Workspace analytics, district overlays, KPI deltas and example insights are synthetic. Real Spring API and FastAPI endpoints run locally. No production deployment, real city partnership, forecast accuracy, public demo or on-chain submission is claimed.
 
-[PulseAI analyst guide](docs/pulseai.md) · [Static header](docs/assets/citypulse-header-static.svg) · [Product requirements](docs/PRD.md) · [Architecture](docs/architecture/README.md) · [API behavior](docs/api/backend.md) · [Blockchain guide](docs/blockchain.md) · [Model card](docs/model-card.md) · [Developer guide](docs/development.md) · [Ingestion demo](docs/ingestion.md) · [Data dictionary](docs/data-dictionary.md)
+[Security architecture](docs/security/architecture.md) · [Decision engine](docs/decision-engine.md) · [PulseAI analyst guide](docs/pulseai.md) · [Static header](docs/assets/citypulse-header-static.svg) · [Product requirements](docs/PRD.md) · [Architecture](docs/architecture/README.md) · [API behavior](docs/api/backend.md) · [Blockchain guide](docs/blockchain.md) · [Model card](docs/model-card.md) · [Developer guide](docs/development.md) · [Ingestion demo](docs/ingestion.md) · [Data dictionary](docs/data-dictionary.md)
 
 ## Navigation
 

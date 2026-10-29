@@ -19,5 +19,6 @@ starlette==1.10.0
 threadpoolctl==3.7.0
 typing-inspection==0.4.4
 typing_extensions==4.16.0
+tzdata==2026.6
 uvicorn==0.41.0
 xgboost==3.4.1
