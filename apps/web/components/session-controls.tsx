@@ -34,6 +34,8 @@ export function SessionControls() {
             try {
               const response = await fetch('/api/auth/logout', { method: 'POST' });
               if (!response.ok) throw new Error('Server logout could not be confirmed');
+              // Discard the entire in-memory query/router cache after session revocation.
+              // eslint-disable-next-line @next/next/no-location-assign-relative-destination
               window.location.assign('/login');
             } catch (e) {
               setError((e as Error).message);
