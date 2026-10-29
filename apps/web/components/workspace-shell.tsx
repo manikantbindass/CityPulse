@@ -47,7 +47,7 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
   const nav = (
     <>
       <Link className="brand" href="/">
-        <span className="brand-icon" aria-hidden="true">
+        <span className="brand-icon">
           c<span>p</span>
         </span>
         <span className="brand-name">
@@ -145,7 +145,11 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
             <strong>{current?.label ?? 'Overview'}</strong>
           </div>
           <div className="topbar-actions">
-            <button className="search-trigger" onClick={() => setCommand(true)}>
+            <button
+              className="search-trigger"
+              aria-label="Search anything… ⌘ K"
+              onClick={() => setCommand(true)}
+            >
               <Search size={15} />
               <span>Search anything…</span>
               <kbd aria-hidden="true">⌘ K</kbd>

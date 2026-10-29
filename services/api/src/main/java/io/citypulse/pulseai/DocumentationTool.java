@@ -17,7 +17,11 @@ final class DocumentationTool {
                     "(?s).*(model|forecast|uncertainty|provenance|retention|privacy|source|data).*"
                 )
             ) continue;
-            try (var stream = new ClassPathResource("pulseai-docs/" + name).getInputStream()) {
+            try (
+                var stream = new ClassPathResource(
+                    "pulseai-docs/" + name.replace(".md", ".txt")
+                ).getInputStream()
+            ) {
                 byte[] bytes = stream.readAllBytes();
                 String content = new String(bytes, StandardCharsets.UTF_8);
                 results.add(
