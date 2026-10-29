@@ -135,7 +135,10 @@ OIDC issuer is configured. Local Compose is explicitly local preview on loopback
 Never publish it as a production deployment. The synthetic/manual solver adapter
 additionally requires `DECISION_LOCAL_PREVIEW=true` and cannot retrieve tenant data.
 Same-origin checks and SameSite cookies protect browser mutations; bearer-only
-Spring APIs disable CSRF and do not accept session cookies. CORS denies cross-origin
+Spring APIs retain CSRF protection except for `/api/v1/` requests explicitly
+supplying a Bearer Authorization header. Bearer credentials still require
+independent validation; the exemption grants no access. The API does not
+authenticate session cookies. CORS denies cross-origin
 use by default. Configure the UI and API behind the same origin/private boundary;
 there is no wildcard credentialed CORS exception.
 

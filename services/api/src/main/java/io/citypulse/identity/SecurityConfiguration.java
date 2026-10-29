@@ -26,7 +26,18 @@ public class SecurityConfiguration {
 
     private HttpSecurity base(HttpSecurity http) throws Exception {
         return http
-            .csrf(csrf -> csrf.disable())
+            // Only explicitly supplied bearer credentials bypass CSRF. The API
+            // never authenticates cookies; all other unsafe requests keep protection.
+            .csrf(csrf ->
+                csrf.ignoringRequestMatchers(request -> {
+                    String authorization = request.getHeader("Authorization");
+                    return (
+                        request.getRequestURI().startsWith(request.getContextPath() + "/api/v1/") &&
+                        authorization != null &&
+                        authorization.startsWith("Bearer ")
+                    );
+                })
+            )
             .cors(Customizer.withDefaults())
             .headers(headers ->
                 headers.contentSecurityPolicy(csp ->

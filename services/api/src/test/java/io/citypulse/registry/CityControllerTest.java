@@ -71,6 +71,36 @@ class CityControllerTest {
     }
 
     @Test
+    void rejectsCookieOnlyAndNonApiMutationsWithoutCsrf() throws Exception {
+        mvc.perform(
+            org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post(
+                "/api/v1/cities"
+            ).cookie(new jakarta.servlet.http.Cookie("session", "untrusted"))
+        ).andExpect(status().isForbidden());
+        mvc.perform(
+            org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post(
+                "/outside-api"
+            ).header("Authorization", "Bearer test-token-for-citypulse-with-32-characters")
+        ).andExpect(status().isForbidden());
+    }
+
+    @Test
+    void bearerMutationPassesCsrfButStillRequiresAcceptedIdentity() throws Exception {
+        mvc.perform(
+            org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post(
+                "/api/v1/cities"
+            ).header("Authorization", "Bearer invalid-token")
+        ).andExpect(status().isUnauthorized());
+        // This controller has GET only: an accepted bearer reaches method handling,
+        // while a cookie-only request above is stopped by CSRF before dispatch.
+        mvc.perform(
+            org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post(
+                "/api/v1/cities"
+            ).header("Authorization", "Bearer test-token-for-citypulse-with-32-characters")
+        ).andExpect(status().isMethodNotAllowed());
+    }
+
+    @Test
     void returnsTypedPageForValidToken() throws Exception {
         when(service.list(0, 20)).thenReturn(List.of());
         mvc.perform(
