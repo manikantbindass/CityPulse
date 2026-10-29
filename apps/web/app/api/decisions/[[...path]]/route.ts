@@ -1,31 +1,8 @@
+import { BodyLimitError, readBoundedBody } from '../../../../lib/request-body';
 import { backendAuthorization, localPreviewEnabled, sameOrigin } from '../../../../lib/server-auth';
 import { NextRequest } from 'next/server';
 
 let localInFlight = false;
-
-async function boundedBody(request: Request) {
-  if (!request.body) return '';
-  const reader = request.body.getReader();
-  const chunks: Uint8Array[] = [];
-  let size = 0;
-  for (;;) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    size += value.byteLength;
-    if (size > 512000) {
-      await reader.cancel();
-      throw new Error('BODY_LIMIT');
-    }
-    chunks.push(value);
-  }
-  const result = new Uint8Array(size);
-  let offset = 0;
-  for (const chunk of chunks) {
-    result.set(chunk, offset);
-    offset += chunk.byteLength;
-  }
-  return new TextDecoder().decode(result);
-}
 
 async function proxy(request: NextRequest, context: { params: Promise<{ path?: string[] }> }) {
   const { path = [] } = await context.params;
@@ -43,7 +20,7 @@ async function proxy(request: NextRequest, context: { params: Promise<{ path?: s
   if (!sameOrigin(request))
     return Response.json({ detail: 'Same-origin request required' }, { status: 403 });
   try {
-    const body = request.method === 'POST' ? await boundedBody(request) : undefined;
+    const body = request.method === 'POST' ? await readBoundedBody(request, 512000) : undefined;
     if (route === 'local') {
       if (
         request.method !== 'POST' ||
@@ -129,11 +106,11 @@ async function proxy(request: NextRequest, context: { params: Promise<{ path?: s
     return Response.json(
       {
         detail:
-          (error as Error).message === 'BODY_LIMIT'
+          error instanceof BodyLimitError
             ? 'Scenario exceeds 512000 bytes'
             : 'Decision service unavailable or invalid JSON. No plan was fabricated.',
       },
-      { status: (error as Error).message === 'BODY_LIMIT' ? 413 : 503 },
+      { status: error instanceof BodyLimitError ? 413 : 503 },
     );
   }
 }

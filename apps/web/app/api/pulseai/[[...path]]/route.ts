@@ -1,3 +1,4 @@
+import { BodyLimitError, readBoundedBody } from '../../../../lib/request-body';
 import { backendAuthorization, sameOrigin } from '../../../../lib/server-auth';
 import { NextRequest } from 'next/server';
 
@@ -17,10 +18,10 @@ async function proxy(request: NextRequest, context: { params: Promise<{ path?: s
     );
   if (!process.env.API_BASE_URL)
     return Response.json({ detail: 'Configure and start the backend.' }, { status: 503 });
-  const body = ['POST', 'PUT'].includes(request.method) ? await request.text() : undefined;
-  if (body && body.length > 8000)
-    return Response.json({ detail: 'Request too large' }, { status: 413 });
   try {
+    const body = ['POST', 'PUT'].includes(request.method)
+      ? await readBoundedBody(request, 8000)
+      : undefined;
     const response = await fetch(`${process.env.API_BASE_URL}/api/v1/pulseai/${path.join('/')}`, {
       method: request.method,
       body: body || undefined,
@@ -32,7 +33,9 @@ async function proxy(request: NextRequest, context: { params: Promise<{ path?: s
     if (response.status === 204 || request.method === 'DELETE')
       return new Response(null, { status: 204 });
     return Response.json(await response.json());
-  } catch {
+  } catch (error) {
+    if (error instanceof BodyLimitError)
+      return Response.json({ detail: 'Request too large' }, { status: 413 });
     return Response.json(
       { detail: 'Analyst unavailable. Your question was not replaced by sample insights.' },
       { status: 503 },

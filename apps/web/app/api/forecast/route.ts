@@ -1,3 +1,4 @@
+import { BodyLimitError, readBoundedBody } from '../../../lib/request-body';
 import { backendAuthorization } from '../../../lib/server-auth';
 export async function POST(request: Request) {
   const base = process.env.API_BASE_URL;
@@ -5,8 +6,7 @@ export async function POST(request: Request) {
   if (!authorization) return Response.json({ detail: 'Authentication required' }, { status: 401 });
   if (!base) return Response.json({ error: 'AI not configured' }, { status: 503 });
   try {
-    const raw = await request.text();
-    if (raw.length > 200000) return Response.json({ error: 'Request too large' }, { status: 413 });
+    const raw = await readBoundedBody(request, 200000);
     const response = await fetch(`${base}/api/v1/forecasts`, {
       method: 'POST',
       headers: {
@@ -23,7 +23,9 @@ export async function POST(request: Request) {
     });
     const result = await response.json();
     return Response.json(response.ok ? result.result : result, { status: response.status });
-  } catch {
+  } catch (error) {
+    if (error instanceof BodyLimitError)
+      return Response.json({ error: 'Request too large' }, { status: 413 });
     return Response.json({ error: 'Forecast unavailable' }, { status: 503 });
   }
 }

@@ -10,6 +10,8 @@ scenarios, membership revocation, final-admin lifecycle and prompt injection.
 
 Local results before CI:
 
+- Web request-stream regressions reject chunked, understated-length and multibyte
+  oversized bodies before buffering; all 13 web unit tests pass locally.
 - Python: 46 tests passed (forecasting, provider fallback/prompt injection and
   decision constraints). One existing Starlette/httpx deprecation warning.
 - Java build/tests passed locally; PostGIS tests require Docker and are skipped

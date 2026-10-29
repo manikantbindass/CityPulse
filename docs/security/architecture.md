@@ -104,6 +104,10 @@ platform administration. No default superuser scope is accepted from the browser
 
 ## Input, output and API controls
 
+Web adapters bound streamed request bytes before buffering: 8,000 for PulseAI,
+200,000 for forecasts and 512,000 for decisions. Limits also apply when
+Content-Length is absent or understated; oversized streams are canceled and return 413. UTF-8 byte and chunk-boundary regressions cover this boundary.
+
 Spring validates DTOs, rejects unknown JSON properties, bounds parser nesting,
 number and string sizes, restricts multipart files to one MB/500 JSON observations,
 and enforces a streaming body bound even when Content-Length is absent. Local
