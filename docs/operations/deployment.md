@@ -12,7 +12,7 @@
 
 ## Local startup
 
-Install Docker with Compose v2, Python 3.12+ and Git. Run `python scripts/platform.py up --chain --observability` from the root. Existing `.env` is preserved; add a distinct `GRAFANA_ADMIN_PASSWORD` if upgrading an older environment. The launcher checks Docker, builds/waits and runs cross-service smoke checks. It does not install Docker or change host security settings. Use the same optional flags with `down`; volumes remain. Ingestion is a finite CLI, not an invented daemon; reporting/admin are existing API/UI boundaries, not separate runnable services.
+Install Docker with Compose v2, Python 3.12+ and Git. Run `python scripts/dev_stack.py up --chain --observability` from the root. Existing `.env` is preserved; add a distinct `GRAFANA_ADMIN_PASSWORD` if upgrading an older environment. The launcher checks Docker, builds/waits and runs cross-service smoke checks. It does not install Docker or change host security settings. Use the same optional flags with `down`; volumes remain. Ingestion is a finite CLI, not an invented daemon; reporting/admin are existing API/UI boundaries, not separate runnable services.
 
 `python scripts/data_pipeline.py demo` produces deterministic data, quality/dead-letter/checkpoint outputs. `python scripts/data_pipeline.py publish` idempotently publishes through the authorized API. To record actual job success/failure in local monitoring, set `PUSHGATEWAY_URL=http://127.0.0.1:9092` and run `python scripts/ingestion_job.py demo`; the wrapper preserves the original process exit status even if metrics fail.
 

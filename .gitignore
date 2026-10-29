@@ -42,3 +42,6 @@ var/
 *.tfplan
 *.tfvars
 !*.tfvars.example
+
+*.tfvars.json
+*.backend.hcl

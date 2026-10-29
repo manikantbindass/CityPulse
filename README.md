@@ -173,16 +173,16 @@ Prerequisites: Git, Docker Engine/Desktop with Linux containers and Compose v2, 
 ```bash
 git clone https://github.com/manikantbindass/CityPulse.git
 cd CityPulse
-python scripts/platform.py up
+python scripts/dev_stack.py up
 ```
 
 The launcher generates `.env` only when missing, preserves existing configuration, builds the stack, waits for health and runs real smoke checks. It stops on a failed prerequisite or check.
 
 ```bash
 # Include a local test blockchain and the optional telemetry stack.
-python scripts/platform.py up --chain --observability
-python scripts/platform.py status --chain --observability
-python scripts/platform.py down --chain --observability
+python scripts/dev_stack.py up --chain --observability
+python scripts/dev_stack.py status --chain --observability
+python scripts/dev_stack.py down --chain --observability
 ```
 
 Default app: `http://localhost:3000`; API readiness: `http://localhost:8080/readyz`; AI: `http://localhost:8000/health`. Optional Grafana: `http://localhost:3050` (admin; generated password in ignored `.env`), Prometheus: `http://localhost:9090`, local chain: `http://localhost:8545`. All published development ports bind to loopback. Stopping preserves named volumes.
