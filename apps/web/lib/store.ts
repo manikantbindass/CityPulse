@@ -1,6 +1,7 @@
 'use client';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { useSyncExternalStore } from 'react';
 type WorkspaceState = {
   district: string;
   period: string;
@@ -39,3 +40,19 @@ export const useWorkspace = create<WorkspaceState>()(
     { name: 'citypulse-workspace-v1', skipHydration: true },
   ),
 );
+
+const subscribeHydration = (notify: () => void) => {
+  const start = useWorkspace.persist.onHydrate(notify);
+  const finish = useWorkspace.persist.onFinishHydration(notify);
+  return () => {
+    start();
+    finish();
+  };
+};
+export function useWorkspaceReady() {
+  return useSyncExternalStore(
+    subscribeHydration,
+    () => useWorkspace.persist.hasHydrated(),
+    () => false,
+  );
+}

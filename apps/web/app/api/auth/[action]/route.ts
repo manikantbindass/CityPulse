@@ -43,10 +43,7 @@ export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ action: string }> },
 ) {
-  if (
-    !sameOrigin(request) ||
-    request.headers.get('origin') !== (process.env.WEB_ORIGIN ?? request.nextUrl.origin)
-  )
+  if (!sameOrigin(request) || !request.headers.get('origin'))
     return Response.json({ detail: 'Same-origin mutation required' }, { status: 403 });
   if ((await params).action !== 'logout')
     return Response.json({ detail: 'Unknown action' }, { status: 404 });

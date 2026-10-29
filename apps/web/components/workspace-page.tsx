@@ -25,12 +25,13 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { districts, series, notifications, pageInfo, type District } from '../lib/seed';
-import { useWorkspace } from '../lib/store';
+import { useWorkspace, useWorkspaceReady } from '../lib/store';
 import { exportCsv, getCities, getForecast } from '../lib/api';
 import { Button } from './ui/button';
 import { CityNetwork } from './network';
 import { ChainRecords } from './chain-records';
 import { MlForecast } from './ml-forecast';
+import { SessionControls } from './session-controls';
 import { DecisionWorkspace } from './decision-workspace';
 import { PulseAI } from './pulseai';
 import { BackendEvidence } from './backend-evidence';
@@ -868,6 +869,7 @@ function Reports({ data }: { data: District[] }) {
   );
 }
 function Settings() {
+  const ready = useWorkspaceReady();
   const store = useWorkspace();
   const [name, setName] = useState('Demo Analyst');
   return (
@@ -892,6 +894,12 @@ function Settings() {
           <Button type="submit">Save local profile</Button>
         </form>
       </Panel>
+      <Panel
+        title="Session security"
+        label="Identity provider session, separate from local display preferences"
+      >
+        <SessionControls />
+      </Panel>
       <Panel title="Workspace appearance" label="Local preferences and demo navigation">
         <div className="settings-form">
           <label htmlFor="theme-select">Theme</label>
@@ -906,6 +914,7 @@ function Settings() {
           <label htmlFor="role-select">Demo persona</label>
           <select
             id="role-select"
+            disabled={!ready}
             value={store.role}
             onChange={(e) => {
               store.setRole(e.target.value as 'analyst' | 'administrator');

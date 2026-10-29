@@ -28,7 +28,7 @@ spring:
     user: ${MIGRATION_USER:${spring.datasource.username}}
     password: ${MIGRATION_PASSWORD:${spring.datasource.password}}
     locations: classpath:db/migration,classpath:db/callback
-  jackson:
+  jackson2:
     deserialization:
       fail-on-unknown-properties: true
   mvc:

@@ -33,3 +33,21 @@ penetration test, production backup restore drill or SOC assessment is asserted.
 
 See [operations](operations.md) for the deployment checklist and unresolved
 operational controls. Scan results are point-in-time and must be rerun after changes.
+
+## Runtime findings and remediation
+
+The first Trivy runtime-image scan identified high/critical vulnerabilities in the
+previous Spring Boot 3.5.11 dependency set and bundled npm/Yarn tooling. The API is
+upgraded to Spring Boot 4.0.9 / Framework 7.0.10 with the coherent Boot-managed
+Security, Tomcat, Netty, Micrometer, PostgreSQL and Jackson patch versions. Public
+Framework 6.2 releases did not provide the indicated critical MVC fixes; a major
+upgrade was necessary. OpenAPI and test modules are adapted to Boot 4. The official
+Jackson-2 compatibility module temporarily preserves existing DTO/tree contracts;
+its eventual replacement with Jackson 3 is planned. This is a documented deprecated
+bridge, not a claim that obsolete Jackson libraries remain patched indefinitely.
+
+The API image upgrades Alpine packages, including the affected Brotli library.
+The web runtime removes unused npm, Corepack and Yarn (build-stage tooling remains
+isolated). A read-only runtime does not require package installation. Native image
+health checks remediate the three low-severity configuration findings. Final image
+scan evidence must confirm remediation; no vulnerability suppression file was added.
