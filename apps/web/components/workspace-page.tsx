@@ -319,8 +319,9 @@ export function WorkspacePage({ section }: { section: string }) {
       <div className="sample-banner">
         <Info size={14} />
         <span>
-          Development preview. Analytics, overlays, and insights use synthetic data. No live city
-          intelligence.
+          {section === 'analyst'
+            ? 'PulseAI reads authorized backend records and labels their source mode. Workspace charts remain synthetic.'
+            : 'Development preview. Analytics, overlays, and insights use synthetic data. No live city intelligence.'}
         </span>
         <Link href="/help">
           About this data <ArrowUpRight size={12} />

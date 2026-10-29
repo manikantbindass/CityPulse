@@ -54,6 +54,8 @@ web_job = check(f"{web}/api/ml", payload)
 assert len(web_job["predictions"]) == 3 and web_job["dataMode"] == "synthetic"
 
 # PulseAI must cite stored observations, never the browser's sample district figures.
+permitted_cities = check(f"{api}/api/v1/pulseai/cities", authenticated=True)
+assert any(city["name"] == "Demo City" for city in permitted_cities)
 session = check(f"{api}/api/v1/pulseai/sessions", {}, True)
 answer = check(f"{api}/api/v1/pulseai/sessions/{session['id']}/messages", {
     "question": "Explain source provenance and missing supply", "cityId": "10000000-0000-0000-0000-000000000001",

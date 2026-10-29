@@ -7,6 +7,16 @@ import { Button } from './ui/button';
 
 type Fact = { id: string; text: string; evidence: Record<string, unknown> };
 type Answer = {
+  suggestedConfiguration?: {
+    chart: string;
+    cityId: string;
+    commodities: string[];
+    unit: string;
+    from: string;
+    to: string;
+    seriesBy: string[];
+    missingValues: string;
+  };
   documents?: { path: string; sha256: string; excerpt: string; label: string }[];
   statements: Fact[];
   provider: string;
@@ -38,6 +48,9 @@ export function PulseAI() {
   const [question, setQuestion] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [cities, setCities] = useState<
+    { id: string; name: string; country_code: string; timezone: string }[]
+  >([]);
   const [cityId, setCityId] = useState('10000000-0000-0000-0000-000000000001');
   const [commodity, setCommodity] = useState('rice');
   const [comparisonCommodity, setComparisonCommodity] = useState('');
@@ -97,7 +110,7 @@ export function PulseAI() {
   }
   return (
     <section className="panel pulseai" aria-labelledby="pulseai-title">
-      <header className="panel-header">
+      <header className="panel-heading">
         <div>
           <span className="eyebrow">
             <Sparkles size={14} /> Evidence before answers
@@ -113,12 +126,46 @@ export function PulseAI() {
         Defaults select the synthetic local fixture, not live city intelligence. Dates use UTC. The
         analyst never substitutes the dashboard’s sample figures for database records.
       </p>
-      <details className="pulse-context" open>
-        <summary>Data context &amp; filters</summary>
+      <details className="pulse-context">
+        <summary>
+          Data context &amp; filters · {commodity} / {unit} · {from}–{to} UTC
+        </summary>
+        <Button
+          variant="outline"
+          disabled={busy}
+          onClick={async () => {
+            setBusy(true);
+            setError('');
+            try {
+              const result =
+                await api<{ id: string; name: string; country_code: string; timezone: string }[]>(
+                  'cities',
+                );
+              setCities(result);
+              if (result.length && !result.some((c) => c.id === cityId)) setCityId(result[0].id);
+              if (!result.length) setError('No cities are assigned to your tenant.');
+            } catch (e) {
+              setError((e as Error).message);
+            } finally {
+              setBusy(false);
+            }
+          }}
+        >
+          Load permitted cities
+        </Button>
         <div className="pulse-fields">
           <label>
-            Authorized city UUID
-            <input required value={cityId} onChange={(e) => setCityId(e.target.value)} />
+            City
+            <select value={cityId} onChange={(e) => setCityId(e.target.value)}>
+              {!cities.some((c) => c.id === cityId) && (
+                <option value={cityId}>Synthetic local fixture (load cities to change)</option>
+              )}
+              {cities.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name} · {c.country_code} · {c.timezone}
+                </option>
+              ))}
+            </select>
           </label>
           <label>
             Commodity
@@ -263,6 +310,19 @@ export function PulseAI() {
                 </details>
               ))}
               <p className="fine-print">{message.answer.notice}</p>
+              {message.answer.suggestedConfiguration && (
+                <details>
+                  <summary>Suggested chart &amp; filters</summary>
+                  <p>
+                    Use a line chart with separate zone, commodity, source-mode and
+                    interval-duration series. Leave missing observations as gaps. This configuration
+                    is a suggestion; no dashboard has been changed.
+                  </p>
+                  <pre className="pulse-evidence">
+                    {JSON.stringify(message.answer.suggestedConfiguration, null, 2)}
+                  </pre>
+                </details>
+              )}
               <details>
                 <summary>Uncertainty &amp; limitations</summary>
                 <ul>

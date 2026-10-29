@@ -8,6 +8,17 @@ test('PulseAI keeps missing evidence explicit, manages sessions, and is accessib
   await page.route('**/api/pulseai/**', async (route) => {
     const path = new URL(route.request().url()).pathname;
     const method = route.request().method();
+    if (path.endsWith('/cities'))
+      return route.fulfill({
+        json: [
+          {
+            id: '10000000-0000-0000-0000-000000000001',
+            name: 'Synthetic test city',
+            country_code: 'IN',
+            timezone: 'Asia/Kolkata',
+          },
+        ],
+      });
     if (path.endsWith('/messages'))
       return route.fulfill({
         json: {
@@ -31,6 +42,12 @@ test('PulseAI keeps missing evidence explicit, manages sessions, and is accessib
     });
   });
   await page.goto('/analyst');
+  await page.locator('.pulse-context summary').click();
+  await page.getByRole('button', { name: 'Load permitted cities' }).click();
+  await expect(page.getByRole('combobox', { name: 'City', exact: true })).toContainText(
+    'Synthetic test city',
+  );
+  await page.locator('.pulse-context summary').click();
   await page.getByRole('button', { name: 'Explain source provenance', exact: true }).click();
   await expect(page.getByLabel('Ask PulseAI')).toHaveValue('Explain source provenance');
   await page.getByRole('button', { name: 'Send question', exact: true }).click();
@@ -43,7 +60,7 @@ test('PulseAI keeps missing evidence explicit, manages sessions, and is accessib
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await page.screenshot({
-    path: `../../docs/assets/pulseai-${info.project.name}.png`,
+    path: info.outputPath('pulseai.png'),
     fullPage: true,
   });
   await page.getByRole('button', { name: 'Delete conversation' }).click();

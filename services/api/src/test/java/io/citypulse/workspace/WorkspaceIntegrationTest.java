@@ -227,6 +227,7 @@ class WorkspaceIntegrationTest {
             .getContentAsString();
         assertTrue(answer.contains("Missing side is unknown"));
         assertTrue(answer.contains("synthetic"));
+        assertTrue(answer.contains("suggestedConfiguration"));
         assertFalse(answer.contains("East Market"));
         mvc.perform(get("/api/v1/pulseai/sessions/" + id).header("Authorization", TOKEN)).andExpect(
             status().isOk()

@@ -34,6 +34,14 @@ public class PulseAiController {
         return service.create();
     }
 
+    @GetMapping("/cities")
+    @PreAuthorize(
+        "hasAuthority('SCOPE_registry:read') and hasAuthority('SCOPE_analytics:read') and hasAuthority('SCOPE_data:read')"
+    )
+    public Object cities() {
+        return service.cities();
+    }
+
     @GetMapping("/sessions")
     public Object list() {
         return service.list();

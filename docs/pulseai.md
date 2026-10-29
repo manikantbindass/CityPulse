@@ -26,15 +26,18 @@ the existing OIDC resource-server configuration.
 
 All routes require `analytics:read` **and** `data:read`, narrowed by active database
 membership on every request, including history. Tenant comes from the validated
-identity. A session additionally belongs to the subject that created it.
+identity. The city picker additionally requires `registry:read`. A session belongs to the subject that created it.
 
 | Method | Route under `/api/v1/pulseai` | Behavior                                                               |
 | ------ | ----------------------------- | ---------------------------------------------------------------------- |
+| GET    | `/cities`                     | Up to 100 tenant-assigned cities, names, country codes and time zones  |
 | POST   | `/sessions`                   | Create an owned seven-day session; maximum 30 active sessions          |
 | GET    | `/sessions`                   | List up to 30 owned sessions                                           |
 | GET    | `/sessions/{id}`              | Up to 20 stored question/answer pairs, oldest first                    |
 | DELETE | `/sessions/{id}`              | Delete owned session and cascade messages                              |
 | POST   | `/sessions/{id}/messages`     | Validate filters, retrieve evidence, select statements, persist answer |
+
+Use **Data context & filters → Load permitted cities** to choose an assigned city by name and time zone. The collapsed context keeps chat actions visible on mobile.
 
 Message body:
 
@@ -63,7 +66,7 @@ failure rejects requests. Existing global abuse controls remain in place elsewhe
 
 Each answer includes statements with actual observation UUIDs or source/forecast
 UUIDs, documentation paths and SHA-256 fingerprints, limitations, related views,
-and follow-up prompts. Record references are identifiers, not public URLs. The
+follow-up prompts, and a typed line-chart/filter configuration that preserves source-mode and interval-duration separation. It never applies configuration or changes a dashboard automatically. Record references are identifiers, not public URLs. The
 authorized forecast endpoint provides the selected forecast in full.
 
 ## Retrieval and truth boundary
@@ -185,3 +188,14 @@ injection, explicit local-preview configuration against anonymous token delegati
 same-origin web mutations, bounded payload/context/session/request/token usage and
 no raw source HTML rendering. Compromised server credentials, provider compromise,
 operator price misconfiguration and incomplete source data remain operational risks.
+
+## Screenshots and rendering measurements
+
+![PulseAI initial desktop view](assets/pulseai-desktop.png)
+
+[Mobile view](assets/pulseai-mobile.png). These captures show the locally running
+production build before retrieving any analytical records. No external provider
+or city intelligence is implied. Reproduce with `npm run build` followed by
+`node scripts/measure_web.mjs`; output is in
+[web-performance.json](reports/web-performance.json). Browser contract tests also
+exercise empty responses and error states with explicitly synthetic test fixtures.

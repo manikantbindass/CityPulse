@@ -48,6 +48,13 @@ public class PulseAiService {
         );
     }
 
+    public List<Map<String, Object>> cities() {
+        return db.query(
+            "SELECT c.id,c.name,c.country_code,c.timezone FROM city c JOIN tenant_city tc ON tc.city_id=c.id WHERE tc.tenant_id=:tenant ORDER BY c.name,c.id LIMIT 100",
+            params()
+        );
+    }
+
     @Transactional
     public Map<String, Object> create() {
         db.update(
@@ -342,6 +349,29 @@ public class PulseAiService {
             )
         );
         answer.put("empty", facts.isEmpty());
+        answer.put(
+            "suggestedConfiguration",
+            Map.of(
+                "chart",
+                "line",
+                "cityId",
+                input.cityId(),
+                "commodities",
+                input.comparisonCommodity() == null
+                    ? List.of(input.commodity())
+                    : List.of(input.commodity(), input.comparisonCommodity()),
+                "unit",
+                input.unit(),
+                "from",
+                input.from().toString(),
+                "to",
+                input.to().toString(),
+                "seriesBy",
+                List.of("zone", "commodity", "sourceMode", "intervalDuration"),
+                "missingValues",
+                "gaps; never fill missing observations with zero"
+            )
+        );
         answer.put("documents", DocumentationTool.retrieve(question));
         answer.put(
             "followUps",
@@ -420,7 +450,16 @@ public class PulseAiService {
                     ? "openai-compatible"
                     : "evidence-fallback",
                 "reason",
-                "Evidence IDs validated by API"
+                switch (String.valueOf(result.get("reason"))) {
+                    case
+                        "Provider disabled",
+                        "Provider price ceiling not configured",
+                        "Provider configuration incomplete",
+                        "Daily request/token budget or context limit reached",
+                        "Provider unavailable or invalid selection",
+                        "Validated evidence selection" -> result.get("reason");
+                    default -> "Evidence IDs validated by API";
+                }
             );
         } catch (InterruptedException error) {
             Thread.currentThread().interrupt();

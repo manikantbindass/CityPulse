@@ -33,7 +33,7 @@ try {
   await session.send('Network.enable');
   await session.send('Network.setCacheDisabled', { cacheDisabled: true });
   const measurements = [];
-  for (const route of ['/', '/dashboard', '/explorer']) {
+  for (const route of ['/', '/dashboard', '/explorer', '/analyst']) {
     await page.goto(origin + route, { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.locator('h1:visible').first().waitFor();
     await page.waitForTimeout(1500);
@@ -59,6 +59,11 @@ try {
       };
     });
     measurements.push({ route, ...measured });
+    if (route === '/analyst')
+      await page.screenshot({
+        path: path.join(root, 'docs/assets/pulseai-desktop.png'),
+        fullPage: true,
+      });
     if (route === '/dashboard')
       await page.screenshot({
         path: path.join(root, 'docs/assets/dashboard-desktop.png'),
@@ -66,6 +71,12 @@ try {
       });
   }
   await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(origin + '/analyst');
+  await page.locator('main#main').waitFor();
+  await page.screenshot({
+    path: path.join(root, 'docs/assets/pulseai-mobile.png'),
+    fullPage: true,
+  });
   await page.goto(origin + '/dashboard');
   await page.locator('main#main').waitFor();
   await page.locator('.recharts-surface').first().waitFor({ timeout: 15000 });

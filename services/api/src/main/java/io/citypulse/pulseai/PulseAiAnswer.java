@@ -14,11 +14,23 @@ public record PulseAiAnswer(
     boolean empty,
     List<Document> documents,
     List<String> followUps,
-    List<View> views
+    List<View> views,
+    ChartConfiguration suggestedConfiguration
 ) {
     public record Statement(String id, String text, Map<String, Object> evidence) {}
 
     public record Document(String path, String sha256, String excerpt, String label) {}
 
     public record View(String label, String href) {}
+
+    public record ChartConfiguration(
+        String chart,
+        UUID cityId,
+        List<String> commodities,
+        String unit,
+        String from,
+        String to,
+        List<String> seriesBy,
+        String missingValues
+    ) {}
 }

@@ -1,33 +1,42 @@
 {
-  "measuredAt": "2026-10-28T21:26:36.010Z",
+  "measuredAt": "2026-10-29T07:59:09.063Z",
   "environment": "single local Chromium run against production build; synthetic data, browser cache disabled; 1.5-second observation window after heading; map tiles may be unavailable; no production performance claim",
   "measurements": [
     {
       "route": "/",
-      "domContentLoadedMs": 687,
-      "firstContentfulPaintMs": 560,
-      "loadEventMs": 689,
-      "javascriptTransferBytes": 246579,
-      "javascriptDecodedBytes": 787841,
+      "domContentLoadedMs": 8545,
+      "firstContentfulPaintMs": 8188,
+      "loadEventMs": 8546,
+      "javascriptTransferBytes": 251501,
+      "javascriptDecodedBytes": 804565,
       "javascriptRequests": 12
     },
     {
       "route": "/dashboard",
-      "domContentLoadedMs": 85,
-      "firstContentfulPaintMs": 428,
-      "loadEventMs": 393,
-      "javascriptTransferBytes": 370082,
-      "javascriptDecodedBytes": 1201596,
-      "javascriptRequests": 15
+      "domContentLoadedMs": 180,
+      "firstContentfulPaintMs": 200,
+      "loadEventMs": 391,
+      "javascriptTransferBytes": 247894,
+      "javascriptDecodedBytes": 796745,
+      "javascriptRequests": 11
     },
     {
       "route": "/explorer",
-      "domContentLoadedMs": 95,
-      "firstContentfulPaintMs": 396,
-      "loadEventMs": 406,
-      "javascriptTransferBytes": 748881,
-      "javascriptDecodedBytes": 2581464,
-      "javascriptRequests": 15
+      "domContentLoadedMs": 233,
+      "firstContentfulPaintMs": 276,
+      "loadEventMs": 801,
+      "javascriptTransferBytes": 753086,
+      "javascriptDecodedBytes": 2602715,
+      "javascriptRequests": 18
+    },
+    {
+      "route": "/analyst",
+      "domContentLoadedMs": 2793,
+      "firstContentfulPaintMs": 3108,
+      "loadEventMs": 3086,
+      "javascriptTransferBytes": 251501,
+      "javascriptDecodedBytes": 804565,
+      "javascriptRequests": 12
     }
   ]
 }

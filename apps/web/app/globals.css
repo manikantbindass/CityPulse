@@ -2254,6 +2254,7 @@ details p {
   padding: 12px;
 }
 .pulseai .chat-messages {
+  min-height: 0;
   max-height: 650px;
   overflow-y: auto;
 }

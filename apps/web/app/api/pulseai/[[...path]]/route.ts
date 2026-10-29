@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server';
 
 async function proxy(request: NextRequest, context: { params: Promise<{ path?: string[] }> }) {
   const { path = [] } = await context.params;
-  if (!/^sessions(?:\/[0-9a-f-]{36}(?:\/messages)?)?$/.test(path.join('/')))
+  if (!/^(?:cities|sessions(?:\/[0-9a-f-]{36}(?:\/messages)?)?)$/.test(path.join('/')))
     return Response.json({ detail: 'Unknown analyst route' }, { status: 404 });
   const origin = request.headers.get('origin');
   if (origin && origin !== request.nextUrl.origin)
