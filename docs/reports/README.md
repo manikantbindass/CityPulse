@@ -1,6 +1,6 @@
 # Technical report
 
-The [79-page PDF](CityPulse-Technical-Report.pdf) covers the implemented application at commit `2385ea7a3c6f9349c9c9ee67a56ace5f279fa992`, with 37 numbered chapters, a linked table of contents, architecture diagrams, real screenshots, measured synthetic results and source appendices. Evidence was gathered on 29 October 2026. Future infrastructure and operational targets are explicitly distinguished from demonstrated behavior.
+The [79-page PDF](CityPulse-Technical-Report.pdf) covers the implemented application at commit `723bb901411f84815f48acf1d5e6cef0a51f112d`, with 37 numbered chapters, a linked table of contents, architecture diagrams, real screenshots, measured synthetic results and source appendices. Evidence was gathered on 30 October 2026. Future infrastructure and operational targets are explicitly distinguished from demonstrated behavior.
 
 From the repository root, using Python 3.12 or later:
 

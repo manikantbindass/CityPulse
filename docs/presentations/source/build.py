@@ -206,7 +206,7 @@ def build():
                 x=.8+(i%3)*4.2;y=1.95+(i//3)*2.05
                 text(slide,value,x,y,3.6,.9,50,CYAN if i%2==0 else VIOLET,True)
                 text(slide,label,x,y+1,3.5,.5,23)
-            text(slide,'Revision-linked CI evidence; two mocked Terraform plans; no coverage percentage invented',.8,6.5,11.9,.35,14,MUTED)
+            text(slide,'Earlier CI baseline 2385ea7; candidate adds a PostGIS regression; current checks are authoritative',.8,6.5,11.9,.35,14,MUTED)
         elif kind=='load-chart':
             metric=load['measured']['metrics']['http_req_duration']['values']
             native_chart(slide,['Average','Median','p95','Maximum'],[('Milliseconds',[metric['avg'],metric['med'],metric['p(95)'],metric['max']])],.7,2.0,8.2,4.3,XL_CHART_TYPE.COLUMN_CLUSTERED,False)
