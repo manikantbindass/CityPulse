@@ -905,6 +905,7 @@ function Settings() {
           <label htmlFor="theme-select">Theme</label>
           <select
             id="theme-select"
+            disabled={!ready}
             value={store.theme}
             onChange={(e) => store.setTheme(e.target.value as 'dark' | 'light')}
           >
