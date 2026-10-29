@@ -11,3 +11,6 @@ package-lock.json
 **/*.svg
 **/*.csv
 **/*.geojson
+
+**/.terraform
+.build

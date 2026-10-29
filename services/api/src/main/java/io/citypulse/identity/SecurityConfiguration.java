@@ -38,7 +38,14 @@ public class SecurityConfiguration {
             )
             .authorizeHttpRequests(auth ->
                 auth
-                    .requestMatchers("/actuator/health", "/actuator/health/**")
+                    .requestMatchers(
+                        request ->
+                            request.getLocalPort() == 9091 &&
+                            request.getMethod().equals("GET") &&
+                            request.getRequestURI().equals("/actuator/prometheus")
+                    )
+                    .permitAll()
+                    .requestMatchers("/actuator/health", "/actuator/health/**", "/readyz", "/livez")
                     .permitAll()
                     .requestMatchers("/api/v1/cities")
                     .hasAuthority("SCOPE_registry:read")

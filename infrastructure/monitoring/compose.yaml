@@ -1,0 +1,58 @@
+services:
+  api:
+    environment:
+      TRACING_ENABLED: 'true'
+      TRACING_SAMPLE_PROBABILITY: '1.0'
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://collector:4318/v1/traces
+  ai:
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4318
+  web:
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4318
+      OTEL_EXPORTER_OTLP_PROTOCOL: http/protobuf
+  collector:
+    image: otel/opentelemetry-collector-contrib:0.164.0
+    command: ['--config=/etc/otelcol/config.yaml']
+    volumes: ['./infrastructure/monitoring/collector.yaml:/etc/otelcol/config.yaml:ro']
+    ports: ['127.0.0.1:13133:13133']
+    depends_on: [tempo]
+    mem_limit: 256m
+    security_opt: ['no-new-privileges:true']
+    cap_drop: ['ALL']
+  tempo:
+    image: grafana/tempo:3.1.1
+    command: ['-config.file=/etc/tempo.yaml']
+    volumes: ['./infrastructure/monitoring/tempo.yaml:/etc/tempo.yaml:ro', 'tempo-data:/var/tempo']
+    ports: ['127.0.0.1:3200:3200']
+    mem_limit: 1g
+  prometheus:
+    image: prom/prometheus:v3.15.1
+    command: ['--config.file=/etc/prometheus/prometheus.yaml', '--storage.tsdb.retention.time=7d']
+    volumes:
+      [
+        './infrastructure/monitoring/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro',
+        './infrastructure/monitoring/alerts.yaml:/etc/prometheus/alerts.yaml:ro',
+        'prometheus-data:/prometheus',
+      ]
+    ports: ['127.0.0.1:9090:9090']
+    mem_limit: 512m
+  pushgateway:
+    image: prom/pushgateway:v1.11.4
+    ports: ['127.0.0.1:9092:9091']
+  grafana:
+    image: grafana/grafana:13.3.0
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?Set a distinct Grafana password}
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+      GF_AUTH_ANONYMOUS_ENABLED: 'false'
+    ports: ['127.0.0.1:3050:3000']
+    volumes:
+      - ./infrastructure/monitoring/grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml:ro
+      - ./infrastructure/monitoring/grafana/dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
+      - ./infrastructure/monitoring/grafana/citypulse.json:/var/lib/grafana/dashboards/citypulse.json:ro
+      - grafana-data:/var/lib/grafana
+volumes:
+  tempo-data:
+  prometheus-data:
+  grafana-data:

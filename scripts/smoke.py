@@ -25,7 +25,7 @@ def check(url, body=None, authenticated=False, key=None):
 
 check(f"http://localhost:{env.get('WEB_PORT', '3000')}/api/health")
 api = f"http://localhost:{env.get('API_PORT', '8080')}"
-check(f"{api}/actuator/health/readiness")
+check(f"{api}/readyz")
 cities = check(f"{api}/api/v1/cities", authenticated=True)
 assert any(city["name"] == "Demo City" for city in cities["items"])
 ai = f"http://localhost:{env.get('AI_PORT', '8000')}"

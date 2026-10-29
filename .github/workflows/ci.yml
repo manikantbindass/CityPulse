@@ -66,7 +66,7 @@ jobs:
       - run: pip install -r services/ai-engine/requirements-dev.lock
       - run: pip install --no-deps -e services/ai-engine
       - run: python -m pytest services/ai-engine/tests && ruff check services/ai-engine
-      - run: python scripts/check_repository.py && python scripts/check_secrets.py
+      - run: python scripts/check_repository.py && python scripts/check_readme.py && python scripts/check_secrets.py
       - run: python -m unittest discover -s services/ingestion/tests -v
       - run: npm ci && npm run format:check
       - run: python scripts/setup-env.py && docker compose config --quiet
@@ -91,10 +91,11 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/setup-env.py
-      - run: docker compose up --build -d --wait --wait-timeout 300
+      - run: docker compose -f compose.yaml -f infrastructure/monitoring/compose.yaml --profile chain up --build -d --wait --wait-timeout 300
       - run: python scripts/smoke.py && python scripts/check_database_privileges.py
       - run: python scripts/data_pipeline.py demo && python scripts/data_pipeline.py publish
-      - run: docker compose logs --no-color
+      - run: python scripts/monitoring_smoke.py
+      - run: docker compose -f compose.yaml -f infrastructure/monitoring/compose.yaml logs --no-color
         if: failure()
-      - run: docker compose down
+      - run: docker compose -f compose.yaml -f infrastructure/monitoring/compose.yaml --profile chain down
         if: always()

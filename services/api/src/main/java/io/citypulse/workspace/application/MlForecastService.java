@@ -51,7 +51,10 @@ public class MlForecastService {
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json.writeValueAsString(input)))
                 .build();
-            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            var response = client.send(
+                io.citypulse.operations.TraceHeaders.propagated(request),
+                HttpResponse.BodyHandlers.ofString()
+            );
             if (response.statusCode() != 200) throw new ResponseStatusException(
                 response.statusCode() == 422 ? HttpStatus.BAD_REQUEST : HttpStatus.BAD_GATEWAY,
                 "AI forecast request rejected"

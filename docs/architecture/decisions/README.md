@@ -6,3 +6,5 @@
 - [004 AI and attestation](004-ai-attestation.md)
 - [005 Events and infrastructure](005-events-infrastructure.md)
 - [006 Frontend](006-frontend.md)
+
+- [009: Progressive platform and AI writer boundary](009-progressive-platform.md)

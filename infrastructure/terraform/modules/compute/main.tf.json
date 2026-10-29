@@ -1,0 +1,605 @@
+{
+  "variable": {
+    "name": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "vpc_id": {
+      "type": "string"
+    },
+    "db_endpoint": {
+      "type": "string"
+    },
+    "redis_endpoint": {
+      "type": "string"
+    },
+    "efs_id": {
+      "type": "string"
+    },
+    "efs_access_point": {
+      "type": "string"
+    },
+    "hostname": {
+      "type": "string"
+    },
+    "certificate_arn": {
+      "type": "string"
+    },
+    "oidc_issuer": {
+      "type": "string"
+    },
+    "oidc_audience": {
+      "type": "string"
+    },
+    "private_subnets": {
+      "type": "list(string)"
+    },
+    "public_subnets": {
+      "type": "list(string)"
+    },
+    "images": {
+      "type": "map(string)",
+      "validation": {
+        "condition": "${alltrue([for image in values(var.images) : can(regex(\"^[^ ]+@sha256:[a-f0-9]{64}$\", image))]) && length(var.images) == 3}",
+        "error_message": "Provide three immutable image digest references."
+      }
+    },
+    "secrets": {
+      "type": "map(list(object({name=string,valueFrom=string})))"
+    },
+    "security_groups": {
+      "type": "map(string)"
+    },
+    "start_services": {
+      "type": "bool",
+      "default": false
+    },
+    "alarm_actions": {
+      "type": "list(string)",
+      "default": []
+    }
+  },
+  "data": {
+    "aws_caller_identity": {
+      "this": {}
+    }
+  },
+  "locals": {
+    "containers": {
+      "web": {
+        "name": "web",
+        "image": "${var.images[\"web\"]}",
+        "essential": true,
+        "portMappings": [
+          {
+            "containerPort": 3000,
+            "protocol": "tcp"
+          }
+        ],
+        "environment": [
+          {
+            "name": "NODE_ENV",
+            "value": "production"
+          },
+          {
+            "name": "WEB_ORIGIN",
+            "value": "https://${var.hostname}"
+          },
+          {
+            "name": "API_BASE_URL",
+            "value": "http://api.citypulse.internal:8080"
+          },
+          {
+            "name": "AI_BASE_URL",
+            "value": "http://ai.citypulse.internal:8000"
+          },
+          {
+            "name": "OIDC_ISSUER_URI",
+            "value": "${var.oidc_issuer}"
+          },
+          {
+            "name": "PULSEAI_LOCAL_PREVIEW",
+            "value": "false"
+          },
+          {
+            "name": "DECISION_LOCAL_PREVIEW",
+            "value": "false"
+          }
+        ],
+        "secrets": "${var.secrets[\"web\"]}",
+        "readonlyRootFilesystem": false,
+        "linuxParameters": {
+          "capabilities": {
+            "drop": ["ALL"]
+          }
+        },
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "${aws_cloudwatch_log_group.this.name}",
+            "awslogs-region": "${var.region}",
+            "awslogs-stream-prefix": "web"
+          }
+        },
+        "healthCheck": {
+          "command": [
+            "CMD-SHELL",
+            "node -e \"fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""
+          ],
+          "interval": 30,
+          "timeout": 5,
+          "retries": 3,
+          "startPeriod": 120
+        },
+        "mountPoints": []
+      },
+      "api": {
+        "name": "api",
+        "image": "${var.images[\"api\"]}",
+        "essential": true,
+        "portMappings": [
+          {
+            "containerPort": 8080,
+            "protocol": "tcp"
+          }
+        ],
+        "environment": [
+          {
+            "name": "DATABASE_URL",
+            "value": "jdbc:postgresql://${var.db_endpoint}:5432/citypulse?sslmode=verify-full&sslrootcert=/app/certs/rds-ca.crt"
+          },
+          {
+            "name": "DATABASE_USER",
+            "value": "citypulse_app"
+          },
+          {
+            "name": "REDIS_HOST",
+            "value": "${var.redis_endpoint}"
+          },
+          {
+            "name": "REDIS_SSL",
+            "value": "true"
+          },
+          {
+            "name": "FLYWAY_ENABLED",
+            "value": "false"
+          },
+          {
+            "name": "AI_BASE_URL",
+            "value": "http://ai.citypulse.internal:8000"
+          },
+          {
+            "name": "OIDC_ISSUER_URI",
+            "value": "${var.oidc_issuer}"
+          },
+          {
+            "name": "OIDC_AUDIENCE",
+            "value": "${var.oidc_audience}"
+          },
+          {
+            "name": "DB_POOL_SIZE",
+            "value": "10"
+          }
+        ],
+        "secrets": "${var.secrets[\"api\"]}",
+        "readonlyRootFilesystem": false,
+        "linuxParameters": {
+          "capabilities": {
+            "drop": ["ALL"]
+          }
+        },
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "${aws_cloudwatch_log_group.this.name}",
+            "awslogs-region": "${var.region}",
+            "awslogs-stream-prefix": "api"
+          }
+        },
+        "healthCheck": {
+          "command": ["CMD-SHELL", "curl -fsS http://127.0.0.1:8080/readyz || exit 1"],
+          "interval": 30,
+          "timeout": 5,
+          "retries": 3,
+          "startPeriod": 120
+        },
+        "mountPoints": []
+      },
+      "ai": {
+        "name": "ai",
+        "image": "${var.images[\"ai\"]}",
+        "essential": true,
+        "portMappings": [
+          {
+            "containerPort": 8000,
+            "protocol": "tcp"
+          }
+        ],
+        "environment": [
+          {
+            "name": "PULSEAI_PROVIDER",
+            "value": "disabled"
+          },
+          {
+            "name": "AI_STORAGE_DIR",
+            "value": "/app/var"
+          },
+          {
+            "name": "MODEL_REGISTRY_DIR",
+            "value": "/app/models"
+          }
+        ],
+        "secrets": "${var.secrets[\"ai\"]}",
+        "readonlyRootFilesystem": false,
+        "linuxParameters": {
+          "capabilities": {
+            "drop": ["ALL"]
+          }
+        },
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "${aws_cloudwatch_log_group.this.name}",
+            "awslogs-region": "${var.region}",
+            "awslogs-stream-prefix": "ai"
+          }
+        },
+        "healthCheck": {
+          "command": [
+            "CMD-SHELL",
+            "python -c \"import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/ready')\""
+          ],
+          "interval": 30,
+          "timeout": 5,
+          "retries": 3,
+          "startPeriod": 120
+        },
+        "mountPoints": [
+          {
+            "sourceVolume": "ai-data",
+            "containerPath": "/app/var",
+            "readOnly": false
+          }
+        ]
+      }
+    },
+    "migration": {
+      "name": "migration",
+      "image": "${var.images[\"api\"]}",
+      "essential": true,
+      "entryPoint": [
+        "java",
+        "-Dloader.main=io.citypulse.operations.Migrate",
+        "-cp",
+        "app.jar",
+        "org.springframework.boot.loader.launch.PropertiesLauncher"
+      ],
+      "environment": [
+        {
+          "name": "DATABASE_URL",
+          "value": "jdbc:postgresql://${var.db_endpoint}:5432/citypulse?sslmode=verify-full&sslrootcert=/app/certs/rds-ca.crt"
+        }
+      ],
+      "secrets": "${var.secrets[\"migration\"]}",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "${aws_cloudwatch_log_group.this.name}",
+          "awslogs-region": "${var.region}",
+          "awslogs-stream-prefix": "migration"
+        }
+      }
+    }
+  },
+  "resource": {
+    "aws_ecs_cluster": {
+      "this": {
+        "name": "${var.name}",
+        "setting": [
+          {
+            "name": "containerInsights",
+            "value": "enabled"
+          }
+        ]
+      }
+    },
+    "aws_cloudwatch_log_group": {
+      "this": {
+        "name": "/citypulse/${var.name}",
+        "retention_in_days": 30
+      }
+    },
+    "aws_service_discovery_private_dns_namespace": {
+      "this": {
+        "name": "citypulse.internal",
+        "vpc": "${var.vpc_id}"
+      }
+    },
+    "aws_service_discovery_service": {
+      "this": {
+        "for_each": {
+          "api": {},
+          "ai": {}
+        },
+        "name": "${each.key}",
+        "dns_config": {
+          "namespace_id": "${aws_service_discovery_private_dns_namespace.this.id}",
+          "dns_records": [
+            {
+              "ttl": 10,
+              "type": "A"
+            }
+          ],
+          "routing_policy": "MULTIVALUE"
+        },
+        "health_check_custom_config": {}
+      }
+    },
+    "aws_iam_role": {
+      "execution": {
+        "for_each": {
+          "web": {},
+          "api": {},
+          "ai": {},
+          "migration": {}
+        },
+        "name": "${var.name}-${each.key}-execution",
+        "assume_role_policy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": {\"Service\": \"ecs-tasks.amazonaws.com\"}, \"Action\": \"sts:AssumeRole\"}]}"
+      },
+      "task": {
+        "for_each": {
+          "web": {},
+          "api": {},
+          "ai": {},
+          "migration": {}
+        },
+        "name": "${var.name}-${each.key}-task",
+        "assume_role_policy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": {\"Service\": \"ecs-tasks.amazonaws.com\"}, \"Action\": \"sts:AssumeRole\"}]}"
+      }
+    },
+    "aws_iam_role_policy_attachment": {
+      "execution": {
+        "for_each": {
+          "web": {},
+          "api": {},
+          "ai": {},
+          "migration": {}
+        },
+        "role": "${aws_iam_role.execution[each.key].name}",
+        "policy_arn": "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+      }
+    },
+    "aws_iam_role_policy": {
+      "secrets": {
+        "for_each": {
+          "web": {},
+          "api": {},
+          "ai": {},
+          "migration": {}
+        },
+        "role": "${aws_iam_role.execution[each.key].id}",
+        "policy": "${jsonencode({Version=\"2012-10-17\",Statement=[{Effect=\"Allow\",Action=[\"secretsmanager:GetSecretValue\"],Resource=[for s in var.secrets[each.key] : s.valueFrom]}]})}"
+      },
+      "efs": {
+        "role": "${aws_iam_role.task[\"ai\"].id}",
+        "policy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Action\": [\"elasticfilesystem:ClientMount\", \"elasticfilesystem:ClientWrite\"], \"Resource\": \"arn:aws:elasticfilesystem:${var.region}:${data.aws_caller_identity.this.account_id}:file-system/${var.efs_id}\", \"Condition\": {\"StringEquals\": {\"elasticfilesystem:AccessPointArn\": \"arn:aws:elasticfilesystem:${var.region}:${data.aws_caller_identity.this.account_id}:access-point/${var.efs_access_point}\"}}}]}"
+      }
+    },
+    "aws_ecs_task_definition": {
+      "this": {
+        "for_each": {
+          "web": {
+            "cpu": 512,
+            "memory": 1024
+          },
+          "api": {
+            "cpu": 1024,
+            "memory": 2048
+          },
+          "ai": {
+            "cpu": 1024,
+            "memory": 4096
+          }
+        },
+        "family": "${var.name}-${each.key}",
+        "requires_compatibilities": ["FARGATE"],
+        "network_mode": "awsvpc",
+        "cpu": "${each.value.cpu}",
+        "memory": "${each.value.memory}",
+        "execution_role_arn": "${aws_iam_role.execution[each.key].arn}",
+        "task_role_arn": "${aws_iam_role.task[each.key].arn}",
+        "container_definitions": "${jsonencode([local.containers[each.key]])}",
+        "dynamic": {
+          "volume": {
+            "for_each": "${each.key == \"ai\" ? [1] : []}",
+            "content": {
+              "name": "ai-data",
+              "efs_volume_configuration": {
+                "file_system_id": "${var.efs_id}",
+                "transit_encryption": "ENABLED",
+                "authorization_config": {
+                  "access_point_id": "${var.efs_access_point}",
+                  "iam": "ENABLED"
+                }
+              }
+            }
+          }
+        }
+      },
+      "migration": {
+        "family": "${var.name}-migration",
+        "requires_compatibilities": ["FARGATE"],
+        "network_mode": "awsvpc",
+        "cpu": "512",
+        "memory": "1024",
+        "execution_role_arn": "${aws_iam_role.execution[\"migration\"].arn}",
+        "task_role_arn": "${aws_iam_role.task[\"migration\"].arn}",
+        "container_definitions": "${jsonencode([local.migration])}"
+      }
+    },
+    "aws_lb": {
+      "this": {
+        "name": "${var.name}",
+        "internal": false,
+        "load_balancer_type": "application",
+        "security_groups": ["${var.security_groups[\"alb\"]}"],
+        "subnets": "${var.public_subnets}",
+        "drop_invalid_header_fields": true,
+        "enable_deletion_protection": true
+      }
+    },
+    "aws_lb_target_group": {
+      "web": {
+        "name": "${var.name}-web",
+        "port": 3000,
+        "protocol": "HTTP",
+        "target_type": "ip",
+        "vpc_id": "${var.vpc_id}",
+        "deregistration_delay": 30,
+        "health_check": {
+          "path": "/api/health",
+          "matcher": "200",
+          "healthy_threshold": 2,
+          "unhealthy_threshold": 3
+        }
+      }
+    },
+    "aws_lb_listener": {
+      "https": {
+        "load_balancer_arn": "${aws_lb.this.arn}",
+        "port": 443,
+        "protocol": "HTTPS",
+        "ssl_policy": "ELBSecurityPolicy-TLS13-1-2-2021-06",
+        "certificate_arn": "${var.certificate_arn}",
+        "default_action": [
+          {
+            "type": "forward",
+            "target_group_arn": "${aws_lb_target_group.web.arn}"
+          }
+        ]
+      },
+      "http": {
+        "load_balancer_arn": "${aws_lb.this.arn}",
+        "port": 80,
+        "protocol": "HTTP",
+        "default_action": [
+          {
+            "type": "redirect",
+            "redirect": {
+              "port": "443",
+              "protocol": "HTTPS",
+              "status_code": "HTTP_301"
+            }
+          }
+        ]
+      }
+    },
+    "aws_ecs_service": {
+      "this": {
+        "for_each": {
+          "web": {},
+          "api": {},
+          "ai": {}
+        },
+        "name": "${each.key}",
+        "cluster": "${aws_ecs_cluster.this.id}",
+        "task_definition": "${aws_ecs_task_definition.this[each.key].arn}",
+        "desired_count": "${var.start_services ? (each.key == \"ai\" ? 1 : 2) : 0}",
+        "launch_type": "FARGATE",
+        "platform_version": "1.4.0",
+        "deployment_minimum_healthy_percent": "${each.key == \"ai\" ? 0 : 100}",
+        "deployment_maximum_percent": "${each.key == \"ai\" ? 100 : 200}",
+        "deployment_circuit_breaker": {
+          "enable": true,
+          "rollback": true
+        },
+        "network_configuration": {
+          "subnets": "${var.private_subnets}",
+          "security_groups": ["${var.security_groups[each.key]}"],
+          "assign_public_ip": false
+        },
+        "dynamic": {
+          "load_balancer": {
+            "for_each": "${each.key == \"web\" ? [1] : []}",
+            "content": {
+              "target_group_arn": "${aws_lb_target_group.web.arn}",
+              "container_name": "web",
+              "container_port": 3000
+            }
+          },
+          "service_registries": {
+            "for_each": "${each.key == \"web\" ? [] : [1]}",
+            "content": {
+              "registry_arn": "${aws_service_discovery_service.this[each.key].arn}"
+            }
+          }
+        },
+        "depends_on": ["aws_lb_listener.https"]
+      }
+    },
+    "aws_appautoscaling_target": {
+      "this": {
+        "for_each": "${var.start_services ? toset([\"web\",\"api\"]) : toset([])}",
+        "min_capacity": 2,
+        "max_capacity": 4,
+        "resource_id": "service/${aws_ecs_cluster.this.name}/${aws_ecs_service.this[each.key].name}",
+        "scalable_dimension": "ecs:service:DesiredCount",
+        "service_namespace": "ecs"
+      }
+    },
+    "aws_appautoscaling_policy": {
+      "cpu": {
+        "for_each": "${var.start_services ? toset([\"web\",\"api\"]) : toset([])}",
+        "name": "${each.key}-cpu",
+        "policy_type": "TargetTrackingScaling",
+        "resource_id": "${aws_appautoscaling_target.this[each.key].resource_id}",
+        "scalable_dimension": "${aws_appautoscaling_target.this[each.key].scalable_dimension}",
+        "service_namespace": "ecs",
+        "target_tracking_scaling_policy_configuration": {
+          "target_value": 60,
+          "scale_in_cooldown": 300,
+          "scale_out_cooldown": 60,
+          "predefined_metric_specification": {
+            "predefined_metric_type": "ECSServiceAverageCPUUtilization"
+          }
+        }
+      }
+    },
+    "aws_cloudwatch_metric_alarm": {
+      "alb_errors": {
+        "alarm_name": "${var.name}-alb-5xx",
+        "comparison_operator": "GreaterThanThreshold",
+        "evaluation_periods": 2,
+        "metric_name": "HTTPCode_Target_5XX_Count",
+        "namespace": "AWS/ApplicationELB",
+        "period": 60,
+        "statistic": "Sum",
+        "threshold": 5,
+        "treat_missing_data": "notBreaching",
+        "dimensions": {
+          "LoadBalancer": "${aws_lb.this.arn_suffix}"
+        },
+        "alarm_actions": "${var.alarm_actions}"
+      }
+    }
+  },
+  "output": {
+    "cluster": {
+      "value": "${aws_ecs_cluster.this.name}"
+    },
+    "alb_dns_name": {
+      "value": "${aws_lb.this.dns_name}"
+    },
+    "task_definitions": {
+      "value": "${{for k,v in aws_ecs_task_definition.this : k => v.arn}}"
+    },
+    "desired_counts": {
+      "value": "${{for k,v in aws_ecs_service.this : k => v.desired_count}}"
+    },
+    "migration_task_definition": {
+      "value": "${aws_ecs_task_definition.migration.arn}"
+    }
+  }
+}

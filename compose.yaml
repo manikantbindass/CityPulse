@@ -76,7 +76,7 @@ services:
       db-permissions: { condition: service_completed_successfully }
       redis: { condition: service_healthy }
     healthcheck:
-      test: ['CMD', 'curl', '-fsS', 'http://localhost:8080/actuator/health/readiness']
+      test: ['CMD', 'curl', '-fsS', 'http://localhost:8080/readyz']
       interval: 10s
       timeout: 5s
       start_period: 60s
@@ -109,7 +109,7 @@ services:
           'CMD',
           'python',
           '-c',
-          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/ready', timeout=3)",
         ]
       interval: 10s
       timeout: 5s
@@ -146,6 +146,28 @@ services:
       timeout: 5s
       retries: 12
     restart: unless-stopped
+
+  chain:
+    profiles: ['chain']
+    build:
+      context: .
+      dockerfile: blockchain/Dockerfile
+    ports: ['127.0.0.1:8545:8545']
+    security_opt: ['no-new-privileges:true']
+    cap_drop: ['ALL']
+    pids_limit: 128
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:8545',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_chainId',params:[]})}).then(async r=>process.exit((await r.json()).result==='0x7a69'?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 12
 
 volumes:
   ai-data:

@@ -165,7 +165,10 @@ public class DecisionService {
                 .header("X-Tenant-ID", identity.tenantId().toString())
                 .POST(HttpRequest.BodyPublishers.ofString(encode(input)))
                 .build();
-            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            var response = client.send(
+                io.citypulse.operations.TraceHeaders.propagated(request),
+                HttpResponse.BodyHandlers.ofString()
+            );
             if (response.statusCode() == 422) throw new ResponseStatusException(
                 HttpStatus.BAD_REQUEST,
                 "Scenario schema rejected: check finite quantities, time zones, periods, unique IDs, endpoints and weights against the published JSON schema"

@@ -12,3 +12,7 @@
 .env.*
 !.env.example
 *.log
+
+.build
+**/.terraform
+**/*.tfstate*

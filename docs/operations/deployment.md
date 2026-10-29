@@ -1,0 +1,41 @@
+# Progressive deployment and rollback
+
+## Implemented versus designed
+
+| Stage | Implemented code                                                                                            | Verification boundary                                                                |
+| ----- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| A     | Web/API/AI, ingestion CLI and Hardhat Dockerfiles; PostGIS/Redis, seed migration, probes and optional chain | Linux Compose CI; local Docker engine unavailable                                    |
+| B     | Pinned CI actions, application/security/platform gates, CycloneDX SBOMs, manual SHA-tag packaging           | PR workflows; GHCR publishing is manual and has not been dispatched                  |
+| C     | AWS network, data and ECS Terraform modules, dedicated migration task                                       | Provider validation and mocked plans only; no AWS apply                              |
+| D     | AI/API metrics, W3C traces, redacting collector, Tempo, Prometheus alerts and Grafana dashboard             | Optional Compose telemetry smoke; cloud collector and pager delivery require rollout |
+| E     | Stateless web/API scaling limits, connection budget, bounded k6 workload and batch client design            | Small synthetic workloads; no production capacity certification                      |
+
+## Local startup
+
+Install Docker with Compose v2, Python 3.12+ and Git. Run `python scripts/platform.py up --chain --observability` from the root. Existing `.env` is preserved; add a distinct `GRAFANA_ADMIN_PASSWORD` if upgrading an older environment. The launcher checks Docker, builds/waits and runs cross-service smoke checks. It does not install Docker or change host security settings. Use the same optional flags with `down`; volumes remain. Ingestion is a finite CLI, not an invented daemon; reporting/admin are existing API/UI boundaries, not separate runnable services.
+
+`python scripts/data_pipeline.py demo` produces deterministic data, quality/dead-letter/checkpoint outputs. `python scripts/data_pipeline.py publish` idempotently publishes through the authorized API. To record actual job success/failure in local monitoring, set `PUSHGATEWAY_URL=http://127.0.0.1:9092` and run `python scripts/ingestion_job.py demo`; the wrapper preserves the original process exit status even if metrics fail.
+
+With the chain profile running, execute `docker compose run --rm --no-deps -e LOCAL_CHAIN_RPC_URL=http://chain:8545 chain npx hardhat run blockchain/scripts/local-demo.ts --config blockchain/hardhat.config.ts --network localhost`. The chain resets when recreated; fixed Hardhat accounts are public test fixtures and must never hold real funds.
+
+## CI, artifacts and preview design
+
+Every PR builds/lints/tests the services and scans production dependencies, secrets, source, configuration and runtime images. The security job uploads image/config reports and runtime CycloneDX SBOMs. Artifacts are tied to the workflow run/revision, not mutable coverage badges. The platform job validates Terraform without credentials, runs mock plans and validates monitoring config and the ingestion image. Compose smoke starts the actual optional chain/telemetry stack and checks requests, persistence, privileges, scrape targets and trace ingestion.
+
+The manual `Package release` workflow runs only on main and uses the `release` GitHub environment. It rebuilds, gates fixable HIGH/CRITICAL image findings, produces SBOMs, then pushes `ghcr.io/<owner>/citypulse-<service>:<commit-sha>` using a job-only packages-write token. It records resolved digests; deployment consumes digests, not mutable tags. Configure environment reviewers and branch restrictions before using this workflow. It does not deploy AWS or provision infrastructure. Cloud publishing has not been executed by this task. Local-only chain tooling is not promoted as a production image; its known development advisory remains disclosed.
+
+Preview design: one disposable Compose project per PR/revision, synthetic fixtures only, no production IdP, cloud credentials, databases or signers. Bind previews to a private runner/network, authenticate ingress if sharing, namespace volumes, cap lifetime/resources and remove only that project's resources after review. Fork PRs run unprivileged checks and receive no release credentials. No hosted preview URL or ephemeral cloud deployment is claimed.
+
+## Configuration and promotion
+
+Development uses the explicit local Spring profile and preview flags on loopback. Staging/production require HTTPS, real issuer/audience/client, scoped memberships, private TLS session Redis, encryption key and private service credentials. Keep the local profile/flags off. Secrets Manager injects individual values into ECS; only the migration task receives schema-owner credentials. Configure separate state, secrets, certificates, image digest manifests and databases per environment; never share a tenant fixture DB with production.
+
+Promote a digest manifest after staging smoke, authorization checks, restore evidence and SLO review. AWS provisioning uses separately approved short-lived operator credentials; there is no automatic Terraform apply. See the [AWS module guide](../../infrastructure/terraform/README.md).
+
+## Rollback
+
+For stateless web/API, record the previous healthy ECS task-definition revision and digest manifest, then roll back via `aws ecs update-service --cluster <cluster> --service <service> --task-definition <previous-arn>`. Wait for service stability and verify readiness, authorization and a real read/write/replay smoke. Circuit-breaker rollback assists failed task launches; it does not validate business correctness or reverse a migration.
+
+Use expand/migrate/contract schema changes. Keep the previous app compatible throughout a rollout. Never automatically run destructive down migrations. Restore a database only into an isolated replacement and explicitly reconcile writes since the recovery point. AI file/SQLite rollback is stop-the-writer, snapshot/restore the entire state, deploy the previous model/image and verify fingerprints; do not overlap old/new writers. Session-key changes invalidate sessions and may require users to sign in again.
+
+Optional Kubernetes stays planned because running two orchestration stacks adds work without current capacity evidence. [Recovery](recovery.md), [observability](observability.md) and [scaling](scaling.md) define operational gates.

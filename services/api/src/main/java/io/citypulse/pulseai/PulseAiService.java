@@ -434,7 +434,10 @@ public class PulseAiService {
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json.writeValueAsString(body)))
                 .build();
-            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            var response = client.send(
+                io.citypulse.operations.TraceHeaders.propagated(request),
+                HttpResponse.BodyHandlers.ofString()
+            );
             if (response.statusCode() != 200) return fallback;
             Map<String, Object> result = json.readValue(response.body(), new TypeReference<>() {});
             if (

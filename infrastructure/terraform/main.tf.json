@@ -1,0 +1,152 @@
+{
+  "terraform": {
+    "required_version": ">= 1.10, < 2.0",
+    "required_providers": {
+      "aws": {
+        "source": "hashicorp/aws",
+        "version": "~> 6.0"
+      }
+    },
+    "backend": {
+      "s3": {}
+    }
+  },
+  "provider": {
+    "aws": {
+      "region": "${var.region}",
+      "default_tags": {
+        "tags": {
+          "Project": "CityPulse",
+          "Environment": "${var.name}",
+          "ManagedBy": "Terraform"
+        }
+      }
+    }
+  },
+  "variable": {
+    "name": {
+      "type": "string",
+      "validation": {
+        "condition": "${can(regex(\"^[a-z][a-z0-9-]{2,19}$\", var.name))}",
+        "error_message": "Use 3-20 lowercase letters, digits and hyphens."
+      }
+    },
+    "region": {
+      "type": "string"
+    },
+    "bucket_name": {
+      "type": "string"
+    },
+    "postgres_version": {
+      "type": "string"
+    },
+    "hostname": {
+      "type": "string"
+    },
+    "certificate_arn": {
+      "type": "string"
+    },
+    "oidc_issuer": {
+      "type": "string"
+    },
+    "oidc_audience": {
+      "type": "string"
+    },
+    "azs": {
+      "type": "list(string)"
+    },
+    "images": {
+      "type": "map(string)"
+    },
+    "secrets": {
+      "type": "map(list(object({name=string,valueFrom=string})))"
+    },
+    "redis_auth_token": {
+      "type": "string",
+      "sensitive": true
+    },
+    "start_services": {
+      "type": "bool",
+      "default": false
+    },
+    "enable_queue": {
+      "type": "bool",
+      "default": false
+    },
+    "alarm_actions": {
+      "type": "list(string)",
+      "default": []
+    }
+  },
+  "module": {
+    "network": {
+      "source": "./modules/network",
+      "name": "${var.name}",
+      "azs": "${var.azs}"
+    },
+    "boundary": {
+      "source": "./modules/workload-boundary",
+      "name": "${var.name}",
+      "vpc_id": "${module.network.vpc_id}"
+    },
+    "data": {
+      "source": "./modules/data",
+      "name": "${var.name}",
+      "vpc_id": "${module.network.vpc_id}",
+      "subnets": "${module.network.private_subnets}",
+      "api_security_group": "${module.boundary.api}",
+      "web_security_group": "${module.boundary.web}",
+      "ai_security_group": "${module.boundary.ai}",
+      "postgres_version": "${var.postgres_version}",
+      "bucket_name": "${var.bucket_name}",
+      "redis_auth_token": "${var.redis_auth_token}",
+      "enable_queue": "${var.enable_queue}"
+    },
+    "compute": {
+      "source": "./modules/compute",
+      "name": "${var.name}",
+      "region": "${var.region}",
+      "hostname": "${var.hostname}",
+      "certificate_arn": "${var.certificate_arn}",
+      "oidc_issuer": "${var.oidc_issuer}",
+      "oidc_audience": "${var.oidc_audience}",
+      "images": "${var.images}",
+      "secrets": "${var.secrets}",
+      "start_services": "${var.start_services}",
+      "alarm_actions": "${var.alarm_actions}",
+      "vpc_id": "${module.network.vpc_id}",
+      "private_subnets": "${module.network.private_subnets}",
+      "public_subnets": "${module.network.public_subnets}",
+      "db_endpoint": "${module.data.db_endpoint}",
+      "redis_endpoint": "${module.data.redis_endpoint}",
+      "efs_id": "${module.data.efs_id}",
+      "efs_access_point": "${module.data.efs_access_point}",
+      "security_groups": {
+        "alb": "${module.boundary.alb}",
+        "web": "${module.boundary.web}",
+        "api": "${module.boundary.api}",
+        "ai": "${module.boundary.ai}"
+      }
+    }
+  },
+  "output": {
+    "alb_dns_name": {
+      "value": "${module.compute.alb_dns_name}"
+    },
+    "db_master_secret_arn": {
+      "value": "${module.data.db_master_secret_arn}"
+    },
+    "cluster": {
+      "value": "${module.compute.cluster}"
+    },
+    "security_posture": {
+      "value": "${module.data.security_posture}"
+    },
+    "desired_counts": {
+      "value": "${module.compute.desired_counts}"
+    },
+    "migration_task_definition": {
+      "value": "${module.compute.migration_task_definition}"
+    }
+  }
+}

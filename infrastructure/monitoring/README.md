@@ -1,3 +1,3 @@
-# Observability
+# Local observability
 
-Current: service/container health and logs. Planned: trace propagation, structured access logs, OpenTelemetry, local Prometheus/Grafana, model drift and actionable alerts. No dashboards are deployed.
+Run `python scripts/platform.py up --observability` from the repository root after configuring the generated Grafana secret. This overlay includes the redacting OpenTelemetry Collector, Tempo, Prometheus, ingestion Pushgateway and a provisioned Grafana dashboard. No public telemetry or pager endpoint is configured. [Signals, privacy, alerts and proposed SLOs](../../docs/operations/observability.md) distinguish executable local configuration from cloud operational work. [Deployment](../../docs/operations/deployment.md) documents startup, validation and rollback.
