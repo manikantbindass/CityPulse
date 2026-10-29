@@ -41,4 +41,4 @@ Scaling triggers: sustained web/API CPU over 60% with healthy DB → bounded sca
 
 ## Recorded local result
 
-On 2026-10-29, k6 2.3.0 sent 20 real synthetic decision requests at one arrival/second over 20 seconds to the updated FastAPI/SciPy service on loopback. All semantic checks passed; HTTP failure rate was 0%; p95 request duration was 74.80 ms. See the [raw summary](../reports/operations/k6-local-ai.json) for averages, maxima, thresholds and the environment. This excludes web/API/DB latency and provides no production capacity estimate.
+On 2026-10-29, k6 2.3.0 sent 21 real synthetic decision requests at one arrival/second over 20 seconds to the updated FastAPI/SciPy service on loopback. All semantic checks passed; HTTP failure rate was 0%; p95 request duration was 74.68 ms. See the [raw summary](../reports/operations/k6-local-ai.json) for averages, maxima, thresholds and the environment. This excludes web/API/DB latency and provides no production capacity estimate.
