@@ -4,7 +4,7 @@ import { BodyLimitError, readBoundedBody } from '../lib/request-body';
 
 function body(chunks: string[], length?: string) {
   const cancel = vi.fn();
-  const stream = new ReadableStream<Uint8Array>({
+  const stream = new ReadableStream<Uint8Array<ArrayBuffer>>({
     start(controller) {
       for (const chunk of chunks) controller.enqueue(new TextEncoder().encode(chunk));
       // Leave open so rejection must actively cancel the unread request.
@@ -36,7 +36,7 @@ describe('streaming request limit', () => {
   });
   it('accepts the exact byte boundary including split UTF-8 sequences', async () => {
     const bytes = new TextEncoder().encode('₹a');
-    const stream = new ReadableStream<Uint8Array>({
+    const stream = new ReadableStream<Uint8Array<ArrayBuffer>>({
       start(c) {
         c.enqueue(bytes.slice(0, 1));
         c.enqueue(bytes.slice(1));
