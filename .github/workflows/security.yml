@@ -60,7 +60,7 @@ jobs:
           cache: true
           version: v0.76.1
       - name: Scan tracked source for secrets
-        run: trivy fs --scanners secret --exit-code 1 --skip-dirs .git,node_modules,.venv .
+        run: trivy fs --offline-scan --scanners secret --exit-code 1 --skip-dirs .git,node_modules,.venv .
       - name: Record configuration findings
         run: trivy config --format json --output security-config.json .
       - name: Build runtime images
