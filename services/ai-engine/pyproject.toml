@@ -9,7 +9,7 @@ dependencies = [
   "prometheus-client==0.26.0",
   "fastapi==0.162.0",
   "uvicorn==0.41.0",
-  "scikit-learn==1.8.0",
+  "scikit-learn==1.9.1",
   "numpy==2.4.2",
   "scipy==1.18.1",
   "tzdata==2026.6",
