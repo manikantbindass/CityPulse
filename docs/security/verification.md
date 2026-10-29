@@ -1,7 +1,7 @@
 # Security verification evidence
 
 This file records actual checks, not a penetration-test or compliance report.
-Final PR check links and any unresolved findings are added after CI completes.
+Evidence below identifies the measured revision; the PR checks show subsequent runs.
 
 Implemented regressions cover access-token tenant/lifetime/assurance checks,
 session encryption/tampering/key rotation, explicit anonymous-delegation denial,
@@ -50,4 +50,42 @@ The API image upgrades Alpine packages, including the affected Brotli library.
 The web runtime removes unused npm, Corepack and Yarn (build-stage tooling remains
 isolated). A read-only runtime does not require package installation. Native image
 health checks remediate the three low-severity configuration findings. Final image
-scan evidence must confirm remediation; no vulnerability suppression file was added.
+scan evidence confirms remediation at the revision identified below; no vulnerability
+suppression file was added.
+
+## Verified runs and reproducible evidence
+
+On 2026-10-29, revision `87bd7dc` passed the [CI workflow](https://github.com/manikantbindass/CityPulse/actions/runs/40897054852):
+
+- Java: 25 tests, zero failures/errors/skips, including real PostgreSQL/PostGIS
+  tenant isolation, account lifecycle, strict imports and scenario ownership.
+- Web: production build, lint, types, unit tests and 16 Playwright desktop/mobile
+  tests, including automated accessibility and security regressions.
+- AI: 46 tests including prompt injection and solver constraints; ingestion: six
+  tests; Solidity: four tests plus Solhint and local-chain demonstration.
+- Compose: real service health, Next-to-Spring-to-AI forecasting/PulseAI/scenarios,
+  saved scenario export, ingestion publication and restricted DB privilege checks.
+
+The [first patched image scan](https://github.com/manikantbindass/CityPulse/actions/runs/40896385686)
+on `c54f289` recorded zero fixable HIGH/CRITICAL findings in each of the three
+runtime images and zero configuration findings. This scope excludes lower severity
+and vendor-unfixed vulnerabilities; it is not an assertion of no vulnerabilities.
+The uploaded `security-image-and-config-results` artifact holds the raw reports;
+[remediation data](../reports/security-remediation.json) records the original CVEs.
+The [subsequent security run](https://github.com/manikantbindass/CityPulse/actions/runs/40897054855)
+passed dependency audits, source secret checks and CodeQL. The PR-ref CodeQL alert
+API returned no open alerts when inspected. Consult the current PR checks for the
+latest image-scan status rather than assuming that earlier evidence applies forever.
+
+Main now requires all eight CI/security jobs, including `container-and-secrets`,
+with strict up-to-date checks, PRs, administrator enforcement, conversation
+resolution and disabled branch deletion/force pushes. Owner-only review has zero
+required independent approvals; separation of duties is an operational gap.
+
+Local browser verification used actual Next.js (port 3300) and FastAPI/SciPy (8300),
+without response interception: a synthetic scenario calculated successfully, while
+cross-origin solver requests and origin-less logout returned 403. Unconfigured
+IdP login returned a safe 503; rendered login had nonce CSP. Full local Compose
+remains unavailable because Docker Desktop cannot start its engine; Linux CI is
+the full-stack verification environment. Local preview has explicit flags, synthetic
+inputs and no persisted tenant-session claim. PDF and PowerPoint remain deferred.

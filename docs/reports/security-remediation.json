@@ -353,5 +353,17 @@
     }
   ],
   "remediation": "Boot 4.0.9 managed patch set, upgraded Alpine packages, unused runtime npm/Yarn removal",
-  "finalScan": "See final PR required checks and uploaded image reports; no exclusions applied"
+  "finalScan": {
+    "commit": "c54f289",
+    "run": "https://github.com/manikantbindass/CityPulse/actions/runs/40896385686",
+    "scanner": "Trivy 0.76.1",
+    "scope": "Fixable HIGH/CRITICAL runtime-image vulnerabilities; unfixed and lower severity findings are outside this gate",
+    "gatedFindings": {
+      "web": 0,
+      "api": 0,
+      "ai": 0
+    },
+    "configurationFindings": 0,
+    "suppressions": []
+  }
 }
