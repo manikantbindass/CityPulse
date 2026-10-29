@@ -2195,3 +2195,75 @@ details p {
     transform: none;
   }
 }
+
+.pulseai {
+  min-width: 0;
+}
+.pulse-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 20px 0;
+}
+.pulse-fields label,
+.pulse-tools label {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+}
+.pulse-fields input,
+.pulse-fields select,
+.pulse-tools select {
+  width: 100%;
+  min-width: 0;
+  background: var(--background, #101b26);
+  color: var(--foreground, #efffff);
+  border: 1px solid #5c7280;
+  border-radius: 9px;
+  padding: 10px;
+}
+.pulse-tools {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 16px 0;
+}
+.pulse-tools a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.pulse-context summary,
+.pulseai details summary {
+  cursor: pointer;
+  padding: 10px 0;
+}
+.pulse-evidence {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.pulse-suggestion {
+  border: 1px solid #5c7280;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 12px;
+}
+.pulse-error {
+  border-left: 3px solid #ff9e9e;
+  padding: 12px;
+}
+.pulseai .chat-messages {
+  max-height: 650px;
+  overflow-y: auto;
+}
+@media (max-width: 760px) {
+  .pulse-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .pulse-fields {
+    grid-template-columns: 1fr;
+  }
+}

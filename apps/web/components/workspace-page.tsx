@@ -1,7 +1,7 @@
 'use client';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useMemo, useState, useSyncExternalStore, type FormEvent } from 'react';
+import { useMemo, useState, useSyncExternalStore } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { motion, useReducedMotion } from 'motion/react';
 import {
@@ -19,7 +19,6 @@ import {
   RefreshCw,
   Search,
   Check,
-  Send,
   Copy,
   ShieldCheck,
   Info,
@@ -32,6 +31,7 @@ import { Button } from './ui/button';
 import { CityNetwork } from './network';
 import { ChainRecords } from './chain-records';
 import { MlForecast } from './ml-forecast';
+import { PulseAI } from './pulseai';
 import { BackendEvidence } from './backend-evidence';
 const DemandChart = dynamic(() => import('./charts').then((m) => m.DemandChart), {
   ssr: false,
@@ -903,63 +903,7 @@ function Verification() {
   );
 }
 function Analyst() {
-  const [messages, setMessages] = useState([
-    {
-      role: 'assistant',
-      text: 'I’m the local analyst preview. Ask about sample gaps, supply, or forecasts. Replies use fixed rules and synthetic data, not an LLM.',
-    },
-  ]);
-  const [prompt, setPrompt] = useState('');
-  function send(e: FormEvent) {
-    e.preventDefault();
-    if (!prompt.trim()) return;
-    const text = prompt.trim(),
-      q = text.toLowerCase();
-    const answer = /forecast|predict|future/.test(q)
-      ? 'The AI service provides a linear-trend baseline with no seasonality or calibrated intervals. Run it on the predictions page.'
-      : /gap|opportun|demand/.test(q)
-        ? 'East Market has the largest sample gap: demand 756 minus supply 590 = 166 units/day. These figures are synthetic.'
-        : /supply|resource/.test(q)
-          ? 'North Quarter and West Gardens show sample surpluses of 56 and 48 units/day. Resource planning explores allocation to positive gaps.'
-          : 'Try asking about district gaps, available supply, or forecasting limitations.';
-    setMessages((m) => [...m, { role: 'user', text }, { role: 'assistant', text: answer }]);
-    setPrompt('');
-  }
-  return (
-    <Panel
-      title="CityPulse analyst"
-      label="Rule-based preview · no external model or conversation storage"
-    >
-      <div
-        className="chat-messages"
-        role="log"
-        aria-label="Analyst conversation"
-        aria-live="polite"
-      >
-        {messages.map((m, i) => (
-          <article className={`chat-message ${m.role}`} key={i}>
-            <span>{m.role === 'assistant' ? 'CityPulse preview' : 'You'}</span>
-            <p>{m.text}</p>
-          </article>
-        ))}
-      </div>
-      <form onSubmit={send} className="chat-form">
-        <label htmlFor="chat-input" className="sr-only">
-          Ask about sample data
-        </label>
-        <input
-          id="chat-input"
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          maxLength={500}
-          placeholder="Which district has the largest supply gap?"
-        />
-        <Button type="submit" disabled={!prompt.trim()} aria-label="Send question">
-          <Send size={18} />
-        </Button>
-      </form>
-    </Panel>
-  );
+  return <PulseAI />;
 }
 function Reports({ data }: { data: District[] }) {
   const [fields, setFields] = useState(['demand', 'supply', 'businesses']);

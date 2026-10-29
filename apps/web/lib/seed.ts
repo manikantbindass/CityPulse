@@ -150,7 +150,7 @@ export const pageInfo: Record<string, { title: string; subtitle: string }> = {
   },
   analyst: {
     title: 'Ask a better city question.',
-    subtitle: 'A local, rule-based analyst preview grounded in the sample dataset.',
+    subtitle: 'PulseAI retrieves authorized records, explains limitations, and links its evidence.',
   },
   reports: {
     title: 'Make intelligence shareable.',

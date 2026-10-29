@@ -11,7 +11,7 @@
 
 > **Development foundation.** Workspace analytics, district overlays, KPI deltas and example insights are synthetic. Real Spring API and FastAPI endpoints run locally. No production deployment, real city partnership, forecast accuracy, public demo or on-chain submission is claimed.
 
-[Static header](docs/assets/citypulse-header-static.svg) · [Product requirements](docs/PRD.md) · [Architecture](docs/architecture/README.md) · [API behavior](docs/api/backend.md) · [Blockchain guide](docs/blockchain.md) · [Model card](docs/model-card.md) · [Developer guide](docs/development.md) · [Ingestion demo](docs/ingestion.md) · [Data dictionary](docs/data-dictionary.md)
+[PulseAI analyst guide](docs/pulseai.md) · [Static header](docs/assets/citypulse-header-static.svg) · [Product requirements](docs/PRD.md) · [Architecture](docs/architecture/README.md) · [API behavior](docs/api/backend.md) · [Blockchain guide](docs/blockchain.md) · [Model card](docs/model-card.md) · [Developer guide](docs/development.md) · [Ingestion demo](docs/ingestion.md) · [Data dictionary](docs/data-dictionary.md)
 
 ## Navigation
 
@@ -21,16 +21,17 @@
 
 <img src="docs/assets/citypulse-flow.svg" alt="Observe spatial context, anticipate with baselines, verify evidence" width="1200" />
 
-| Capability        | Available now                                                                     | Planned next                                                         |
-| ----------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Urban workspace   | Responsive sidebar, command palette, seed charts/maps, tables and saved views     | Real authorized aggregates and user sessions                         |
-| Registry          | Tenant-scoped cities, zones, geographic areas and businesses                      | Full update/archive lifecycle and controlled boundary edits          |
-| Supply and demand | Validated observations, inventories, history, gap calculations                    | Licensed feeds and completeness monitoring                           |
-| AI                | Measured seasonal/moving-average/Ridge/XGBoost comparisons and Java orchestration | Backtesting, seasonality, calibrated uncertainty and recommendations |
-| Resource planning | Proportional gap allocation, no dispatch                                          | Constraints, fairness review and approved workflows                  |
-| Provenance        | Local hashes, digest receipts and submitter-scoped Solidity tests                 | Canonicalization, wallets and attestation workers                    |
-| Governance        | OIDC resource server, membership/scopes, audit, rate limit, idempotency           | Web sessions, tenant onboarding and retention automation             |
-| Reporting         | Filtered CSV and custom seed reports                                              | Async report jobs and expiring downloads                             |
+| Capability        | Available now                                                                                     | Planned next                                                               |
+| ----------------- | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Urban workspace   | Responsive sidebar, command palette, seed charts/maps, tables and saved views                     | Real authorized aggregates and user sessions                               |
+| Registry          | Tenant-scoped cities, zones, geographic areas and businesses                                      | Full update/archive lifecycle and controlled boundary edits                |
+| Supply and demand | Validated observations, inventories, history, gap calculations                                    | Licensed feeds and completeness monitoring                                 |
+| AI                | Measured seasonal/moving-average/Ridge/XGBoost comparisons and Java orchestration                 | Backtesting, seasonality, calibrated uncertainty and recommendations       |
+| Resource planning | Proportional gap allocation, no dispatch                                                          | Constraints, fairness review and approved workflows                        |
+| Provenance        | Local hashes, digest receipts and submitter-scoped Solidity tests                                 | Canonicalization, wallets and attestation workers                          |
+| PulseAI           | Tenant-scoped evidence retrieval, sessions, source citations and optional ID-only model selection | Cross-category ranking, end-user web OIDC and evaluated provider streaming |
+| Governance        | OIDC resource server, membership/scopes, audit, rate limit, idempotency                           | Web sessions, tenant onboarding and retention automation                   |
+| Reporting         | Filtered CSV and custom seed reports                                                              | Async report jobs and expiring downloads                                   |
 
 ### Technology
 

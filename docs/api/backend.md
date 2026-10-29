@@ -49,3 +49,7 @@ On-chain verification, live provider connectors, asynchronous exports, real mode
 ## Blockchain receipt confirmation
 
 `POST /api/v1/verifications/{id}/receipt` requires data:write and a current-tenant digest record. It validates the transaction against configured RPC, chain ID, registry address, attestation-event topic, attestation ID, content digest and canonical block hash before saving CHAIN_CONFIRMED. Unconfigured/unreachable RPC returns 503; unmatched or unmined evidence returns 409. A successful verification request without that matching receipt remains DIGEST_RECORDED. See [blockchain guide](../blockchain.md) for actual local demo evidence, role design and finality limitations.
+
+## PulseAI
+
+The `/api/v1/pulseai` namespace provides owned sessions and evidence-grounded messages. See the [PulseAI contract and security guide](../pulseai.md) for requests, limits, retrieval semantics and current limitations. Runtime OpenAPI includes validated question fields and the `PulseAiAnswer` response schema.

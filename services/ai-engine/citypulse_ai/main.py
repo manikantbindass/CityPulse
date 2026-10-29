@@ -65,7 +65,7 @@ async def validation_error(request: Request, error: RequestValidationError) -> J
             "status": 422,
             "code": "VALIDATION_ERROR",
             "instance": request.url.path,
-            "detail": "Supply 3..10000 finite nonnegative values and horizon 1..168.",
+            "detail": "Request fields failed schema validation. See the endpoint OpenAPI schema.",
         },
     )
 
@@ -91,3 +91,7 @@ def create_forecast(payload: ForecastRequest) -> ForecastResponse:
 from citypulse_ai.forecast_jobs import build_router  # noqa: E402
 
 app.include_router(build_router(require_token))
+
+from citypulse_ai.pulseai import build_pulseai_router  # noqa: E402
+
+app.include_router(build_pulseai_router(require_token))

@@ -46,8 +46,8 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
   const current = navigation.find((item) => item.href === path);
   const nav = (
     <>
-      <Link className="brand" href="/" aria-label="CityPulse home">
-        <span className="brand-icon">
+      <Link className="brand" href="/">
+        <span className="brand-icon" aria-hidden="true">
           c<span>p</span>
         </span>
         <span className="brand-name">
@@ -145,14 +145,10 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
             <strong>{current?.label ?? 'Overview'}</strong>
           </div>
           <div className="topbar-actions">
-            <button
-              className="search-trigger"
-              aria-label="Search workspace pages"
-              onClick={() => setCommand(true)}
-            >
+            <button className="search-trigger" onClick={() => setCommand(true)}>
               <Search size={15} />
               <span>Search anything…</span>
-              <kbd>⌘ K</kbd>
+              <kbd aria-hidden="true">⌘ K</kbd>
             </button>
             <span className="sample-pill">
               <i />
@@ -161,7 +157,7 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
             <Link href="/notifications" className="icon-button" aria-label="Notifications">
               <Bell size={18} />
             </Link>
-            <Link href="/settings" className="avatar" aria-label="Profile and settings">
+            <Link href="/settings" className="avatar" aria-label="JD profile and settings">
               JD
             </Link>
           </div>

@@ -66,6 +66,11 @@ services:
       dockerfile: services/ai-engine/Dockerfile
     environment:
       LOCAL_API_TOKEN: ${LOCAL_API_TOKEN}
+      PULSEAI_PROVIDER: ${PULSEAI_PROVIDER:-disabled}
+      PULSEAI_PROVIDER_URL: ${PULSEAI_PROVIDER_URL:-https://api.openai.com/v1}
+      PULSEAI_MODEL: ${PULSEAI_MODEL:-}
+      PULSEAI_API_KEY: ${PULSEAI_API_KEY:-}
+      PULSEAI_MAX_USD_PER_MILLION_TOKENS: ${PULSEAI_MAX_USD_PER_MILLION_TOKENS:-}
     volumes:
       - ai-data:/app/var
     ports:
@@ -88,6 +93,7 @@ services:
       context: .
       dockerfile: apps/web/Dockerfile
     environment:
+      PULSEAI_LOCAL_PREVIEW: 'true'
       API_BASE_URL: http://api:8080
       AI_BASE_URL: http://ai:8000
       LOCAL_API_TOKEN: ${LOCAL_API_TOKEN}

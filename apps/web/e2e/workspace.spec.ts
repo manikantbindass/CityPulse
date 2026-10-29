@@ -53,9 +53,19 @@ test('all pages load without uncaught runtime errors', async ({ page }) => {
 });
 test('analyst, digest, exports, and role-aware navigation work', async ({ page }) => {
   await page.goto('/analyst');
-  await page.getByLabel('Ask about sample data').fill('Which district has the largest gap?');
+  await page.route('**/api/pulseai/**', (route) =>
+    route.fulfill({
+      status: 503,
+      contentType: 'application/json',
+      body: JSON.stringify({ detail: 'Analyst unavailable. Start the backend.' }),
+    }),
+  );
+  await page.getByLabel('Ask PulseAI').fill('Which district has the largest gap?');
   await page.getByRole('button', { name: 'Send question' }).click();
-  await expect(page.getByText(/East Market has the largest sample gap/)).toBeVisible();
+  await expect(page.getByRole('alert').filter({ hasText: 'Analyst unavailable' })).toContainText(
+    'Analyst unavailable',
+  );
+  await expect(page.getByText(/East Market has the largest sample gap/)).toHaveCount(0);
   await page.goto('/verification');
   await page.getByRole('button', { name: 'Calculate fingerprint' }).click();
   await expect(page.locator('.digest')).toHaveText(/^0x[a-f0-9]{64}$/);
