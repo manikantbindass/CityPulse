@@ -1,0 +1,55 @@
+# Implemented backend behavior
+
+All protected operations derive tenant UUID from the signed `tenant_id` claim, or the fixed local tenant in explicit local profile. Membership must exist and be enabled. Effective permissions are the intersection of signed scopes and database role permissions. ADMIN can use all recognized scopes; ANALYST/PLANNER read registry/data and read/write analytics; PROVIDER/BUSINESS_OWNER read registry/data/analytics and write data; CITIZEN reads registry. Business-owner records are currently tenant-scoped, not individually owner-scoped. Do not enable mixed-owner tenants until row ownership policy is added.
+
+OIDC resource server validates issuer, expiry and audience. Configure `OIDC_ISSUER_URI` and `OIDC_AUDIENCE`. The external provider owns passwords and login. No IdP realm is fabricated. Administrators provision membership against real IdP subjects; there is no self-service tenant creation or password API.
+
+## Resource groups under /api/v1
+
+| Path                                               | Behavior                                                    | Required scope                   |
+| -------------------------------------------------- | ----------------------------------------------------------- | -------------------------------- |
+| GET /tenants/me; PATCH /tenants/me                 | Read/rename current tenant                                  | registry:read / admin:write      |
+| GET/POST /organizations                            | Tenant list/create                                          | registry:read / admin:write      |
+| GET/POST /users; PATCH /users/{id}/role            | Membership list/provision/role and enabled state            | admin:read / admin:write         |
+| GET/POST /cities                                   | Bounded city list/create with geometry                      | registry:read / registry:write   |
+| GET /cities/{id}/zones; POST /zones                | List/create city-contained zones                            | registry:read / registry:write   |
+| GET/POST /areas                                    | Regions, districts, neighborhoods; parent containment       | registry:read / registry:write   |
+| GET/POST /businesses                               | Search/sort/page and create located businesses              | registry:read / registry:write   |
+| GET/POST /sources                                  | Licensed provider catalog                                   | data:read / data:write           |
+| GET/POST /observations                             | Historical query and validated append                       | data:read / data:write           |
+| GET/POST /inventories                              | Snapshot list and append                                    | data:read / data:write           |
+| GET /analytics/imbalance                           | Sum compatible commodity/unit observations by zone          | analytics:read                   |
+| GET /opportunities                                 | Positive-gap share score 0..100, heuristic                  | analytics:read                   |
+| POST /optimizations                                | Proportional allocation scenario, never dispatch            | analytics:write                  |
+| GET/POST /forecasts                                | Stored results / real FastAPI orchestration                 | analytics:read / analytics:write |
+| GET/POST /verifications                            | Stored digest receipts, status DIGEST_RECORDED              | data:read / data:write           |
+| GET /notifications; PATCH /notifications/{id}/read | Recipient-scoped list/read                                  | registry:read                    |
+| POST /notifications                                | Create in current tenant                                    | admin:write                      |
+| GET /admin/audit                                   | Paginated structured audit                                  | admin:read                       |
+| GET/PUT /admin/configuration                       | Display name / timezone only, no secrets                    | admin:read / admin:write         |
+| GET /reports/export                                | Tenant CSV, first 100 observations, explicit X-Export-Limit | data:read                        |
+| POST /imports/observations                         | application/json multipart, 1 MB, 1..500 rows, atomic       | data:write                       |
+
+POST business operations require `Idempotency-Key` of 8..100 safe characters. Receipts are scoped by tenant/subject/operation/key and digest. Concurrent requests serialize on a transaction advisory lock. Identical retries return the stored result; mismatched requests return 409. Receipt expiry/deletion is not yet scheduled.
+
+List endpoints use page 0..100000 and size 1..100 where exposed. Zone lists and aggregate results cap at 100. Business sort allows only `name` or `createdAt`; search is parameterized. Observation and aggregate queries require cityId, commodity, unit, from and to, with a positive window no longer than 366 days. Only compatible units/commodities are summed; incomplete coverage must not be mistaken for complete demand.
+
+Redis enforces 180 authenticated API requests per subject/tenant per 60-second fixed window, with remaining/limit headers and Retry-After. Failure to verify rate limits fails closed. City reads cache for 30 s with tenant-aware keys; new cities may appear after TTL. OIDC tokens never gain permissions from a database role alone. CORS is same-origin; stateless bearer endpoints disable CSRF. Public web sessions are not implemented.
+
+Geometry, references, quantities, times, schema/JSON constraints and Bean Validation reject invalid writes. Sensitive writes audit in the same transaction. No SQL is assembled from caller-supplied identifiers except allowlisted sort constants. PII is minimized to subject/display name. Retention policy is documented but automated deletion/legal holds remain incomplete.
+
+On-chain verification, live provider connectors, asynchronous exports, real model calibration, tenant onboarding/deletion and full update/archive lifecycle are not implemented. The verification API explicitly returns onChain=false. No endpoint marks these actions complete.
+
+## Advanced forecast integration
+
+`POST /api/v1/forecast-jobs` requires analytics:write and Idempotency-Key. Body: city/district/category slugs, ordered daily observations `{time,demand,supply?}`, horizon 1..90 and explicit dataMode. Java derives the tenant, calls FastAPI `/v1/forecasts` with service identity and X-Tenant-ID, and persists the returned job. `GET /api/v1/forecast-jobs/{id}` requires analytics:read and retrieves only the current tenant's result. The dashboard forecast lab calls this real path and displays returned intervals or an explicit unavailable state. See the [model card](../model-card.md).
+
+`GET /api/v1/analytics/metrics` adds mode/duration-separated ratio, shortage/surplus, UTC time buckets, volatility, business-category distribution, geodesic business density, local-UTM clustering and an explicitly limited proximity indicator. No missing population or capacity inputs are fabricated.
+
+## Blockchain receipt confirmation
+
+`POST /api/v1/verifications/{id}/receipt` requires data:write and a current-tenant digest record. It validates the transaction against configured RPC, chain ID, registry address, attestation-event topic, attestation ID, content digest and canonical block hash before saving CHAIN_CONFIRMED. Unconfigured/unreachable RPC returns 503; unmatched or unmined evidence returns 409. A successful verification request without that matching receipt remains DIGEST_RECORDED. See [blockchain guide](../blockchain.md) for actual local demo evidence, role design and finality limitations.
+
+## PulseAI
+
+The `/api/v1/pulseai` namespace provides owned sessions and evidence-grounded messages. See the [PulseAI contract and security guide](../pulseai.md) for requests, limits, retrieval semantics and current limitations. Runtime OpenAPI includes validated question fields and the `PulseAiAnswer` response schema.

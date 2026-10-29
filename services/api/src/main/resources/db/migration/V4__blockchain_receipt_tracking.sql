@@ -1,0 +1,11 @@
+ALTER TABLE verification_request DROP CONSTRAINT verification_request_status_check;
+ALTER TABLE verification_request ADD CONSTRAINT verification_request_status_check CHECK(status IN ('DIGEST_RECORDED','CHAIN_CONFIRMED'));
+ALTER TABLE verification_request ADD COLUMN chain_id bigint;
+ALTER TABLE verification_request ADD COLUMN contract_address varchar(42);
+ALTER TABLE verification_request ADD COLUMN contract_version varchar(30);
+ALTER TABLE verification_request ADD COLUMN transaction_hash varchar(66);
+ALTER TABLE verification_request ADD COLUMN block_hash varchar(66);
+ALTER TABLE verification_request ADD COLUMN block_number bigint;
+ALTER TABLE verification_request ADD COLUMN attestation_id varchar(66);
+ALTER TABLE verification_request ADD COLUMN verified_at timestamptz;
+CREATE UNIQUE INDEX verification_tenant_transaction ON verification_request(tenant_id,transaction_hash,attestation_id) WHERE transaction_hash IS NOT NULL;

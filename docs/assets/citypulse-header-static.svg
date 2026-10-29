@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+<title id="title">CityPulse — Predict Demand. Optimize Supply. Build Smarter Cities.</title>
+<desc id="desc">A cyan and violet city skyline connects through a geospatial data grid. All text remains visible without animation.</desc>
+<defs><linearGradient id="ground" x2="1" y2="1"><stop stop-color="#080d1c"/><stop offset="1" stop-color="#151337"/></linearGradient><linearGradient id="signal"><stop stop-color="#67e8f9"/><stop offset=".5" stop-color="#818cf8"/><stop offset="1" stop-color="#c084fc"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#475569" stroke-width=".6" opacity=".28"/></pattern></defs>
+
+<rect width="1200" height="420" rx="24" fill="url(#ground)"/><rect width="1200" height="420" rx="24" fill="url(#grid)"/>
+<g fill="none" stroke="url(#signal)" opacity=".35"><path d="M0 330H1200M0 370H1200M600 240L140 420M600 240L350 420M600 240L850 420M600 240L1060 420"/><path d="M35 330V268H70V238H110V330M107 330V290H147V210H188V330M910 330V220H950V175H987V330M995 330V260H1030V200H1070V330M1080 330V280H1130V235H1165V330"/></g>
+<g class="enter" font-family="Arial, Helvetica, sans-serif" text-anchor="middle">
+<text x="600" y="81" font-size="12" letter-spacing="5" fill="#a5b4fc">URBAN INTELLIGENCE · EVIDENCE FIRST</text>
+<text class="type" x="600" y="209" font-size="112" font-weight="800" letter-spacing="5" fill="url(#signal)">CITYPULSE</text>
+<text x="600" y="257" font-size="24" fill="#e2e8f0">Predict Demand. Optimize Supply. Build Smarter Cities.</text>
+<text x="600" y="291" font-size="13" letter-spacing="2" fill="#a5b4fc">GEOSPATIAL ANALYTICS / AI FORECASTS / VERIFIABLE PROVENANCE</text>
+</g>
+<path class="signal" d="M60 350L205 315L330 350L470 325L600 355L745 320L890 350L1040 315L1140 345" fill="none" stroke="url(#signal)" stroke-width="2"/>
+<g fill="#67e8f9"><circle class="point" cx="205" cy="315" r="4"/><circle class="point" cx="470" cy="325" r="4"/><circle class="point" cx="745" cy="320" r="4"/><circle class="point" cx="1040" cy="315" r="4"/></g>
+<text x="600" y="396" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" letter-spacing="3" fill="#94a3b8">OBSERVE → EXPLAIN → SIMULATE → VERIFY</text></svg>

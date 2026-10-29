@@ -1,0 +1,48 @@
+name: Package release
+on:
+  workflow_dispatch:
+permissions: { contents: read }
+jobs:
+  package:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: release
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: aquasecurity/setup-trivy@3fb12ec12f41e471780db15c232d5dd185dcb514
+        with: { version: v0.76.1 }
+      - name: Build, scan, inventory, then publish immutable SHA tags
+        env:
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          registry="ghcr.io/${GITHUB_REPOSITORY,,}"
+          for service in web api ai ingestion; do
+            case "$service" in
+              web) dockerfile=apps/web/Dockerfile ;;
+              api) dockerfile=services/api/Dockerfile ;;
+              ai) dockerfile=services/ai-engine/Dockerfile ;;
+              ingestion) dockerfile=services/ingestion/Dockerfile ;;
+              chain) dockerfile=blockchain/Dockerfile ;;
+            esac
+            image="$registry-$service:$GITHUB_SHA"
+            docker build --label "org.opencontainers.image.revision=$GITHUB_SHA" --label "org.opencontainers.image.source=https://github.com/$GITHUB_REPOSITORY" -f "$dockerfile" -t "$image" .
+            trivy image --scanners vuln --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 "$image"
+            trivy image --format cyclonedx --output "sbom-$service.cdx.json" "$image"
+          done
+          printf '%s' "$REGISTRY_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          for service in web api ai ingestion; do
+            image="$registry-$service:$GITHUB_SHA"
+            docker push "$image"
+            docker inspect "$image" --format '{{json .RepoDigests}}' >> image-digests.jsonl
+          done
+          docker logout ghcr.io
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: release-${{ github.sha }}
+          path: |
+            sbom-*.cdx.json
+            image-digests.jsonl

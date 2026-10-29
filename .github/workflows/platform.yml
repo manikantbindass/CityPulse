@@ -1,0 +1,33 @@
+name: Platform
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions: { contents: read }
+concurrency:
+  group: platform-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  platform:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: { python-version: '3.12' }
+      - name: Install verified Terraform binary
+        run: |
+          mkdir -p .build/tf
+          curl -fsSLo .build/tf/terraform.zip https://releases.hashicorp.com/terraform/1.17.1/terraform_1.17.1_linux_amd64.zip
+          curl -fsSLo .build/tf/checksums https://releases.hashicorp.com/terraform/1.17.1/terraform_1.17.1_SHA256SUMS
+          cd .build/tf
+          grep 'terraform_1.17.1_linux_amd64.zip$' checksums | sed 's/terraform_1.17.1_linux_amd64.zip/terraform.zip/' | sha256sum -c
+          unzip terraform.zip
+          echo "$PWD" >> "$GITHUB_PATH"
+      - run: terraform -chdir=infrastructure/terraform init -backend=false -input=false -lockfile=readonly
+      - run: terraform -chdir=infrastructure/terraform fmt -check -recursive && terraform -chdir=infrastructure/terraform validate && terraform -chdir=infrastructure/terraform test -no-color
+      - run: python scripts/setup-env.py && docker compose -f compose.yaml -f infrastructure/monitoring/compose.yaml --profile chain config --quiet
+      - run: docker run --rm -v "$PWD/infrastructure/monitoring:/etc/prometheus:ro" --entrypoint promtool prom/prometheus:v3.15.1 check config /etc/prometheus/prometheus.yaml
+      - run: docker run --rm -v "$PWD/infrastructure/monitoring/collector.yaml:/etc/otelcol/config.yaml:ro" otel/opentelemetry-collector-contrib:0.164.0 validate --config=/etc/otelcol/config.yaml
+      - run: docker build -f services/ingestion/Dockerfile -t citypulse-ingestion:${{ github.sha }} . && docker run --rm citypulse-ingestion:${{ github.sha }} demo

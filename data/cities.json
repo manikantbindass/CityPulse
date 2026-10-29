@@ -1,0 +1,18 @@
+{
+  "bengaluru": {
+    "name": "Bengaluru example",
+    "countryCode": "IN",
+    "timezone": "Asia/Kolkata",
+    "currency": "INR",
+    "bounds": [77.55, 12.94, 77.64, 13.01],
+    "boundaryStatus": "synthetic rectangle, not an official city boundary"
+  },
+  "amsterdam": {
+    "name": "Amsterdam example",
+    "countryCode": "NL",
+    "timezone": "Europe/Amsterdam",
+    "currency": "EUR",
+    "bounds": [4.86, 52.34, 4.95, 52.4],
+    "boundaryStatus": "synthetic rectangle, not an official city boundary"
+  }
+}

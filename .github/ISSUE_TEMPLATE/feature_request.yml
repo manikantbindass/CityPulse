@@ -1,0 +1,14 @@
+name: Feature request
+description: Propose a concrete user outcome
+title: '[Feature]: '
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: User need and proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria and alternatives

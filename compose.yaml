@@ -1,0 +1,175 @@
+name: citypulse
+
+services:
+  db:
+    image: postgis/postgis:17-3.5
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?Copy .env.example to .env}
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - '127.0.0.1:5432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  db-permissions:
+    image: postgis/postgis:17-3.5
+    entrypoint: ['/bin/sh', '/roles.sh']
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:?Generate a distinct runtime database password}
+    volumes:
+      - ./infrastructure/docker/database-roles.sh:/roles.sh:ro
+    depends_on:
+      db: { condition: service_healthy }
+    restart: 'no'
+
+  redis:
+    image: redis:7.4-alpine
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    command: ['sh', '-c', 'exec redis-server --requirepass "$$REDIS_PASSWORD" --appendonly yes']
+    volumes:
+      - redis-data:/data
+    ports:
+      - '127.0.0.1:6379:6379'
+    healthcheck:
+      test: ['CMD-SHELL', 'REDISCLI_AUTH="$$REDIS_PASSWORD" redis-cli ping | grep -q PONG']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  api:
+    security_opt: ['no-new-privileges:true']
+    cap_drop: ['ALL']
+    read_only: true
+    tmpfs: ['/tmp:rw,noexec,nosuid,size=64m']
+    pids_limit: 256
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      MIGRATION_USER: ${POSTGRES_USER}
+      MIGRATION_PASSWORD: ${POSTGRES_PASSWORD}
+      DATABASE_USER: citypulse_app
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      AI_BASE_URL: http://ai:8000
+      LOCAL_API_TOKEN: ${LOCAL_API_TOKEN:?Set LOCAL_API_TOKEN}
+    ports:
+      - '127.0.0.1:${API_PORT:-8080}:8080'
+    depends_on:
+      db-permissions: { condition: service_completed_successfully }
+      redis: { condition: service_healthy }
+    healthcheck:
+      test: ['CMD', 'curl', '-fsS', 'http://localhost:8080/readyz']
+      interval: 10s
+      timeout: 5s
+      start_period: 60s
+      retries: 12
+    restart: unless-stopped
+
+  ai:
+    security_opt: ['no-new-privileges:true']
+    cap_drop: ['ALL']
+    read_only: true
+    tmpfs: ['/tmp:rw,noexec,nosuid,size=64m']
+    pids_limit: 256
+    build:
+      context: .
+      dockerfile: services/ai-engine/Dockerfile
+    environment:
+      LOCAL_API_TOKEN: ${LOCAL_API_TOKEN}
+      PULSEAI_PROVIDER: ${PULSEAI_PROVIDER:-disabled}
+      PULSEAI_PROVIDER_URL: ${PULSEAI_PROVIDER_URL:-https://api.openai.com/v1}
+      PULSEAI_MODEL: ${PULSEAI_MODEL:-}
+      PULSEAI_API_KEY: ${PULSEAI_API_KEY:-}
+      PULSEAI_MAX_USD_PER_MILLION_TOKENS: ${PULSEAI_MAX_USD_PER_MILLION_TOKENS:-}
+    volumes:
+      - ai-data:/app/var
+    ports:
+      - '127.0.0.1:${AI_PORT:-8000}:8000'
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'python',
+          '-c',
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/ready', timeout=3)",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  web:
+    security_opt: ['no-new-privileges:true']
+    cap_drop: ['ALL']
+    read_only: true
+    tmpfs: ['/tmp:rw,noexec,nosuid,size=64m']
+    pids_limit: 256
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    environment:
+      PULSEAI_LOCAL_PREVIEW: 'true'
+      API_BASE_URL: http://api:8080
+      AI_BASE_URL: http://ai:8000
+      LOCAL_API_TOKEN: ${LOCAL_API_TOKEN}
+    ports:
+      - '127.0.0.1:${WEB_PORT:-3000}:3000'
+    depends_on:
+      api: { condition: service_healthy }
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  chain:
+    profiles: ['chain']
+    build:
+      context: .
+      dockerfile: blockchain/Dockerfile
+    ports: ['127.0.0.1:8545:8545']
+    security_opt: ['no-new-privileges:true']
+    cap_drop: ['ALL']
+    pids_limit: 128
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:8545',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_chainId',params:[]})}).then(async r=>process.exit((await r.json()).result==='0x7a69'?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 12
+
+volumes:
+  ai-data:
+  postgres-data:
+  redis-data:

@@ -1,0 +1,28 @@
+{
+  "extends": "solhint:recommended",
+  "rules": {
+    "compiler-version": ["error", "^0.8.28"],
+    "func-visibility": [
+      "error",
+      {
+        "ignoreConstructors": true
+      }
+    ],
+    "avoid-tx-origin": "error",
+    "avoid-suicide": "error",
+    "avoid-sha3": "error",
+    "no-inline-assembly": "warn",
+    "max-line-length": "off",
+    "gas-custom-errors": "off",
+    "one-contract-per-file": "error",
+    "immutable-vars-naming": "off",
+    "var-name-mixedcase": "off",
+    "use-natspec": "off",
+    "import-path-check": [
+      "warn",
+      {
+        "resolveFromRoot": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "citypulse",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/web",
+    "blockchain"
+  ],
+  "engines": {
+    "node": ">=22.14.0 <25"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace apps/web",
+    "build": "npm run build --workspace apps/web",
+    "lint": "npm run lint --workspace apps/web",
+    "typecheck": "npm run typecheck --workspace apps/web",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check:repo": "python scripts/check_repository.py",
+    "test:contracts": "npm test --workspace blockchain",
+    "stack:up": "docker compose up --build -d --wait",
+    "stack:down": "docker compose down",
+    "stack:logs": "docker compose logs -f",
+    "smoke": "python scripts/smoke.py",
+    "hooks:install": "git config core.hooksPath .githooks"
+  },
+  "devDependencies": {
+    "prettier": "3.9.10",
+    "prettier-plugin-java": "^2.11.0",
+    "solhint": "^6.2.5"
+  }
+}

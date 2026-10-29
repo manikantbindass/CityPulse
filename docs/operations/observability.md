@@ -1,0 +1,32 @@
+# Observability, alerts and proposed SLOs
+
+## Signals and trust boundaries
+
+Spring Boot's OpenTelemetry/Micrometer starter traces API requests; W3C trace context is explicitly propagated by outbound Java AI clients. The AI middleware extracts only W3C trace context, records a server span, counts route/method/status and measures durations. Next's optional `@vercel/otel` instrumentation is activated only with an OTLP endpoint. Export is disabled by default. A collector outage must not fabricate application success; exporter queues/timeouts are bounded.
+
+The local overlay sends traces to a collector with memory limiting/batching and a strict attribute allowlist. It strips URL/query/SQL/body/identity attributes, exception messages/events and span status text before Tempo storage. Resource labels retain service identity, not tenant/user identifiers. Verify redaction against actual provider traces before production use. Trace sampling is 100% in the local diagnostic overlay, normally 10% in the API; tune cost and privacy together.
+
+API management listens on private port 9091, exposing Prometheus and health; metrics are allowed only on that management port, not through public ingress. `/readyz` on 8080 checks DB/Redis, `/livez` checks process liveness. AI `/health` is process liveness and `/ready` requires configured service identity; it is not a claim that every model artifact is valid. AI `/metrics` is internal-only. Never publicly route management or AI endpoints.
+
+Prometheus scrapes API/AI and optional ingestion Pushgateway; Grafana provisions actual throughput/latency/connection/heap/job panels. Tempo stores local trace blocks for 24 hours; Prometheus retains seven days. Grafana requires the generated password. Local `docker compose logs` aggregates stdout; the AWS ECS task definitions send logs to a centralized CloudWatch group with 30-day retention. API emits ECS JSON; AI emits a minimal JSON request event. Web runtime/startup logs can still be unstructured; no universal JSON-log claim is made. Uvicorn access logs are disabled in the container to avoid raw URL/query logging.
+
+## Alerts and response
+
+Prometheus includes target-down, API/AI 5xx, AI latency and instrumented ingestion-failure rules. They are evaluated locally; no Alertmanager/pager destination has been configured or test-paged. Cloud code adds an ALB target-5xx alarm; provide real alarm action ARNs and verify delivery. Scrape failure is a signal to investigate, not proof of user-visible outage. Missing traffic is not counted as successful requests. Ingestion metrics exist only when the real wrapper runs; missing data is not a successful ingestion.
+
+Triage using generated request IDs/trace IDs, then determine process/network/auth/data impact. Do not paste prompts, source rows, credentials or callback query strings into incidents. See the [incident runbook](../security/operations.md).
+
+## Proposed service objectives
+
+These are initial engineering targets, not achieved SLAs or measured production history.
+
+| SLI                               | Proposed objective                                | Measurement                                                                                                                               |
+| --------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Eligible interactive availability | 99.5% over rolling 30 days                        | Successful eligible requests / attempted requests at ingress; include timeouts/5xx, exclude policy-rejected invalid/unauthorized requests |
+| Registry read latency             | p95 under 500 ms at a validated load              | Ingress request histogram, separate from compute requests                                                                                 |
+| Small forecast/decision latency   | p95 under 2 s at documented size limits           | Route-specific completed duration plus timeout count                                                                                      |
+| Configured source freshness       | Within source-specific schedule plus agreed grace | Last successful published checkpoint versus expected cadence; no schedule means no freshness promise                                      |
+
+At 99.5%, a 30-day time-based availability budget is 216 minutes; request-based budgets depend on measured eligible volume. Before adopting a budget, define eligibility, minimum volume and external probe locations. Current dashboards/alerts are foundations, not a complete external SLI implementation.
+
+Policy: investigate fast burn immediately; pause feature releases if the rolling budget is exhausted, except approved remediation. A proposed page requires both 1-hour and 5-minute burn above 14.4x; a proposed ticket uses 6-hour and 30-minute burn above 6x. Implement and test these multi-window rules after real eligibility/traffic is established; the checked-in initial error alerts are simpler thresholds. Record incident impact, release decisions and recovery evidence. No SLO attainment is claimed by a 20-second load smoke.

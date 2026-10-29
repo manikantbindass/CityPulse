@@ -1,0 +1,13 @@
+{
+  "provider": "U.S. Census Bureau",
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0/query?where=STATE%3D%2710%27&outFields=NAME%2CSTATE&f=geojson&outSR=4326&returnGeometry=true",
+  "allowedHost": "tigerweb.geo.census.gov",
+  "licenseReference": "U.S. federal government work, public domain in the United States; preserve source attribution and review other jurisdictions",
+  "licenseUrl": "https://www2.census.gov/foia/ds_policies/ds027.pdf",
+  "licenseStatus": "verified",
+  "dataMode": "historical",
+  "vintage": "January 1, 2026 per official layer metadata",
+  "updateFrequency": "provider release; manual snapshot",
+  "schema": "GeoJSON FeatureCollection of state polygons; not supply/demand observations",
+  "qualityStatus": "raw-unvalidated"
+}

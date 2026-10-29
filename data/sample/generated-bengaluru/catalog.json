@@ -1,0 +1,14 @@
+{
+  "name": "Bengaluru example",
+  "countryCode": "IN",
+  "timezone": "Asia/Kolkata",
+  "currency": "INR",
+  "bounds": [77.55, 12.94, 77.64, 13.01],
+  "boundaryStatus": "synthetic rectangle, not an official city boundary",
+  "sourceUri": "urn:citypulse:synthetic:bengaluru:seed-42",
+  "licenseReference": "synthetic development fixtures; repository license pending",
+  "dataMode": "synthetic",
+  "updateFrequency": "manual deterministic generation",
+  "schemaVersion": 1,
+  "qualityStatus": "not-yet-validated"
+}

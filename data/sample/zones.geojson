@@ -1,0 +1,44 @@
+{
+  "type": "FeatureCollection",
+  "name": "SYNTHETIC Market Quarter",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20000000-0000-0000-0000-000000000001",
+        "city_id": "10000000-0000-0000-0000-000000000001",
+        "name": "Market Quarter",
+        "synthetic": true
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                77.01,
+                12.01
+              ],
+              [
+                77.09,
+                12.01
+              ],
+              [
+                77.09,
+                12.09
+              ],
+              [
+                77.01,
+                12.09
+              ],
+              [
+                77.01,
+                12.01
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

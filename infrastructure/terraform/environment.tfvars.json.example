@@ -1,0 +1,67 @@
+{
+  "name": "citypulse-staging",
+  "region": "ap-south-1",
+  "azs": ["ap-south-1a", "ap-south-1b"],
+  "bucket_name": "REPLACE-WITH-GLOBALLY-UNIQUE-NAME",
+  "postgres_version": "REPLACE-WITH-AVAILABLE-17-MINOR",
+  "hostname": "citypulse.example.org",
+  "certificate_arn": "REPLACE-WITH-VALIDATED-ACM-ARN",
+  "oidc_issuer": "https://REPLACE-WITH-IDP",
+  "oidc_audience": "citypulse-api",
+  "images": {
+    "web": "REPLACE-WITH-ECR-URI@sha256:DIGEST",
+    "api": "REPLACE-WITH-ECR-URI@sha256:DIGEST",
+    "ai": "REPLACE-WITH-ECR-URI@sha256:DIGEST"
+  },
+  "secrets": {
+    "web": [
+      {
+        "name": "OIDC_CLIENT_ID",
+        "valueFrom": "REPLACE-WITH-SECRET-ARN"
+      },
+      {
+        "name": "OIDC_CLIENT_SECRET",
+        "valueFrom": "REPLACE-WITH-SECRET-ARN"
+      },
+      {
+        "name": "SESSION_ENCRYPTION_KEY",
+        "valueFrom": "REPLACE-WITH-SECRET-ARN"
+      },
+      {
+        "name": "SESSION_REDIS_URL",
+        "valueFrom": "REPLACE-WITH-SECRET-ARN"
+      }
+    ],
+    "api": [
+      {
+        "name": "DATABASE_PASSWORD",
+        "valueFrom": "REPLACE-WITH-SECRET-ARN"
+      },
+      {
+        "name": "REDIS_PASSWORD",
+        "valueFrom": "REPLACE-WITH-SECRET-ARN"
+      },
+      {
+        "name": "AI_SERVICE_TOKEN",
+        "valueFrom": "REPLACE-WITH-SECRET-ARN"
+      }
+    ],
+    "ai": [
+      {
+        "name": "AI_SERVICE_TOKEN",
+        "valueFrom": "REPLACE-WITH-SECRET-ARN"
+      }
+    ],
+    "migration": [
+      {
+        "name": "MIGRATION_USER",
+        "valueFrom": "REPLACE-WITH-MIGRATOR-SECRET-ARN"
+      },
+      {
+        "name": "MIGRATION_PASSWORD",
+        "valueFrom": "REPLACE-WITH-MIGRATOR-SECRET-ARN"
+      }
+    ]
+  },
+  "start_services": false
+}
