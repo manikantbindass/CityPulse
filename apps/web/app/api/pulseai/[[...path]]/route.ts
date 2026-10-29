@@ -1,12 +1,11 @@
-import { backendAuthorization } from '../../../../lib/server-auth';
+import { backendAuthorization, sameOrigin } from '../../../../lib/server-auth';
 import { NextRequest } from 'next/server';
 
 async function proxy(request: NextRequest, context: { params: Promise<{ path?: string[] }> }) {
   const { path = [] } = await context.params;
   if (!/^(?:cities|sessions(?:\/[0-9a-f-]{36}(?:\/messages)?)?)$/.test(path.join('/')))
     return Response.json({ detail: 'Unknown analyst route' }, { status: 404 });
-  const origin = request.headers.get('origin');
-  if (origin && origin !== request.nextUrl.origin)
+  if (!sameOrigin(request))
     return Response.json({ detail: 'Same-origin requests required' }, { status: 403 });
   const authorization = await backendAuthorization(request);
   if (!authorization)

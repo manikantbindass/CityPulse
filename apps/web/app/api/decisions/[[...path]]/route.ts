@@ -1,4 +1,4 @@
-import { backendAuthorization, localPreviewEnabled } from '../../../../lib/server-auth';
+import { backendAuthorization, localPreviewEnabled, sameOrigin } from '../../../../lib/server-auth';
 import { NextRequest } from 'next/server';
 
 let localInFlight = false;
@@ -40,7 +40,7 @@ async function proxy(request: NextRequest, context: { params: Promise<{ path?: s
     )
   )
     return Response.json({ detail: 'Unknown decision route' }, { status: 404 });
-  if (request.headers.get('origin') && request.headers.get('origin') !== request.nextUrl.origin)
+  if (!sameOrigin(request))
     return Response.json({ detail: 'Same-origin request required' }, { status: 403 });
   try {
     const body = request.method === 'POST' ? await boundedBody(request) : undefined;

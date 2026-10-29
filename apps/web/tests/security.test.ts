@@ -66,4 +66,21 @@ describe('browser security boundary', () => {
       ),
     ).toBeNull();
   });
+  it('accepts the explicit loopback host when Next internally rewrites its URL', () => {
+    vi.stubEnv('PULSEAI_LOCAL_PREVIEW', 'true');
+    expect(
+      sameOrigin(
+        new Request('http://localhost:3300/api/decisions/local', {
+          headers: { host: '127.0.0.1:3300', origin: 'http://127.0.0.1:3300' },
+        }),
+      ),
+    ).toBe(true);
+    expect(
+      sameOrigin(
+        new Request('http://localhost:3300/api/decisions/local', {
+          headers: { host: '127.0.0.1:3300', origin: 'https://evil.invalid' },
+        }),
+      ),
+    ).toBe(false);
+  });
 });

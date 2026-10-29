@@ -71,7 +71,14 @@ export function webOrigin() {
 export function sameOrigin(request: Request) {
   const origin = request.headers.get('origin');
   const fetchSite = request.headers.get('sec-fetch-site');
-  const expected = process.env.WEB_ORIGIN ?? new URL(request.url).origin;
+  const host = request.headers.get('host');
+  const localOrigin =
+    localPreviewEnabled() &&
+    host &&
+    /^(?:localhost|127\.0\.0\.1|\[::1\])(?::[0-9]{1,5})?$/.test(host)
+      ? `http://${host}`
+      : new URL(request.url).origin;
+  const expected = process.env.WEB_ORIGIN || localOrigin;
   return (
     (!origin || origin === expected) && (!fetchSite || ['same-origin', 'none'].includes(fetchSite))
   );
