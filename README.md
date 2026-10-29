@@ -13,6 +13,8 @@
 
 > **Working development application.** CityPulse has locally runnable Next.js, Spring Boot and FastAPI services, PostGIS migrations, a tested local-chain demonstration, and a real SciPy decision engine. Dashboard samples and reproducible benchmarks are explicitly synthetic. No live city feed, public deployment, guaranteed profit, independent security audit or compliance certification is claimed. AWS infrastructure is code, not a deployed environment.
 
+[Release validation and reproducible end-to-end journey](docs/release/README.md) records verified features, skipped checks, security findings and remaining release gates. The full PDF and PowerPoint are now committed on the default branch.
+
 [Quick start](#quick-start) · [Screenshots](#running-application) · [Architecture](#system-architecture) · [API](#api-documentation) · [Security](#security-architecture) · [Benchmarks](#testing-and-benchmarks) · [Reports](#reports-and-presentation) · [Contribute](#contributing)
 
 ## The problem

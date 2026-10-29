@@ -1,0 +1,42 @@
+{
+  "measuredAt": "2026-10-29T22:29:24.328Z",
+  "environment": "single local Chromium run against production build; synthetic data, browser cache disabled; 1.5-second observation window after heading; map tiles may be unavailable; no production performance claim",
+  "measurements": [
+    {
+      "route": "/",
+      "domContentLoadedMs": 601,
+      "firstContentfulPaintMs": 628,
+      "loadEventMs": 700,
+      "javascriptTransferBytes": 172251,
+      "javascriptDecodedBytes": 557600,
+      "javascriptRequests": 10
+    },
+    {
+      "route": "/dashboard",
+      "domContentLoadedMs": 178,
+      "firstContentfulPaintMs": 168,
+      "loadEventMs": 255,
+      "javascriptTransferBytes": 379624,
+      "javascriptDecodedBytes": 1237180,
+      "javascriptRequests": 15
+    },
+    {
+      "route": "/explorer",
+      "domContentLoadedMs": 39,
+      "firstContentfulPaintMs": 52,
+      "loadEventMs": 115,
+      "javascriptTransferBytes": 757053,
+      "javascriptDecodedBytes": 2616398,
+      "javascriptRequests": 14
+    },
+    {
+      "route": "/analyst",
+      "domContentLoadedMs": 51,
+      "firstContentfulPaintMs": 56,
+      "loadEventMs": 116,
+      "javascriptTransferBytes": 254745,
+      "javascriptDecodedBytes": 822765,
+      "javascriptRequests": 11
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "candidate": "0.1.0-development",
+  "date": "2026-10-30",
+  "documentationMerge": "738fd816312d4c3b320220a1b7db636e6658d529",
+  "local": {
+    "node": "24.14.1",
+    "python": "3.14.3",
+    "java": "25 (compiled with Java release 21)",
+    "webUnit": { "passed": 13 },
+    "browser": { "passed": 18, "scope": "desktop/mobile, accessibility and synthetic workspace" },
+    "javaTests": {
+      "discovered": 30,
+      "passed": 22,
+      "skipped": 8,
+      "reason": "Docker engine unavailable"
+    },
+    "ai": { "passed": 48, "warnings": 1 },
+    "ingestion": { "passed": 6 },
+    "contracts": { "passed": 4, "solhintErrors": 0, "solhintWarnings": 6 },
+    "training": { "segments": 8, "mode": "synthetic", "report": "evidence/model-evaluation.json" },
+    "runtimeNpmAdvisories": 0,
+    "runtimePythonAdvisories": 0,
+    "developerAdvisories": {
+      "high": 5,
+      "rootCause": "GHSA-mrhx-c7xc-m3w5",
+      "status": "unresolved compatible upstream migration"
+    },
+    "secretScanFindings": 0,
+    "configurationFindings": {
+      "critical": 5,
+      "high": 2,
+      "medium": 3,
+      "status": "reviewed residual deployment risks; not clean"
+    },
+    "dockerCompose": {
+      "status": "unavailable",
+      "reason": "Docker Desktop startup failed; dockerDesktopLinuxEngine named pipe absent"
+    },
+    "slither": { "status": "unavailable", "reason": "not installed" }
+  },
+  "finalCandidateCi": {
+    "status": "pending",
+    "note": "Populate with exact final PR/head results; baseline checks do not substitute for candidate verification"
+  },
+  "release": {
+    "published": false,
+    "paidInfrastructureProvisioned": false,
+    "licenseSelected": false
+  }
+}

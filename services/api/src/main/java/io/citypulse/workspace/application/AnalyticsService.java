@@ -30,7 +30,7 @@ public class AnalyticsService {
         Instant to
     ) {
         if (
-            !to.isAfter(from) || Duration.between(from, to).toDays() > 366
+            !to.isAfter(from) || Duration.between(from, to).compareTo(Duration.ofDays(366)) > 0
         ) throw new IllegalArgumentException("Use a positive window up to 366 days");
         var p = new MapSqlParameterSource("tenant", tenant.tenantId())
             .addValue("city", city)
@@ -52,13 +52,13 @@ public class AnalyticsService {
         String filtered =
             " FROM observation o JOIN source_metadata s ON s.id=o.source_id AND s.tenant_id=o.tenant_id WHERE o.tenant_id=:tenant AND o.city_id=:city AND o.commodity=:commodity AND o.unit=:unit AND o.observed_at>=:from AND o.observed_at<:to ";
         var summary = db.query(
-            "WITH totals AS (SELECT s.data_mode,extract(epoch from (period_end-observed_at)) AS interval_seconds,SUM(CASE WHEN kind='demand' THEN quantity ELSE 0 END) AS demand,SUM(CASE WHEN kind='supply' THEN quantity ELSE 0 END) AS supply,COUNT(*) AS observations" +
+            "WITH totals AS (SELECT s.data_mode,extract(epoch from (period_end-observed_at)) AS interval_seconds,SUM(quantity) FILTER (WHERE kind='demand') AS demand,SUM(quantity) FILTER (WHERE kind='supply') AS supply,COUNT(*) AS observations" +
                 filtered +
-                "GROUP BY s.data_mode,interval_seconds) SELECT *,demand/NULLIF(supply,0) AS demand_supply_ratio,GREATEST(demand-supply,0) AS shortage,GREATEST(supply-demand,0) AS surplus,GREATEST(demand-supply,0)/NULLIF(demand,0) AS market_gap_share FROM totals",
+                "GROUP BY s.data_mode,interval_seconds) SELECT *,demand/NULLIF(supply,0) AS demand_supply_ratio,CASE WHEN demand IS NOT NULL AND supply IS NOT NULL THEN GREATEST(demand-supply,0) END AS shortage,CASE WHEN demand IS NOT NULL AND supply IS NOT NULL THEN GREATEST(supply-demand,0) END AS surplus,CASE WHEN demand IS NOT NULL AND supply IS NOT NULL THEN GREATEST(demand-supply,0)/NULLIF(demand,0) END AS market_gap_share FROM totals",
             p
         );
         var temporal = db.query(
-            "SELECT s.data_mode,date_trunc('day',observed_at AT TIME ZONE 'UTC') AS utc_day,extract(epoch from (period_end-observed_at)) AS interval_seconds,SUM(CASE WHEN kind='demand' THEN quantity ELSE 0 END) AS demand,SUM(CASE WHEN kind='supply' THEN quantity ELSE 0 END) AS supply" +
+            "SELECT s.data_mode,date_trunc('day',observed_at AT TIME ZONE 'UTC') AS utc_day,extract(epoch from (period_end-observed_at)) AS interval_seconds,SUM(quantity) FILTER (WHERE kind='demand') AS demand,SUM(quantity) FILTER (WHERE kind='supply') AS supply" +
                 filtered +
                 "GROUP BY s.data_mode,utc_day,interval_seconds ORDER BY utc_day LIMIT 1000",
             p
