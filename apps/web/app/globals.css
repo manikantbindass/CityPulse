@@ -28,6 +28,18 @@
   --soft: #e5ecf5;
   color-scheme: light;
 }
+/* Portaled notifications share workspace surfaces; status text stays readable. */
+html[data-theme] [data-sonner-toaster] {
+  --normal-bg: var(--surface);
+  --normal-text: var(--text);
+  --normal-border: var(--border);
+}
+html[data-theme='light'] [data-sonner-toaster][data-sonner-theme='light'] {
+  --success-text: #14643a;
+  --info-text: #234d8b;
+  --warning-text: #78500a;
+  --error-text: #92243c;
+}
 * {
   box-sizing: border-box;
 }

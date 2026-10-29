@@ -30,7 +30,7 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
     () => true,
     () => false,
   );
-  const { role, theme } = useWorkspace();
+  const { role } = useWorkspace();
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
@@ -102,10 +102,7 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
     </>
   );
   return (
-    <div
-      className={`app-shell ${collapsed ? 'collapsed' : ''}`}
-      data-theme={mounted ? theme : 'dark'}
-    >
+    <div className={`app-shell ${collapsed ? 'collapsed' : ''}`}>
       <a href="#main" className="skip-link">
         Skip to content
       </a>
