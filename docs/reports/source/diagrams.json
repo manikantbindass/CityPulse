@@ -1,0 +1,291 @@
+{
+  "context": {
+    "title": "C4 context: actors and external trust",
+    "nodes": [
+      ["actors", "City stakeholders", "Analysts, planners, owners"],
+      ["web", "CityPulse", "Decision-support system"],
+      ["idp", "Configured identity", "Credentials and optional MFA"],
+      ["providers", "Data providers", "Licensed/synthetic inputs"],
+      ["operator", "Chain operator", "Authorized local/test signer"],
+      ["chain", "EVM registry", "Digest integrity evidence"]
+    ],
+    "edges": [
+      ["actors", "web", "use"],
+      ["web", "idp", "OIDC"],
+      ["providers", "web", "validated input"],
+      ["operator", "chain", "attest"],
+      ["chain", "web", "receipt check"]
+    ],
+    "caption": "CityPulse supports investigation by human actors. The identity provider and data source are separate trust boundaries. Source licensing and completeness are not established by authentication. Chain operations attest a content digest rather than establish measurement truth. The diagram does not assert a real identity-provider enrollment, licensed live feed, municipal partner or public-chain deployment."
+  },
+  "containers": {
+    "title": "C4 containers: implemented runtime boundaries",
+    "nodes": [
+      ["browser", "Browser", "Typed interactive workspace"],
+      ["web", "Next.js BFF", "Session, origin, body bounds"],
+      ["idp", "OIDC provider", "Operator configured"],
+      ["api", "Spring API", "Tenant authorization / audit"],
+      ["db", "PostgreSQL/PostGIS", "Authoritative scoped data"],
+      ["redis", "Redis", "Sessions, cache and limits"],
+      ["ai", "FastAPI / SciPy", "Forecasts / ID selection / LP"],
+      ["state", "AI state and models", "SQLite/files; single writer"],
+      ["chain", "Local EVM", "Operator attestation demo"]
+    ],
+    "edges": [
+      ["browser", "web", "HTTP"],
+      ["web", "idp", "code flow"],
+      ["web", "api", "user identity"],
+      ["api", "db", "transactions"],
+      ["api", "redis", "admission"],
+      ["api", "ai", "service identity"],
+      ["ai", "state", "jobs/artifacts"]
+    ],
+    "caption": "Next mediates browser requests and Spring owns canonical authorization/persistence. Python isolates numerical libraries and uses trusted service tenant context. An explicitly enabled local synthetic/manual adapter is a narrower exception, not tenant retrieval or audited persistence. Blockchain submission is operator-driven in the local demonstration; no background attestation worker is implied."
+  },
+  "components": {
+    "title": "C4 components: modular API",
+    "nodes": [
+      ["identity", "Token + membership", "Issuer, audience, tenant, scopes"],
+      ["controller", "Controller / DTO", "Routes and Bean Validation"],
+      ["service", "Application services", "Policy, transactions, idempotency"],
+      ["registry", "Registry repository port", "Domain-facing abstraction"],
+      ["adapter", "JDBC / JPA adapters", "Parameterized scoped access"],
+      ["database", "PostGIS / Redis", "Integrity and bounded state"],
+      ["ai", "AI HTTP orchestration", "Timeouts and trusted context"],
+      ["audit", "Audit / receipts", "Sensitive writes / replay"]
+    ],
+    "edges": [
+      ["identity", "controller", "admit"],
+      ["controller", "service", "validated DTO"],
+      ["service", "registry", "domain query"],
+      ["registry", "adapter", "implemented by"],
+      ["adapter", "database", "scoped access"],
+      ["service", "ai", "compute"],
+      ["service", "audit", "same transaction"]
+    ],
+    "caption": "This view shows components within the modular Java boundary rather than independent business microservices. Permission checks are not delegated to UI visibility or model instructions. Repository ports, transactional services and scoped adapters keep business logic separate from controllers. Database owners remain administratively powerful even when runtime audit mutation is revoked."
+  },
+  "sequence": {
+    "title": "Sequence: authorized persisted decision",
+    "nodes": [
+      ["request", "1. Browser request", "Explicit filters and assumptions"],
+      ["bff", "2. BFF checks", "Origin, identity and stream size"],
+      ["policy", "3. Java policy", "Tenant/owner/scopes/key"],
+      ["snapshot", "4. Owned snapshot", "Server-resolved immutable input"],
+      ["solve", "5. FastAPI solve", "Validated bounds / LP or MILP"],
+      ["verify", "6. Check response", "Status, version, residual checks"],
+      ["save", "7. Persist scenario", "Input/result hashes and audit"],
+      ["display", "8. Explain / export", "Real result or meaningful error"]
+    ],
+    "edges": [
+      ["request", "bff", "request"],
+      ["bff", "policy", "authorized"],
+      ["policy", "snapshot", "resolve"],
+      ["snapshot", "solve", "service call"],
+      ["solve", "verify", "status"],
+      ["verify", "save", "transaction"],
+      ["save", "display", "response"]
+    ],
+    "caption": "The numbered sequence makes the trust transitions explicit. A local unsaved scenario omits Java persistence and cannot be presented as an audited tenant result. Retried writes use scoped idempotency receipts. Solver infeasibility or unavailable upstream services are not replaced with sample plans. Export and reproduction refer to evaluated canonical inputs, not subsequent form edits."
+  },
+  "erd": {
+    "title": "ERD: principal logical relationships",
+    "nodes": [
+      ["tenant", "tenant / user_account", "Subject membership and role"],
+      ["assign", "tenant_city / city", "Assigned shared city definition"],
+      ["zone", "zone / geographic_area", "Boundary and parent hierarchy"],
+      ["business", "business", "Tenant + city/zone location"],
+      ["source", "source_metadata", "Tenant, license, mode, schema"],
+      ["obs", "observation / inventory", "Event flow / stock snapshot"],
+      ["receipt", "operation_receipt", "Tenant + subject + key"],
+      ["forecast", "forecast_result", "Scoped request and output"],
+      ["audit", "audit_event", "Tenant/action/time"],
+      ["chat", "pulseai_session/message", "Tenant + subject ownership"],
+      ["decision", "decision_snapshot/scenario", "Owned immutable inputs/results"],
+      ["proof", "verification_request", "Digest / receipt state"]
+    ],
+    "edges": [
+      ["tenant", "assign", "assignment"],
+      ["assign", "zone", "geography"],
+      ["tenant", "business", "tenant"],
+      ["source", "obs", "source ref"],
+      ["business", "obs", "business ref"],
+      ["tenant", "chat", "ownership"],
+      ["tenant", "decision", "ownership"],
+      ["tenant", "receipt", "scoped key"],
+      ["tenant", "audit", "scoped event"]
+    ],
+    "caption": "The physical appendix is definitive for column declarations and composite constraints. City is assigned through tenant_city rather than falsely shown as directly tenant-owned. Business/source/observation and inventory references include tenant protection. Chat and decision objects narrow access by subject ownership. This overview omits some foreign keys for readability and is not a full database introspection."
+  },
+  "ingestion": {
+    "title": "Data ingestion and publication lifecycle",
+    "nodes": [
+      ["input", "CSV / JSON / GeoJSON", "Bounded, licensed or synthetic"],
+      ["parse", "Parse and validate", "Schema, timestamps, units"],
+      ["normalize", "Clean and normalize", "Coordinates and explicit mode"],
+      ["dedup", "Deduplicate / quality", "Source/external ID and score"],
+      ["output", "Durable local output", "Normalized, checkpoint, errors"],
+      ["publish", "API publication", "Scopes and idempotency receipts"],
+      ["db", "PostGIS", "Canonical records and provenance"],
+      ["reject", "Reject / dead letter", "No invented successful upload"],
+      ["query", "Analytical queries", "Compatible records only"]
+    ],
+    "edges": [
+      ["input", "parse", "read"],
+      ["parse", "normalize", "valid"],
+      ["normalize", "dedup", "normalize"],
+      ["dedup", "output", "checkpoint"],
+      ["output", "publish", "retryable"],
+      ["publish", "db", "transaction"],
+      ["parse", "reject", "invalid"],
+      ["db", "query", "protected"]
+    ],
+    "caption": "Local normalization and remote publication have different success boundaries. A written checkpoint is not evidence that every API write arrived. Repeated publication relies on scoped server receipts. Quality is a rule-based diagnostic, not source truth or model confidence. Explicit modes and compatible time/unit/geographic definitions must survive each transformation."
+  },
+  "ml": {
+    "title": "ML lifecycle: chronological segmented evaluation",
+    "nodes": [
+      ["rows", "Synthetic daily rows", "8 city/district/category scopes"],
+      ["split", "Chronological split", "60 / 20 / 20"],
+      ["features", "Past-only features", "Lag 1/7/14, mean, weekday"],
+      ["candidates", "Four candidates", "Naive, average, Ridge, XGBoost"],
+      ["select", "Validation selection", "Lowest validation MAE"],
+      ["test", "Held-out one-step test", "MAE/RMSE/sMAPE/coverage"],
+      ["artifact", "Versioned JSON artifact", "Fingerprint and activation"],
+      ["infer", "Bounded inference", "Fallback and explicit intervals"],
+      ["monitor", "Diagnostics / review", "Latency and drift; no auto claim"]
+    ],
+    "edges": [
+      ["rows", "split", "ordered"],
+      ["split", "features", "past only"],
+      ["features", "candidates", "fit"],
+      ["candidates", "select", "validation"],
+      ["select", "test", "untouched report"],
+      ["select", "artifact", "train-only artifact"],
+      ["artifact", "infer", "trusted registry"],
+      ["infer", "monitor", "observe"]
+    ],
+    "caption": "Each segment is separate; the experiment does not establish unseen-city transfer. Rolling one-step tests use earlier observed targets at later origins. Validation selects the model and also supplies residual intervals, so interval coverage is diagnostic rather than an independent conformal guarantee. Recursive horizon widening requires separate evaluation."
+  },
+  "blockchain": {
+    "title": "Blockchain proof verification",
+    "nodes": [
+      ["bytes", "Exported bytes", "No raw private data on-chain"],
+      ["hash", "Off-chain digest", "Versioned canonical policy"],
+      ["source", "AuthorizedSourceRegistry", "Enabled authorized identity"],
+      ["attest", "DatasetAttestationRegistry", "Attester role + event uniqueness"],
+      ["receipt", "Receipt / event", "Chain, address, digest and block"],
+      ["verify", "VerificationRecord", "Read-only hash comparison"],
+      ["backend", "Java confirmation", "Configured RPC and canonical block"],
+      ["changed", "Tampered bytes", "Comparison must fail"]
+    ],
+    "edges": [
+      ["bytes", "hash", "digest"],
+      ["source", "attest", "authorize"],
+      ["hash", "attest", "submit"],
+      ["attest", "receipt", "event"],
+      ["receipt", "verify", "independent read"],
+      ["receipt", "backend", "validate"],
+      ["changed", "verify", "mismatch"]
+    ],
+    "caption": "Attestation IDs include chain ID, registry address, submitter and event ID. The local sample reports a matched original digest and a failed tampered comparison. A DIGEST_RECORDED database row is not CHAIN_CONFIRMED until receipt checks succeed. Reorg/finality, signer custody, source quality and deletion limits remain operational responsibilities."
+  },
+  "pulseai": {
+    "title": "PulseAI: evidence selection, not generated claims",
+    "nodes": [
+      ["question", "Bounded question + filters", "Owned session and permitted city"],
+      ["policy", "Spring policy", "Tenant, subject, scopes"],
+      ["tools", "Fixed read-only tools", "Parameterized DB / allowlist docs"],
+      ["facts", "Verified statements", "Real IDs and document hashes"],
+      ["model", "Optional provider", "Allowed statement IDs only"],
+      ["validate", "Validate ID selection", "Reject unknown/repeated IDs"],
+      ["answer", "Construct answer", "Java factual prose and citations"],
+      ["fallback", "Evidence fallback", "No model / invalid output"],
+      ["history", "Owned conversation", "Bounded retention and history"]
+    ],
+    "edges": [
+      ["question", "policy", "validate"],
+      ["policy", "tools", "authorized"],
+      ["tools", "facts", "retrieve"],
+      ["facts", "model", "bounded selection"],
+      ["model", "validate", "JSON IDs"],
+      ["validate", "answer", "approved IDs"],
+      ["fallback", "answer", "verified facts"],
+      ["answer", "history", "persist"]
+    ],
+    "caption": "Retrieved text is untrusted and cannot select arbitrary SQL or tools. Both Python and Java validate provider-selected IDs, while factual prose and citations are constructed from permitted evidence. Missing data remains unknown. The model does not infer protected tenant filters from natural-language instructions or autonomously change dashboards."
+  },
+  "trust": {
+    "title": "Security data flow and trust boundaries",
+    "nodes": [
+      ["browser", "Untrusted browser", "Inputs, cookies, source text"],
+      ["web", "HTTPS web boundary", "PKCE/state/nonce; CSRF/origin"],
+      ["idp", "External identity", "Configured issuer and assurance"],
+      ["session", "Private session Redis", "Encrypted short-lived token"],
+      ["api", "Private API", "JWT + current membership"],
+      ["db", "Restricted PostGIS", "Tenant/owner queries and audit"],
+      ["ai", "Private numerical service", "Trusted credential and tenant"],
+      ["external", "Optional model provider", "Bounded statement selection"],
+      ["chain", "Digest-only chain", "Immutable public content risk"]
+    ],
+    "edges": [
+      ["browser", "web", "input"],
+      ["web", "idp", "code flow"],
+      ["web", "session", "opaque handle"],
+      ["web", "api", "access token"],
+      ["api", "db", "scoped"],
+      ["api", "ai", "service identity"],
+      ["ai", "external", "optional"]
+    ],
+    "caption": "The layers do not trust browser roles or model instructions as authority. JWT validation, current membership and tenant/owner predicates are independent. Explicit Bearer API requests are exempt from CSRF, while cookie-only/non-API mutations retain protection. TLS, Redis ACLs, IdP setup, edge quotas and real MFA enrollment still require deployment evidence."
+  },
+  "deployment": {
+    "title": "Deployment: local verification and AWS code",
+    "nodes": [
+      ["host", "Local / CI host", "Loopback services and Compose"],
+      ["web", "Web / API / AI", "Non-root application images"],
+      ["data", "PostGIS / Redis", "Persistent local volumes"],
+      ["monitor", "Optional telemetry / chain", "Collector, Tempo, metrics, EVM"],
+      ["alb", "AWS HTTPS ALB", "Existing validated ACM cert"],
+      ["ecs", "Private ECS/Fargate", "Web/API bounded; AI 1 writer"],
+      ["rds", "Managed data", "TLS RDS/Redis; private SGs"],
+      ["efs", "EFS and private S3", "Persistence; S3 integration planned"],
+      ["migrate", "Isolated migration task", "Owner-only secret, no seed"]
+    ],
+    "edges": [
+      ["host", "web", "implemented"],
+      ["web", "data", "local"],
+      ["host", "monitor", "optional"],
+      ["alb", "ecs", "cloud code"],
+      ["ecs", "rds", "private"],
+      ["ecs", "efs", "persistent"],
+      ["migrate", "rds", "bootstrap"]
+    ],
+    "caption": "Linux CI validates Compose, while local Docker Desktop was unavailable. AWS modules are provider-schema and mocked-plan validated, not applied. Counts default to zero pending roles, migration and identity bootstrap; data/network resources would still incur costs after an apply. Internal HTTP, NAT egress and writable ephemeral cloud roots are documented follow-up gaps."
+  },
+  "monitoring": {
+    "title": "Observability and operational evidence",
+    "nodes": [
+      ["web", "Next instrumentation", "Optional OTLP export"],
+      ["api", "Spring / Micrometer", "Private metrics + W3C traces"],
+      ["ai", "FastAPI middleware", "Route metrics / redacted JSON"],
+      ["collector", "OTLP collector", "Allowlist, memory limit, batch"],
+      ["tempo", "Tempo", "Local trace storage"],
+      ["prom", "Prometheus", "API/AI and job scrape"],
+      ["dash", "Grafana dashboard", "Actual signal panels"],
+      ["alerts", "Alert rules", "No pager delivery configured"],
+      ["logs", "ECS CloudWatch path", "Cloud configuration, not deployed"]
+    ],
+    "edges": [
+      ["web", "collector", "traces"],
+      ["api", "collector", "traces"],
+      ["ai", "collector", "traces"],
+      ["collector", "tempo", "redacted"],
+      ["api", "prom", "metrics"],
+      ["ai", "prom", "metrics"],
+      ["prom", "dash", "query"],
+      ["prom", "alerts", "evaluate"]
+    ],
+    "caption": "Compose smoke confirms real scrape targets and actual stored spans; this is stronger than container process health alone. Request logs exclude raw query/body/token fields. Local alert rules are not a tested pager route, and proposed SLOs are not achieved service levels. CloudWatch is an ECS log configuration path, not an asserted deployed centralized logging service."
+  }
+}

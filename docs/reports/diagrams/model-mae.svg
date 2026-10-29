@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="491.27599999999995" height="280" preserveAspectRatio="xMinYMin meet" viewBox="0 0 491 280" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="491.27599999999995" height="280"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-280)" style="clip-path: url(#clip)">
+		<g transform="">
+			<path d="M 45,68 L 476.276,68 Z" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.6;"/>
+			<text x="26.86767578125" y="65.0" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,130) scale(1,-1)">0.0</text>
+			<path d="M 45,111.75 L 476.276,111.75 Z" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.6;"/>
+			<text x="26.86767578125" y="108.75" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,217) scale(1,-1)">2.8</text>
+			<path d="M 45,155.5 L 476.276,155.5 Z" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.6;"/>
+			<text x="26.86767578125" y="152.5" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,305) scale(1,-1)">5.6</text>
+			<path d="M 45,199.25 L 476.276,199.25 Z" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.6;"/>
+			<text x="26.86767578125" y="196.25" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,392) scale(1,-1)">8.5</text>
+			<path d="M 45,243 L 476.276,243 Z" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.6;"/>
+			<text x="22.4140625" y="240.0" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,480) scale(1,-1)">11.3</text>
+			<rect x="50.930045" y="68" width="9.512352499999999" height="64.799918901691" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<rect x="61.4423975" y="68" width="9.512352499999992" height="122.45442365463026" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<rect x="71.95474999999999" y="68" width="9.512352499999992" height="70.6029673653751" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(27%,45%,70%); fill-rule: evenodd;"/>
+			<rect x="82.4671025" y="68" width="9.512352500000006" height="144.16479473694002" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(65%,47%,26%); fill-rule: evenodd;"/>
+			<text x="57.88675683593749" y="53" style="font-family: Vera; font-size: 6.5px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,106) scale(1,-1)">AMS/C/G</text>
+			<rect x="104.83954499999999" y="68" width="9.512352499999992" height="55.45944110667054" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<rect x="115.35189749999998" y="68" width="9.512352499999992" height="127.71213919965732" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<rect x="125.86424999999998" y="68" width="9.512352500000006" height="51.97182800508038" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(27%,45%,70%); fill-rule: evenodd;"/>
+			<rect x="136.3766025" y="68" width="9.512352499999992" height="106.35109898471555" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(65%,47%,26%); fill-rule: evenodd;"/>
+			<text x="111.5106123046875" y="53" style="font-family: Vera; font-size: 6.5px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,106) scale(1,-1)">AMS/C/M</text>
+			<rect x="158.749045" y="68" width="9.512352499999992" height="73.92689094593302" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<rect x="169.2613975" y="68" width="9.512352499999992" height="119.00999574327977" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<rect x="179.77375" y="68" width="9.512352499999992" height="72.34448524557112" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(27%,45%,70%); fill-rule: evenodd;"/>
+			<rect x="190.2861025" y="68" width="9.512352499999992" height="130.5090772174606" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(65%,47%,26%); fill-rule: evenodd;"/>
+			<text x="165.54389160156248" y="53" style="font-family: Vera; font-size: 6.5px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,106) scale(1,-1)">AMS/N/G</text>
+			<rect x="212.658545" y="68" width="9.512352499999992" height="66.79258327014463" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<rect x="223.1708975" y="68" width="9.512352499999992" height="128.30512410603842" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<rect x="233.68325" y="68" width="9.512352499999992" height="67.57724115011115" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(27%,45%,70%); fill-rule: evenodd;"/>
+			<rect x="244.1956025" y="68" width="9.512352499999992" height="81.19147835387872" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(65%,47%,26%); fill-rule: evenodd;"/>
+			<text x="219.1677470703125" y="53" style="font-family: Vera; font-size: 6.5px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,106) scale(1,-1)">AMS/N/M</text>
+			<rect x="266.568045" y="68" width="9.51235250000002" height="51.29574313361344" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<rect x="277.0803975" y="68" width="9.51235250000002" height="113.63912850717674" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<rect x="287.59274999999997" y="68" width="9.51235250000002" height="50.55332074832832" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(27%,45%,70%); fill-rule: evenodd;"/>
+			<rect x="298.1051025" y="68" width="9.51235250000002" height="115.07899305304574" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(65%,47%,26%); fill-rule: evenodd;"/>
+			<text x="274.31662695312497" y="53" style="font-family: Vera; font-size: 6.5px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,106) scale(1,-1)">BLR/C/G</text>
+			<rect x="320.47754499999996" y="68" width="9.51235250000002" height="75.63120081141815" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<rect x="330.9898975" y="68" width="9.51235250000002" height="127.91436456401891" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<rect x="341.50224999999995" y="68" width="9.51235250000002" height="59.67445826710292" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(27%,45%,70%); fill-rule: evenodd;"/>
+			<rect x="352.01460249999997" y="68" width="9.51235250000002" height="152.17391304347828" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(65%,47%,26%); fill-rule: evenodd;"/>
+			<text x="327.94048242187495" y="53" style="font-family: Vera; font-size: 6.5px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,106) scale(1,-1)">BLR/C/M</text>
+			<rect x="374.387045" y="68" width="9.51235250000002" height="67.07010716286914" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<rect x="384.8993975" y="68" width="9.51235250000002" height="126.58651135825443" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<rect x="395.41175" y="68" width="9.51235250000002" height="57.54546108325039" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(27%,45%,70%); fill-rule: evenodd;"/>
+			<rect x="405.9241025" y="68" width="9.51235250000002" height="101.11673027617888" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(65%,47%,26%); fill-rule: evenodd;"/>
+			<text x="381.97376171875" y="53" style="font-family: Vera; font-size: 6.5px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,106) scale(1,-1)">BLR/N/G</text>
+			<rect x="428.296545" y="68" width="9.51235250000002" height="80.71293992953522" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<rect x="438.8088975" y="68" width="9.51235250000002" height="122.2863153122388" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<rect x="449.32124999999996" y="68" width="9.51235250000002" height="65.86023343739186" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(27%,45%,70%); fill-rule: evenodd;"/>
+			<rect x="459.8336025" y="68" width="9.51235250000002" height="102.15145098267851" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(65%,47%,26%); fill-rule: evenodd;"/>
+			<text x="435.59761718749996" y="53" style="font-family: Vera; font-size: 6.5px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,106) scale(1,-1)">BLR/N/M</text>
+			<text x="45" y="260" style="font-family: VeraBold; font-size: 11px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,520) scale(1,-1)">Synthetic held-out MAE by candidate</text>
+			<text x="4" y="245" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,490) scale(1,-1)">Target units; lower is better</text>
+			<rect x="45" y="8" width="8" height="8" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<text x="57" y="9" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,18) scale(1,-1)">seasonal-naive</text>
+			<rect x="153" y="8" width="8" height="8" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,39%,75%); fill-rule: evenodd;"/>
+			<text x="165" y="9" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,18) scale(1,-1)">moving-average</text>
+			<rect x="261" y="8" width="8" height="8" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(27%,45%,70%); fill-rule: evenodd;"/>
+			<text x="273" y="9" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,18) scale(1,-1)">ridge</text>
+			<rect x="369" y="8" width="8" height="8" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(65%,47%,26%); fill-rule: evenodd;"/>
+			<text x="381" y="9" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,18) scale(1,-1)">xgboost</text>
+		</g>
+	</g>
+</svg>

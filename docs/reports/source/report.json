@@ -1,0 +1,297 @@
+{
+  "title": "CityPulse",
+  "subtitle": "AI-Powered Urban Intelligence & Blockchain Analytics",
+  "edition": "1.0 - technical implementation report",
+  "date": "2026-10-29",
+  "snapshot": "2385ea7a3c6f9349c9c9ee67a56ace5f279fa992",
+  "owner": "manikantbindass (verified GitHub repository owner)",
+  "repository": "https://github.com/manikantbindass/CityPulse",
+  "projectVersion": "0.1.0 / API 0.1.0-SNAPSHOT",
+  "classification": "Engineering project; synthetic demonstration; no production certification",
+  "chapters": [
+    {
+      "title": "Executive summary",
+      "file": "docs/reports/source/chapters/01.md",
+      "sources": ["README.md", "docs/PRD.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Abstract and introduction",
+      "file": "docs/reports/source/chapters/02.md",
+      "sources": ["README.md", "docs/PRD.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Problem statement, motivation and objectives",
+      "file": "docs/reports/source/chapters/03.md",
+      "sources": ["README.md", "docs/PRD.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Existing approaches and gap analysis",
+      "file": "docs/reports/source/chapters/04.md",
+      "sources": ["README.md", "docs/PRD.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Scope, users and requirements",
+      "file": "docs/reports/source/chapters/05.md",
+      "sources": ["README.md", "docs/PRD.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Technology choices and tradeoffs",
+      "file": "docs/reports/source/chapters/06.md",
+      "sources": ["README.md", "docs/PRD.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Complete system architecture",
+      "file": "docs/reports/source/chapters/08.md",
+      "sources": [
+        "apps/web/components/providers.tsx",
+        "services/api/src/main/java/io/citypulse/decision/DecisionService.java"
+      ],
+      "figures": ["context", "containers"],
+      "kind": "text"
+    },
+    {
+      "title": "Backend components and request lifecycle",
+      "file": "docs/reports/source/chapters/09.md",
+      "sources": [
+        "apps/web/components/providers.tsx",
+        "services/api/src/main/java/io/citypulse/decision/DecisionService.java"
+      ],
+      "figures": ["components", "sequence"],
+      "kind": "text"
+    },
+    {
+      "title": "Frontend architecture and accessible product behavior",
+      "file": "docs/reports/source/chapters/10.md",
+      "sources": [
+        "apps/web/components/providers.tsx",
+        "services/api/src/main/java/io/citypulse/decision/DecisionService.java"
+      ],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Backend contracts, errors and implemented behavior",
+      "file": "docs/reports/source/chapters/11.md",
+      "sources": ["docs/api/backend.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Database, PostGIS and entity relationships",
+      "file": "docs/reports/source/chapters/12.md",
+      "sources": [
+        "services/api/src/main/resources/db/migration/V1__canonical_geospatial_schema.sql",
+        "services/api/src/main/resources/db/migration/V2__tenant_operations.sql"
+      ],
+      "figures": ["erd"],
+      "kind": "text"
+    },
+    {
+      "title": "Data sources, licensing and retention semantics",
+      "file": "docs/reports/source/chapters/13.md",
+      "sources": ["docs/data-policy.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Ingestion, quality and idempotent publication",
+      "file": "docs/reports/source/chapters/14.md",
+      "sources": ["docs/ingestion.md"],
+      "figures": ["ingestion"],
+      "kind": "text"
+    },
+    {
+      "title": "Supply-demand analytical methodology",
+      "file": "docs/reports/source/chapters/15.md",
+      "sources": [
+        "services/api/src/main/java/io/citypulse/workspace/application/AnalyticsService.java"
+      ],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "AI forecasting methods and feature engineering",
+      "file": "docs/reports/source/chapters/16.md",
+      "sources": ["docs/model-card.md"],
+      "figures": ["ml"],
+      "kind": "text"
+    },
+    {
+      "title": "Training protocol and actual evaluation results",
+      "file": "docs/reports/source/chapters/17.md",
+      "sources": ["docs/reports/model-evaluation.json"],
+      "figures": [],
+      "kind": "model-results"
+    },
+    {
+      "title": "Blockchain design and proof verification",
+      "file": "docs/reports/source/chapters/18.md",
+      "sources": ["docs/blockchain.md"],
+      "figures": ["blockchain"],
+      "kind": "text"
+    },
+    {
+      "title": "PulseAI analyst, retrieval and safety controls",
+      "file": "docs/reports/source/chapters/19.md",
+      "sources": ["docs/pulseai.md"],
+      "figures": ["pulseai"],
+      "kind": "text"
+    },
+    {
+      "title": "Opportunity discovery and resource workspace",
+      "file": "docs/reports/source/chapters/20.md",
+      "sources": ["docs/decision-engine.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Optimization algorithms and measured cases",
+      "file": "docs/reports/source/chapters/21.md",
+      "sources": [
+        "services/ai-engine/citypulse_ai/decisions.py",
+        "docs/reports/decision-evaluation.json"
+      ],
+      "figures": [],
+      "kind": "decision-results"
+    },
+    {
+      "title": "Authentication, authorization and security architecture",
+      "file": "docs/reports/source/chapters/22.md",
+      "sources": ["docs/security/architecture.md"],
+      "figures": ["trust"],
+      "kind": "text"
+    },
+    {
+      "title": "STRIDE threat modeling",
+      "file": "docs/reports/source/chapters/23.md",
+      "sources": ["docs/security/threat-model.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Illustrative control mapping, not certification",
+      "file": "docs/reports/source/chapters/24.md",
+      "sources": ["docs/security/controls.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "UI/UX and real application screenshots",
+      "file": "docs/reports/source/chapters/25.md",
+      "sources": ["docs/assets/readme-provenance.json", "apps/web/e2e/theme.spec.ts"],
+      "figures": [],
+      "kind": "screenshots"
+    },
+    {
+      "title": "Infrastructure, cloud and progressive delivery",
+      "file": "docs/reports/source/chapters/26.md",
+      "sources": ["docs/operations/deployment.md"],
+      "figures": ["deployment"],
+      "kind": "text"
+    },
+    {
+      "title": "Observability, monitoring and proposed SLOs",
+      "file": "docs/reports/source/chapters/27.md",
+      "sources": ["docs/operations/observability.md"],
+      "figures": ["monitoring"],
+      "kind": "text"
+    },
+    {
+      "title": "Performance, scaling and cost assumptions",
+      "file": "docs/reports/source/chapters/28.md",
+      "sources": ["docs/operations/scaling.md"],
+      "figures": [],
+      "kind": "load-results"
+    },
+    {
+      "title": "Reliability and disaster recovery",
+      "file": "docs/reports/source/chapters/29.md",
+      "sources": ["docs/operations/recovery.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Account/key operations and incident response",
+      "file": "docs/reports/source/chapters/30.md",
+      "sources": ["docs/security/operations.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Testing strategy and real results",
+      "file": "docs/reports/source/chapters/31.md",
+      "sources": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/security.yml",
+        "apps/web/e2e/theme.spec.ts"
+      ],
+      "figures": [],
+      "kind": "test-results"
+    },
+    {
+      "title": "Demonstration scenarios and business applications",
+      "file": "docs/reports/source/chapters/32.md",
+      "sources": [
+        "scripts/smoke.py",
+        "scripts/data_pipeline.py",
+        "docs/reports/blockchain-local-demo.json"
+      ],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Current limitations, future enhancements and conclusion",
+      "file": "docs/reports/source/chapters/33.md",
+      "sources": ["docs/operations/scaling.md", "docs/security/verification.md"],
+      "figures": [],
+      "kind": "text"
+    },
+    {
+      "title": "Appendix A - API inventory",
+      "file": "docs/reports/source/chapters/34.md",
+      "sources": [],
+      "figures": [],
+      "kind": "api-inventory"
+    },
+    {
+      "title": "Appendix B - physical data dictionary",
+      "file": "docs/reports/source/chapters/35.md",
+      "sources": [],
+      "figures": [],
+      "kind": "schema-inventory"
+    },
+    {
+      "title": "Appendix C - architecture decision records",
+      "file": "docs/reports/source/chapters/36.md",
+      "sources": ["docs/architecture/decisions/README.md"],
+      "figures": [],
+      "kind": "adrs"
+    },
+    {
+      "title": "Appendix D - commands, configuration and glossary",
+      "file": "docs/reports/source/chapters/37.md",
+      "sources": [],
+      "figures": [],
+      "kind": "commands"
+    },
+    {
+      "title": "References, attributions and reproducibility",
+      "file": "docs/reports/source/chapters/38.md",
+      "sources": [],
+      "figures": [],
+      "kind": "references"
+    }
+  ]
+}
