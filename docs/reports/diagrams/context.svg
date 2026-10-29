@@ -14,12 +14,20 @@
 			<polygon points="172 151, 166.5973 153.6098, 166.5973 148.3902" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
 			<path d="M 318,151 L 336,151 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
 			<polygon points="336 151, 330.5973 153.6098, 330.5973 148.3902" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
-			<path d="M 81,96 L 245,120 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
-			<polygon points="245 120, 239.2764 121.8, 240.0322 116.6354" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<path d="M 81,96 L 81,103 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 81,103 L 1,103 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,103 L 1,113 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,113 L 245,113 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 245,113 L 245,120 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<polygon points="245 120, 242.3902 114.5973, 247.6098 114.5973" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
 			<path d="M 318,65 L 336,65 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
 			<polygon points="336 65, 330.5973 67.60979, 330.5973 62.39021" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
-			<path d="M 409,96 L 245,120 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
-			<polygon points="245 120, 249.9678 116.6354, 250.7236 121.8" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<path d="M 409,96 L 409,103 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 409,103 L 1,103 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,103 L 1,113 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,113 L 245,113 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 245,113 L 245,120 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<polygon points="245 120, 242.3902 114.5973, 247.6098 114.5973" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
 			<rect x="8" y="120" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
 			<text x="17" y="165" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,330) scale(1,-1)">City stakeholders</text>
 			<text x="17" y="140" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,280) scale(1,-1)">Analysts, planners, owners</text>

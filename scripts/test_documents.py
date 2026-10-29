@@ -50,6 +50,12 @@ class EvidenceTests(unittest.TestCase):
                 self.assertIn(start, ids)
                 self.assertIn(end, ids)
 
+    def test_skipped_column_routes_around_middle_node(self):
+        boxes={'a':(0,1,2,.8),'b':(3,1,2,.8),'c':(6,1,2,.8)}
+        route=report.route_edge('a','c',boxes,.1)
+        self.assertEqual(len(route),4)
+        self.assertLess(route[1][1],boxes['b'][1])
+
 
 if __name__ == '__main__':
     unittest.main()

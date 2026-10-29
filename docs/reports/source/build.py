@@ -8,6 +8,7 @@ import math
 import re
 import subprocess
 import textwrap
+import runpy
 from pathlib import Path
 from xml.sax.saxutils import escape
 
@@ -38,6 +39,7 @@ PALE = colors.HexColor("#f1f5fa")
 W, H = 595.276, 841.89
 WIDTH = W - 104
 MANIFEST: dict[str, str] = {}
+route_edge = runpy.run_path(str(SOURCE / 'routing.py'))['route_edge']
 
 
 def source_file(name: str) -> Path:
@@ -229,14 +231,11 @@ def graph(spec):
         y = height-90 - (index // 3) * 86
         positions[node[0]] = (x, y, 146, 62)
     for start, end, label in spec["edges"]:
-        x, y, w, h = positions[start]; xx, yy, ww, hh = positions[end]
-        if yy == y:
-            ax, ay = (x+w, y+h/2) if xx>x else (x, y+h/2)
-            bx, by = (xx, yy+hh/2) if xx>x else (xx+ww, yy+hh/2)
-        else:
-            ax, ay = x+w/2, y if yy<y else y+h
-            bx, by = xx+ww/2, yy+hh if yy<y else yy
-        drawing.add(Line(ax, ay, bx, by, strokeColor=CYAN, strokeWidth=1.1))
+        top_positions={key:(x,height-y-h,w,h) for key,(x,y,w,h) in positions.items()}
+        route=[(x,height-y) for x,y in route_edge(start,end,top_positions,7)]
+        for (ax,ay),(bx,by) in zip(route,route[1:]):
+            drawing.add(Line(ax, ay, bx, by, strokeColor=CYAN, strokeWidth=1.1))
+        (ax,ay),(bx,by)=route[-2:]
         angle = math.atan2(by-ay, bx-ax)
         points = [bx, by, bx-6*math.cos(angle-.45), by-6*math.sin(angle-.45),
                   bx-6*math.cos(angle+.45), by-6*math.sin(angle+.45)]
@@ -471,6 +470,7 @@ def build():
     verify_application_snapshot()
     source_file('docs/reports/source/report.json')
     source_file('docs/reports/source/build.py')
+    source_file('docs/reports/source/routing.py')
     # Preload inspected code, migrations and data so references are stable on all passes.
     for name in load('docs/reports/source/inspected.json'):source_file(name)
     story=[Spacer(1,95),Paragraph('CITYPULSE',STYLES['cover']),Paragraph(escape(CONFIG['subtitle']),STYLES['subtitle']),Spacer(1,26)]

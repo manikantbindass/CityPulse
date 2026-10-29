@@ -14,14 +14,26 @@
 			<polygon points="172 237, 166.5973 239.6098, 166.5973 234.3902" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
 			<path d="M 318,237 L 336,237 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
 			<polygon points="336 237, 330.5973 239.6098, 330.5973 234.3902" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
-			<path d="M 245,206 L 81,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
-			<polygon points="81 182, 86.72364 180.2, 85.96785 185.3646" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
-			<path d="M 245,206 L 245,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 245,206 L 245,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 245,199 L 1,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,199 L 1,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,189 L 81,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 81,189 L 81,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<polygon points="81 182, 83.60979 187.4027, 78.39021 187.4027" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<path d="M 245,206 L 245,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 245,199 L 1,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,199 L 1,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,189 L 245,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 245,189 L 245,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
 			<polygon points="245 182, 247.6098 187.4027, 242.3902 187.4027" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
 			<path d="M 318,151 L 336,151 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
 			<polygon points="336 151, 330.5973 153.6098, 330.5973 148.3902" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
-			<path d="M 245,120 L 81,96 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
-			<polygon points="81 96, 86.72364 94.20002, 85.96785 99.36459" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<path d="M 245,120 L 245,113 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 245,113 L 1,113 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,113 L 1,103 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,103 L 81,103 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 81,103 L 81,96 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<polygon points="81 96, 83.60979 101.4027, 78.39021 101.4027" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
 			<path d="M 154,65 L 172,65 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
 			<polygon points="172 65, 166.5973 67.60979, 166.5973 62.39021" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
 			<rect x="8" y="206" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>

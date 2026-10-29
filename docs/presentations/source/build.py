@@ -25,6 +25,7 @@ DATA=json.loads((SOURCE/'slides.json').read_text(encoding='utf-8'))
 BG='090D16';SURFACE='111B2B';INK='E8EDF5';MUTED='A6B4C9';CYAN='67E8F9';VIOLET='B7A5FF';INDIGO='879BFF';RULE='30445E'
 FONT='Arial'
 HASHES={}
+route_edge=runpy.run_path(str(ROOT/'docs/reports/source/routing.py'))['route_edge']
 
 
 def asset(name):
@@ -100,18 +101,8 @@ def graph(slide,key):
     for i,node in enumerate(nodes):positions[node[0]]=(x0+(i%3)*dx,y0+(i//3)*dy,w,h)
     # Orthogonal connectors run before nodes so no line crosses a label.
     for start,end,label in spec['edges']:
-        x,y,ww,hh=positions[start];xx,yy,www,hhh=positions[end]
-        if abs(y-yy)<.01:
-            a,b=(x+ww,y+hh/2),(xx,yy+hhh/2)
-            if xx<x:a,b=(x,y+hh/2),(xx+www,yy+hhh/2)
-            connector=line(slide,*a,*b,CYAN,1)
-        else:
-            a=(x+ww/2,y+hh);b=(xx+www/2,yy)
-            if yy<y:a=(x+ww/2,y);b=(xx+www/2,yy+hhh)
-            mid=(a[1]+b[1])/2
-            line(slide,a[0],a[1],a[0],mid,CYAN,1)
-            line(slide,a[0],mid,b[0],mid,CYAN,1)
-            connector=line(slide,b[0],mid,b[0],b[1],CYAN,1)
+        route=route_edge(start,end,positions,.14)
+        for a,b in zip(route,route[1:]):connector=line(slide,*a,*b,CYAN,1)
         end_marker=OxmlElement('a:tailEnd');end_marker.set('type','triangle');connector.line._get_or_add_ln().append(end_marker)
     for ident,title,description in nodes:
         x,y,w,h=positions[ident]
@@ -166,6 +157,7 @@ def build():
     assert len(DATA['slides'])==33
     asset('docs/presentations/source/slides.json')
     asset('docs/presentations/source/build.py')
+    asset('docs/reports/source/routing.py')
     report_builder=runpy.run_path(str(asset('docs/reports/source/build.py')))
     if DATA['snapshot'] != report_builder['CONFIG']['snapshot']:
         raise ValueError('Presentation and report must describe the same application snapshot')
@@ -207,7 +199,7 @@ def build():
             if all(r.get('lower') is not None and r.get('upper') is not None for r in predictions):
                 series.extend([('Lower',[r['lower'] for r in predictions]),('Upper',[r['upper'] for r in predictions])])
             native_chart(slide,categories,series,6.8,2.0,5.85,4.15,XL_CHART_TYPE.LINE,True)
-            text(slide,'Actual local synthetic response; residual intervals are diagnostic',.75,6.5,11.9,.4,16,MUTED)
+            text(slide,'Synthetic daily demand units, Jul–Aug 2025; residual intervals are diagnostic',.75,6.5,11.9,.4,16,MUTED)
         elif kind=='test-metrics':
             rows=[('29','Java'),('48','AI'),('13','Web unit'),('18','Desktop/mobile'),('6','Ingestion'),('4','Solidity')]
             for i,(value,label) in enumerate(rows):

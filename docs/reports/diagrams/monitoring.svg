@@ -10,22 +10,50 @@
 	</clipPath>
 	<g id="group" transform="scale(1,-1) translate(0,-296)" style="clip-path: url(#clip)">
 		<g transform="">
-			<path d="M 81,206 L 81,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 81,206 L 81,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 81,199 L 1,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,199 L 1,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,189 L 81,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 81,189 L 81,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
 			<polygon points="81 182, 83.60979 187.4027, 78.39021 187.4027" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
-			<path d="M 245,206 L 81,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
-			<polygon points="81 182, 86.72364 180.2, 85.96785 185.3646" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
-			<path d="M 409,206 L 81,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
-			<polygon points="81 182, 86.57873 179.7914, 86.19783 184.9971" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<path d="M 245,206 L 245,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 245,199 L 1,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,199 L 1,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,189 L 81,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 81,189 L 81,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<polygon points="81 182, 83.60979 187.4027, 78.39021 187.4027" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<path d="M 409,206 L 409,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 409,199 L 1,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,199 L 1,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,189 L 81,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 81,189 L 81,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<polygon points="81 182, 83.60979 187.4027, 78.39021 187.4027" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
 			<path d="M 154,151 L 172,151 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
 			<polygon points="172 151, 166.5973 153.6098, 166.5973 148.3902" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
-			<path d="M 245,206 L 409,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
-			<polygon points="409 182, 404.0322 185.3646, 403.2764 180.2" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
-			<path d="M 409,206 L 409,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 245,206 L 245,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 245,199 L 1,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,199 L 1,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,189 L 409,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 409,189 L 409,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
 			<polygon points="409 182, 411.6098 187.4027, 406.3902 187.4027" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
-			<path d="M 409,120 L 81,96 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
-			<polygon points="81 96, 86.57873 93.79143, 86.19783 98.9971" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
-			<path d="M 409,120 L 245,96 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
-			<polygon points="245 96, 250.7236 94.20002, 249.9678 99.36459" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<path d="M 409,206 L 409,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 409,199 L 1,199 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,199 L 1,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,189 L 409,189 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 409,189 L 409,182 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<polygon points="409 182, 411.6098 187.4027, 406.3902 187.4027" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<path d="M 409,120 L 409,113 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 409,113 L 1,113 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,113 L 1,103 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,103 L 81,103 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 81,103 L 81,96 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<polygon points="81 96, 83.60979 101.4027, 78.39021 101.4027" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
+			<path d="M 409,120 L 409,113 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 409,113 L 1,113 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,113 L 1,103 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 1,103 L 245,103 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<path d="M 245,103 L 245,96 Z" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1.1;"/>
+			<polygon points="245 96, 247.6098 101.4027, 242.3902 101.4027" style="stroke: rgb(3%,49%,56%); stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,56%); fill-rule: evenodd;"/>
 			<rect x="8" y="206" width="146" height="62" rx="7" ry="7" style="stroke: rgb(84%,88%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,96%,98%); fill-rule: evenodd;"/>
 			<text x="17" y="251" style="font-family: VeraBold; font-size: 8.1px;fill: rgb(9%,16%,26%); stroke:none;" transform="translate(0,502) scale(1,-1)">Next instrumentation</text>
 			<text x="17" y="226" style="font-family: Vera; font-size: 7px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,452) scale(1,-1)">Optional OTLP export</text>
