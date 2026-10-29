@@ -605,11 +605,7 @@
       "repeats": 3,
       "medianWallMs": 19.857,
       "maxWallMs": 21.489,
-      "statuses": [
-        "optimal",
-        "optimal",
-        "optimal"
-      ]
+      "statuses": ["optimal", "optimal", "optimal"]
     },
     {
       "groups": 15,
@@ -618,11 +614,7 @@
       "repeats": 3,
       "medianWallMs": 26.242,
       "maxWallMs": 26.283,
-      "statuses": [
-        "optimal",
-        "optimal",
-        "optimal"
-      ]
+      "statuses": ["optimal", "optimal", "optimal"]
     },
     {
       "groups": 30,
@@ -631,11 +623,7 @@
       "repeats": 3,
       "medianWallMs": 62.432,
       "maxWallMs": 65.364,
-      "statuses": [
-        "optimal",
-        "optimal",
-        "optimal"
-      ]
+      "statuses": ["optimal", "optimal", "optimal"]
     }
   ]
 }

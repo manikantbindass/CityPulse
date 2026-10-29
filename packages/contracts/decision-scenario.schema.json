@@ -173,12 +173,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "id",
-        "city",
-        "name",
-        "category"
-      ],
+      "required": ["id", "city", "name", "category"],
       "title": "District",
       "type": "object"
     },
@@ -214,13 +209,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "sourceId",
-        "districtId",
-        "unitCost",
-        "capacity",
-        "travelMinutes"
-      ],
+      "required": ["sourceId", "districtId", "unitCost", "capacity", "travelMinutes"],
       "title": "Lane",
       "type": "object"
     },
@@ -334,13 +323,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "id",
-        "category",
-        "quantity",
-        "unitCost",
-        "name"
-      ],
+      "required": ["id", "category", "quantity", "unitCost", "name"],
       "title": "Stock",
       "type": "object"
     }
@@ -355,21 +338,13 @@
     },
     "useCase": {
       "default": "retail",
-      "enum": [
-        "retail",
-        "logistics",
-        "public-service"
-      ],
+      "enum": ["retail", "logistics", "public-service"],
       "title": "Usecase",
       "type": "string"
     },
     "origin": {
       "default": "synthetic",
-      "enum": [
-        "synthetic",
-        "manual-assumptions",
-        "authorized-snapshot"
-      ],
+      "enum": ["synthetic", "manual-assumptions", "authorized-snapshot"],
       "title": "Origin",
       "type": "string"
     },
@@ -401,23 +376,12 @@
     },
     "dataMode": {
       "default": "synthetic",
-      "enum": [
-        "synthetic",
-        "historical",
-        "live",
-        "assumed"
-      ],
+      "enum": ["synthetic", "historical", "live", "assumed"],
       "title": "Datamode",
       "type": "string"
     },
     "unit": {
-      "enum": [
-        "count",
-        "kg",
-        "litre",
-        "kwh",
-        "trip"
-      ],
+      "enum": ["count", "kg", "litre", "kwh", "trip"],
       "title": "Unit",
       "type": "string"
     },
@@ -476,10 +440,7 @@
     },
     "demandBasis": {
       "default": "observed",
-      "enum": [
-        "observed",
-        "forecast"
-      ],
+      "enum": ["observed", "forecast"],
       "title": "Demandbasis",
       "type": "string"
     },
@@ -520,13 +481,7 @@
     },
     "objective": {
       "default": "balanced",
-      "enum": [
-        "throughput",
-        "coverage",
-        "cost",
-        "fairness",
-        "balanced"
-      ],
+      "enum": ["throughput", "coverage", "cost", "fairness", "balanced"],
       "title": "Objective",
       "type": "string"
     },

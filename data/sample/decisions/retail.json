@@ -30,9 +30,7 @@
       "businessesPerKm2": 40,
       "latitude": 12.9716,
       "longitude": 77.5946,
-      "evidence": [
-        "synthetic:seed-v1"
-      ]
+      "evidence": ["synthetic:seed-v1"]
     },
     {
       "id": "district-2",
@@ -51,9 +49,7 @@
       "businessesPerKm2": 60,
       "latitude": 12.99,
       "longitude": 77.65,
-      "evidence": [
-        "synthetic:seed-v1"
-      ]
+      "evidence": ["synthetic:seed-v1"]
     },
     {
       "id": "district-3",
@@ -72,9 +68,7 @@
       "businessesPerKm2": 80,
       "latitude": 18.52,
       "longitude": 73.85,
-      "evidence": [
-        "synthetic:seed-v1"
-      ]
+      "evidence": ["synthetic:seed-v1"]
     }
   ],
   "stocks": [

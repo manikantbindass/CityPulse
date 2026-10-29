@@ -36,9 +36,7 @@
           "businessesPerKm2": 40.0,
           "latitude": 12.9716,
           "longitude": 77.5946,
-          "evidence": [
-            "synthetic:seed-v1"
-          ]
+          "evidence": ["synthetic:seed-v1"]
         },
         {
           "id": "district-2",
@@ -57,9 +55,7 @@
           "businessesPerKm2": 60.0,
           "latitude": 12.99,
           "longitude": 77.65,
-          "evidence": [
-            "synthetic:seed-v1"
-          ]
+          "evidence": ["synthetic:seed-v1"]
         },
         {
           "id": "district-3",
@@ -78,9 +74,7 @@
           "businessesPerKm2": 80.0,
           "latitude": 18.52,
           "longitude": 73.85,
-          "evidence": [
-            "synthetic:seed-v1"
-          ]
+          "evidence": ["synthetic:seed-v1"]
         }
       ],
       "stocks": [
@@ -135,9 +129,7 @@
         "businessesPerKm2": 40.0,
         "latitude": 12.9716,
         "longitude": 77.5946,
-        "evidence": [
-          "synthetic:seed-v1"
-        ],
+        "evidence": ["synthetic:seed-v1"],
         "effectiveDemand": 160.0,
         "effectiveAvailability": 70.0,
         "gap": 90.0,
@@ -191,9 +183,7 @@
         "businessesPerKm2": 60.0,
         "latitude": 12.99,
         "longitude": 77.65,
-        "evidence": [
-          "synthetic:seed-v1"
-        ],
+        "evidence": ["synthetic:seed-v1"],
         "effectiveDemand": 200.0,
         "effectiveAvailability": 90.0,
         "gap": 110.0,
@@ -247,9 +237,7 @@
         "businessesPerKm2": 80.0,
         "latitude": 18.52,
         "longitude": 73.85,
-        "evidence": [
-          "synthetic:seed-v1"
-        ],
+        "evidence": ["synthetic:seed-v1"],
         "effectiveDemand": 120.0,
         "effectiveAvailability": 60.0,
         "gap": 60.0,
