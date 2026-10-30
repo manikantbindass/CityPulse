@@ -32,5 +32,7 @@
   ".github/workflows/security.yml",
   ".github/workflows/platform.yml",
   "services/api/src/main/java/io/citypulse/workspace/application/ChainReceiptService.java",
-  "services/api/src/test/java/io/citypulse/workspace/ChainReceiptServiceTest.java"
+  "services/api/src/test/java/io/citypulse/workspace/ChainReceiptServiceTest.java",
+  "services/api/src/main/java/io/citypulse/shared/api/RuntimeConfiguration.java",
+  "services/api/src/test/java/io/citypulse/shared/api/RuntimeConfigurationTest.java"
 ]

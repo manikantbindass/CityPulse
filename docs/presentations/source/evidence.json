@@ -1,12 +1,12 @@
 {
-  "snapshot": "dd387635e3c19ef8eca2369db67ac2cf4a0523c8",
+  "snapshot": "3aeefb3d5b88fc9d912e06464405f35e29c6a356",
   "slideCount": 33,
   "size": "16:9 widescreen",
   "font": "Arial (design choice, installed system font; no font asset committed)",
   "sourceHashes": {
     ".github/workflows/ci.yml": "711ddebebe019e550fc7ca2ec208e45bf4d90b4f96000a850c89f510c7b3eab3",
     ".github/workflows/security.yml": "724bbc3d45116fbce04d0708b888188da86f97f003dc6bda2b643c4ba50002bb",
-    "README.md": "2dfc554abbd31f0dadb0b9bb2ffd569bece012de3985ff787bfa7b027983e306",
+    "README.md": "80d5f9713bdedfef032a8b6d2829550971a6c6da0ab4582587b2b8c7b714da58",
     "apps/web/components/providers.tsx": "d571f00cd4167502ea032d6aa1989a1b46060efd7490dc2702f6062ab270ab25",
     "apps/web/e2e/theme.spec.ts": "296c44f728f3ad8f56c5f3a85660fbd7d283beca6b5958db69384fa53b35e13e",
     "apps/web/package.json": "4e7a8f0a375d2cce31d15a286644be97bdec9aa0f91816da1937117289aae2ee",
@@ -28,7 +28,7 @@
     "docs/presentations/source/evidence/explorer.png": "393257f05d2c48917f3361ffec1bdd58130953bb3fd60af832de004e36c0117c",
     "docs/presentations/source/evidence/forecast-demo.json": "049c3ea70a5cd9144e708cdb3fc8079c0ac4a397598a682a3883762940b44fb7",
     "docs/presentations/source/evidence/repository-qr.png": "8f4be70a99a9185db2848c02ef95577d568ca9303e85ea47ad6a08b368b02a84",
-    "docs/presentations/source/slides.json": "8eab8c94f477f7696b56f2b72c2d3f3090c9f38ef398cea5f7ad073b2e900ac7",
+    "docs/presentations/source/slides.json": "3291fc0872c29b1ea62c027d4c220a5fa6900006e952e55d22822fdd3dfa4437",
     "docs/pulseai.md": "84f4eac0132609709f10e5309d75720d16c23e48fe5acafe2c579873af4cda4e",
     "docs/reports/blockchain-local-demo.json": "fdf279b8f66dec3e087d7dd759fb2a2cdd28102f0aac6ad3216bae55bb6b5f1f",
     "docs/reports/decision-evaluation.json": "c0a5420ef79a0a03a417b651cfd676836ffa73f004ec8a52cfe5e2c2f541258c",
@@ -37,9 +37,9 @@
     "docs/reports/operations/k6-local-ai.json": "80ffea47db30fa3b8206d68d9141b3e4e170243409d796b1ce6c45475f53d24a",
     "docs/reports/source/build.py": "7b0fb02677c1780b540fdaabfb7b99955dd6d55321deb5ea070971a64baf46c8",
     "docs/reports/source/diagrams.json": "3168b6312a9c2711349412f8bf1889e417bc39a0eb7322b14e8755a31dd0ec7a",
-    "docs/reports/source/evidence.json": "7383334b4fac101244d2cbe6c53e4667b762618938e365d7d0a923d86043f606",
+    "docs/reports/source/evidence.json": "3b0d1c065bfbade764aab89f1daeab4daf9c7f1b6350f8d693d2ef7600a06b18",
     "docs/reports/source/narrative.md": "f6262e75b31d5cf22036da9ea1afec645cc022d1757435d6124b6b0fe3e1594b",
-    "docs/reports/source/report.json": "bd819282c298c7f94e99cc63ab3ee428b76404979f76f720fa052fe9ba6fc46d",
+    "docs/reports/source/report.json": "2b60d699ab05c7ab38f1ec731937dfaa81d93938eb221c880dd2b10d3f2ab86b",
     "docs/reports/source/routing.py": "9167c313b4e5954cfe5e2ee8da31f87a087776239ae70cf153ad0f9cf6d2e945",
     "docs/security/architecture.md": "023ec771b279b9668560a49e65122935a862b25af88cb5697336c6ad987d3ce9",
     "docs/security/threat-model.md": "c3d6d913caf129a2c54759bfea45ff6e5cd813ee12156f03ed73ad09a539974a",
@@ -61,7 +61,7 @@
     "services/api/src/main/resources/db/migration/V2__tenant_operations.sql": "acaa969e0eedce157b648e17f617b2b49288883d92c0eeada328e05dcc030d41",
     "services/ingestion/citypulse_ingestion/pipeline.py": "64e933a7532bb6162891a32312130553f09e02132c87ddf39a627464e0f613cf"
   },
-  "outputSha256": "9d5ba72994a04396e21fe68b8b9be8468f2231d5c2a98c4b5d73b39146549e89",
+  "outputSha256": "ded9caf7f38ca372ff493864005febac4cf494a1d0faab697d65718b192ca0a4",
   "notes": "Every slide has source-linked speaker notes; charts/architecture labels are editable native objects; fade transition only",
   "limitations": "Synthetic evidence; no production, public-chain or real-city accuracy claim"
 }

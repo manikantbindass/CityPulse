@@ -1,7 +1,7 @@
 {
   "title": "CityPulse",
   "date": "2026-10-30",
-  "snapshot": "dd387635e3c19ef8eca2369db67ac2cf4a0523c8",
+  "snapshot": "3aeefb3d5b88fc9d912e06464405f35e29c6a356",
   "repository": "https://github.com/manikantbindass/CityPulse",
   "slides": [
     {
@@ -343,7 +343,7 @@
       ],
       "kind": "test-metrics",
       "visual": null,
-      "notes": "These counts have revision-linked CI evidence in the report. Linux Java has zero skips; local Docker tests skip because the engine was unavailable. Browser tests include accessibility and theme persistence. Zero fixable HIGH/CRITICAL findings is a scoped scan gate, not a clean bill of security. These counts are the verified earlier 2385ea7 CI baseline. The candidate discovers 30 Java tests; eight are skipped locally without Docker, while 22 execute. The new whole-stack browser scenario must be verified in candidate CI.",
+      "notes": "These counts have revision-linked CI evidence in the report. Linux Java has zero skips; local Docker tests skip because the engine was unavailable. Browser tests include accessibility and theme persistence. Zero fixable HIGH/CRITICAL findings is a scoped scan gate, not a clean bill of security. These counts are the verified earlier 2385ea7 CI baseline. The candidate discovers 31 Java tests; eight are skipped locally without Docker, while 23 execute. The new whole-stack browser scenario must be verified in candidate CI.",
       "sources": ["docs/reports/source/evidence.json", "apps/web/e2e/theme.spec.ts"]
     },
     {

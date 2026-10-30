@@ -274,7 +274,7 @@ Measurements are bounded local/CI experiments. No production throughput, availab
 
 [Download technical report PDF](docs/reports/CityPulse-Technical-Report.pdf) · [Download project presentation PPTX](docs/presentations/CityPulse-Project-Presentation.pptx)
 
-The **79-page technical report** and **33-slide presentation** document inspected application snapshot `dd38763` and measured synthetic experiments. Both include editable sources, architecture diagrams, real application screenshots, limitations and references. [Report regeneration](docs/reports/README.md) · [Presentation regeneration](docs/presentations/README.md). Application changes after that snapshot require a fresh evidence review.
+The **79-page technical report** and **33-slide presentation** document inspected application snapshot `3aeefb3` and measured synthetic experiments. Both include editable sources, architecture diagrams, real application screenshots, limitations and references. [Report regeneration](docs/reports/README.md) · [Presentation regeneration](docs/presentations/README.md). Application changes after that snapshot require a fresh evidence review.
 
 ## Roadmap
 
