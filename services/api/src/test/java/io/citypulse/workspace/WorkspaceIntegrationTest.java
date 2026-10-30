@@ -68,6 +68,9 @@ class WorkspaceIntegrationTest {
             .param("from", "2026-01-01T00:00:00Z")
             .param("to", "2026-01-02T00:00:00Z");
         mvc.perform(request)
+            .andDo(result -> {
+                if (result.getResolvedException() != null) throw result.getResolvedException();
+            })
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.summary[0].demand").value(60))
             .andExpect(jsonPath("$.summary[0].supply").isEmpty())
