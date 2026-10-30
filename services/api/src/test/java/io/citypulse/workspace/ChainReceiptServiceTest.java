@@ -37,6 +37,12 @@ class ChainReceiptServiceTest {
         eventDigest = "0x" + digest;
         server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
         server.createContext("/", exchange -> {
+            // Hardhat's RPC/WebSocket server rejects Java's plaintext h2c upgrade.
+            if (exchange.getRequestHeaders().getFirst("Upgrade") != null) {
+                exchange.sendResponseHeaders(405, -1);
+                exchange.close();
+                return;
+            }
             var input = json.readTree(exchange.getRequestBody());
             Object result = switch (input.path("method").asText()) {
                 case "eth_chainId" -> chain;

@@ -8,7 +8,11 @@ test('real Java/AI forecast renders and report downloads', async ({ page }) => {
   await expect(
     page.getByRole('table', { name: 'Actual AI output from synthetic daily inputs' }),
   ).toBeVisible();
-  await expect(page.getByRole('table').locator('tbody tr')).toHaveCount(7);
+  await expect(
+    page
+      .getByRole('table', { name: 'Actual AI output from synthetic daily inputs' })
+      .locator('tbody tr'),
+  ).toHaveCount(7);
   await page.goto('/reports');
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Download CSV' }).click();

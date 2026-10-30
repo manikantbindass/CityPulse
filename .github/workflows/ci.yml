@@ -120,7 +120,7 @@ jobs:
           path: |
             .build/release-journey/
             apps/web/test-results/
-      - run: docker compose -f compose.yaml -f infrastructure/monitoring/compose.yaml logs --no-color
+      - run: docker compose -f compose.yaml -f infrastructure/monitoring/compose.yaml --profile chain logs --no-color
         if: failure()
       - run: docker compose -f compose.yaml -f infrastructure/monitoring/compose.yaml --profile chain down
         if: always()

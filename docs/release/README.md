@@ -62,7 +62,7 @@ Linux CI results for the final release PR are recorded in the PR checks and [ver
 
 ## Performance and scalability
 
-[Browser observations](evidence/web-performance.json) are a single local Chromium run against a production build, cold browser cache and synthetic pages. Dashboard transferred 379,624 JavaScript bytes (1,237,180 decoded); explorer transferred 757,053 bytes (2,616,398 decoded). This identifies the map/chart stack as a bundle-cost focus, not a measured production bottleneck. Individual timing samples are not percentiles or SLOs. Existing [k6 evidence](../reports/operations/k6-local-ai.json) is a separate dated 21-request loopback AI smoke workload, not a new release benchmark or whole-stack throughput claim.
+[Browser observations](evidence/web-performance.json) are a single local Chromium run against a production build, cold browser cache and synthetic pages. Dashboard transferred 379,624 JavaScript bytes (1,237,180 decoded); explorer transferred 757,053 bytes (2,616,398 decoded). This identifies the map/chart stack as a bundle-cost focus, not a measured production bottleneck. Individual timing samples are not percentiles or SLOs. Five actual tenant-scoped AI HTTP forecasts also passed locally; [raw timings](evidence/ai-http-smoke.json) explicitly identify the seasonal-naive fallback and exclude Java/database latency. Existing [k6 evidence](../reports/operations/k6-local-ai.json) is a separate dated 21-request loopback AI smoke workload, not a new release benchmark or whole-stack throughput claim.
 
 Web/API can scale within Redis/database connection budgets. AI SQLite/file persistence requires a single writer and deliberate stop-before-start deployment; EFS does not make it transactionally distributed. PostgreSQL indexes, bounded queries and cache keys exist; representative saturation, soak, failover, restore and real tenant workloads remain untested. SLO/RTO/RPO values in planning docs are targets.
 
@@ -72,7 +72,7 @@ Server-side scopes/current memberships and tenant/owner predicates govern access
 
 The runtime dependency audits are clean for the recorded scans, but scans are time-specific. `GHSA-mrhx-c7xc-m3w5` affects developer-only Zod usage in Hardhat and related packages. Current upstream Hardhat/plugins still specify Zod 3; overriding to Zod 4 would change their validation API. Keep these tools local/trusted and revisit upstream migration; do not expose the dev chain/tooling publicly. No advisory was hidden or force-fixed across incompatible major versions.
 
-Trivy configuration review reports five critical (four broad-egress rules and private HTTP), two high (public ALB and S3 customer-managed-key recommendation), three medium and low findings. Public HTTPS ALB ingress is intentional; HTTP redirects are not equivalent to encrypted private service links. Private task HTTP, unrestricted destination egress and writable cloud roots remain documented production hardening gates. Customer-managed KMS/state controls, network policy, effective IAM and actual restore rehearsals require an approved deployment review. AWS modules have no applied account evidence. No penetration test, contract audit, certification or production security guarantee is claimed. Slither is unavailable locally; Solhint and contract tests are the executed checks.
+Trivy configuration review reports five critical findings (four broad-egress rules and an HTTP ALB listener), two high (public ALB and S3 customer-managed-key recommendation), three medium and low findings. The flagged port-80 listener redirects to HTTPS rather than serving application responses; private task HTTP is a separate code-reviewed residual risk. Public HTTPS ALB ingress is intentional; HTTP redirects are not equivalent to encrypted private service links. Private task HTTP, unrestricted destination egress and writable cloud roots remain documented production hardening gates. Customer-managed KMS/state controls, network policy, effective IAM and actual restore rehearsals require an approved deployment review. AWS modules have no applied account evidence. No penetration test, contract audit, certification or production security guarantee is claimed. Slither is unavailable locally; Solhint and contract tests are the executed checks.
 
 ## Checklist
 
@@ -80,7 +80,7 @@ Trivy configuration review reports five critical (four broad-egress rules and pr
 - [x] Pinned installations, local builds and available suites executed with skips reported.
 - [x] Fix missing-side analytics, ambiguous clustering IDs and exact 366-day duration validation; add PostGIS regression.
 - [x] Add a real imported-data → forecast/explanation → exported-report → local-chain receipt journey.
-- [x] Fix chain-container write permissions for non-root demo artifacts/compilation.
+- [x] Fix chain-container write permissions for non-root demo artifacts/compilation and force HTTP/1.1 for Hardhat RPC (the real node rejects h2c upgrades).
 - [x] Refresh PRD/changelog and identify planned module boundaries.
 - [x] Full PDF/PPT merged under explicit user approval; working README downloads.
 - [ ] Final candidate CI: migrations, isolation, contract, actual chain/API integration, browser and scans.

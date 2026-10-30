@@ -16,7 +16,8 @@ This is a development candidate, not a published production release. No tag, clo
 - Add Docker/CI security scans, SBOMs, telemetry and Terraform design/mock-plan checks.
 - Publish the full PDF and editable PowerPoint with sources and regeneration checks (PR #24).
 - Fix incomplete document/portal/native-control/toast theme alignment (issue #22 / PR #23).
-- Fix absent supply being aggregated as zero and enforce the exact maximum analytics duration.
+- Fix absent supply being aggregated as zero, ambiguous clustering IDs, and the exact maximum analytics duration.
+- Fix real Hardhat RPC receipt verification by using HTTP/1.1 instead of its rejected h2c upgrade.
 - Add a full-stack release journey through imported data, metrics, forecasting, explanation, CSV/report export, actual local-chain proof and Java receipt confirmation, plus real browser rendering tests.
 
 Known limitations and unrun checks are tracked in [release validation](docs/release/README.md); historical foundation notes follow.

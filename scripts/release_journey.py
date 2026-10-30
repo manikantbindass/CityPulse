@@ -7,6 +7,7 @@ import subprocess
 import sys
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
@@ -30,9 +31,12 @@ def main():
             headers['Idempotency-Key'] = key
         request = Request(base + path, data=json.dumps(body).encode() if body is not None else None,
                           headers=headers)
-        with urlopen(request, timeout=30) as response:
-            assert response.status == 200
-            return json.load(response)
+        try:
+            with urlopen(request, timeout=30) as response:
+                assert response.status == 200
+                return json.load(response)
+        except HTTPError as error:
+            raise RuntimeError(f'Release fixture API failed: {error.code} {error.read(2000).decode(errors="replace")}') from error
 
     catalog = generate(out, 'bengaluru', seed=731)
     raw = out / 'observations.json'
@@ -42,6 +46,10 @@ def main():
     assert not replay['accepted'], 'Duplicate input must not be ingested again'
     publication = publish(validated['accepted'], catalog, base, token)
     assert publication['createdOrReplayed'] == 56
+    contract = api('/v3/api-docs')
+    assert contract['openapi'].startswith('3.')
+    for route in ['/api/v1/analytics/metrics', '/api/v1/forecast-jobs', '/api/v1/reports/export']:
+        assert route in contract['paths'], f'Missing runtime OpenAPI contract: {route}'
     query = urlencode({'cityId': publication['cityId'], 'commodity': 'rice', 'unit': 'kg',
                        'from': '2026-01-01T00:00:00Z', 'to': '2026-01-29T00:00:00Z'})
     metrics = api('/api/v1/analytics/metrics?' + query)

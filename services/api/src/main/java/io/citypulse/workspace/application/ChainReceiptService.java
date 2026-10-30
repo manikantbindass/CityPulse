@@ -25,6 +25,7 @@ public class ChainReceiptService {
     private final String rpc, address, topic, version;
     private final long chainId;
     private final HttpClient client = HttpClient.newBuilder()
+        .version(HttpClient.Version.HTTP_1_1)
         .connectTimeout(Duration.ofSeconds(3))
         .build();
 
