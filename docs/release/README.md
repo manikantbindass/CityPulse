@@ -78,7 +78,7 @@ Trivy configuration review reports five critical (four broad-egress rules and pr
 
 - [x] Metadata/history inspected; no force-push or history rewrite.
 - [x] Pinned installations, local builds and available suites executed with skips reported.
-- [x] Fix missing-side analytics and exact 366-day duration validation; add PostGIS regression.
+- [x] Fix missing-side analytics, ambiguous clustering IDs and exact 366-day duration validation; add PostGIS regression.
 - [x] Add a real imported-data → forecast/explanation → exported-report → local-chain receipt journey.
 - [x] Fix chain-container write permissions for non-root demo artifacts/compilation.
 - [x] Refresh PRD/changelog and identify planned module boundaries.

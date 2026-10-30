@@ -82,7 +82,7 @@ public class AnalyticsService {
             p
         );
         var clusters = db.query(
-            "WITH projected AS (SELECT id,ST_Transform(b.location,(CASE WHEN ST_Y(ST_Centroid(c.boundary))>=0 THEN 32600 ELSE 32700 END)+(floor((ST_X(ST_Centroid(c.boundary))+180)/6)::integer+1)) AS point FROM business b JOIN city c ON c.id=b.city_id WHERE b.tenant_id=:tenant AND b.city_id=:city AND abs(ST_Y(b.location))<80), assigned AS (SELECT id,ST_ClusterDBSCAN(point,eps:=1000,minpoints:=2) OVER(ORDER BY id) AS cluster FROM projected) SELECT cluster,count(*) AS businesses FROM assigned GROUP BY cluster ORDER BY cluster NULLS LAST",
+            "WITH projected AS (SELECT b.id,ST_Transform(b.location,(CASE WHEN ST_Y(ST_Centroid(c.boundary))>=0 THEN 32600 ELSE 32700 END)+(floor((ST_X(ST_Centroid(c.boundary))+180)/6)::integer+1)) AS point FROM business b JOIN city c ON c.id=b.city_id WHERE b.tenant_id=:tenant AND b.city_id=:city AND abs(ST_Y(b.location))<80), assigned AS (SELECT id,ST_ClusterDBSCAN(point,eps:=1000,minpoints:=2) OVER(ORDER BY id) AS cluster FROM projected) SELECT cluster,count(*) AS businesses FROM assigned GROUP BY cluster ORDER BY cluster NULLS LAST",
             p
         );
         return Map.of(
