@@ -1,6 +1,6 @@
 # Project presentation
 
-The [33-slide PowerPoint](CityPulse-Project-Presentation.pptx) uses a dark 16:9 CityPulse design, editable architecture nodes, three native measured-data charts, actual screenshots, a repository QR code and source-linked speaker notes on every slide. It documents inspected application snapshot `723bb901411f84815f48acf1d5e6cef0a51f112d`; synthetic forecasts, experiments, planned cloud deployment and operational limitations are labeled.
+The [33-slide PowerPoint](CityPulse-Project-Presentation.pptx) uses a dark 16:9 CityPulse design, editable architecture nodes, three native measured-data charts, actual screenshots, a repository QR code and source-linked speaker notes on every slide. It documents inspected application snapshot `370e60164da719fc506bd69c2796fb59823cc4ba`; synthetic forecasts, experiments, planned cloud deployment and operational limitations are labeled.
 
 Install the pinned document dependencies and regenerate from the repository root:
 
