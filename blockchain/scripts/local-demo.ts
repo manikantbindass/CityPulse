@@ -25,7 +25,9 @@ await (
 ).wait();
 const output = path.resolve('../.data/blockchain');
 await fs.mkdir(output, { recursive: true });
-const report = 'dataset,district,demand,supply\nSYNTHETIC,central,100,88\n';
+const report = process.env.CITYPULSE_REPORT_PATH
+  ? await fs.readFile(process.env.CITYPULSE_REPORT_PATH, 'utf8')
+  : 'dataset,district,demand,supply\nSYNTHETIC,central,100,88\n';
 await fs.writeFile(path.join(output, 'sample-report.csv'), report);
 const contentHash = ethers.sha256(ethers.toUtf8Bytes(report));
 const reference = 'urn:citypulse:local:sample-report.csv';

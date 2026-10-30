@@ -1,7 +1,7 @@
 name: CI
 on:
   push:
-    branches: [main, 'feat/**']
+    branches: [main]
   pull_request:
   workflow_dispatch:
 permissions:
@@ -68,6 +68,7 @@ jobs:
       - run: python -m pytest services/ai-engine/tests && ruff check services/ai-engine
       - run: python scripts/check_repository.py && python scripts/check_readme.py && python scripts/check_secrets.py
       - run: python -m unittest discover -s services/ingestion/tests -v
+      - run: python scripts/train_models.py --data data/sample/ml/daily-segments.json --out .build/release-models --report .build/release-model-evaluation.json
       - run: npm ci && npm run format:check
       - run: python scripts/setup-env.py && docker compose config --quiet
   contracts:
@@ -95,7 +96,31 @@ jobs:
       - run: python scripts/smoke.py && python scripts/check_database_privileges.py
       - run: python scripts/data_pipeline.py demo && python scripts/data_pipeline.py publish
       - run: python scripts/monitoring_smoke.py
-      - run: docker compose -f compose.yaml -f infrastructure/monitoring/compose.yaml logs --no-color
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+          cache: npm
+      - run: python scripts/release_journey.py
+      - run: npm ci && npm run build
+      - run: npx playwright install --with-deps chromium
+      - shell: python
+        run: |
+          import os, pathlib, subprocess
+          values = dict(line.split('=', 1) for line in pathlib.Path('.env').read_text().splitlines() if '=' in line and not line.startswith('#'))
+          os.environ['LOCAL_API_TOKEN'] = values['LOCAL_API_TOKEN']
+          subprocess.run(['npm', 'run', 'test:e2e', '--workspace', 'apps/web', '--', 'e2e/release.spec.ts'], check=True)
+        env:
+          CITYPULSE_FULL_STACK: 'true'
+          PULSEAI_LOCAL_PREVIEW: 'true'
+          API_BASE_URL: http://127.0.0.1:8080
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: release-journey
+          path: |
+            .build/release-journey/
+            apps/web/test-results/
+      - run: docker compose -f compose.yaml -f infrastructure/monitoring/compose.yaml --profile chain logs --no-color
         if: failure()
       - run: docker compose -f compose.yaml -f infrastructure/monitoring/compose.yaml --profile chain down
         if: always()

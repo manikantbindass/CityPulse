@@ -24,8 +24,17 @@ public class RuntimeConfiguration {
                     org.springframework.http.converter.HttpMessageConverter<?>
                 > converters
             ) {
+                int position = 0;
+                for (int i = 0; i < converters.size(); i++) {
+                    if (
+                        converters.get(i) instanceof
+                            org.springframework.http.converter.ByteArrayHttpMessageConverter ||
+                        converters.get(i) instanceof
+                            org.springframework.http.converter.StringHttpMessageConverter
+                    ) position = i + 1;
+                }
                 converters.add(
-                    0,
+                    position,
                     new org.springframework.http.converter.json.MappingJackson2HttpMessageConverter(
                         mapper
                     )

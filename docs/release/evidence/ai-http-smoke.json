@@ -1,0 +1,10 @@
+{
+  "scope": "five sequential actual synthetic FastAPI forecast HTTP calls; loopback; excludes Java/database; not capacity or SLO evidence",
+  "durationsMs": [109.183, 10.381, 8.925, 9.377, 11.366],
+  "meanMs": 29.846400000000003,
+  "medianMs": 10.381,
+  "model": "seasonal-naive",
+  "modelVersion": "fallback-seasonal-naive-v1",
+  "dataMode": "synthetic",
+  "passed": 5
+}

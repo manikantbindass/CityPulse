@@ -16,6 +16,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path)
     parser.add_argument("--out", type=Path, default=ROOT / ".models")
+    parser.add_argument("--report", type=Path, default=ROOT / "docs/reports/model-evaluation.json")
     args = parser.parse_args()
     if args.data:
         rows = json.loads(args.data.read_text())
@@ -51,8 +52,8 @@ def main():
             json.dumps(rows, indent=2) + "\n"
         )
     report = train_dataset(rows, args.out)
-    (ROOT / "docs/reports").mkdir(parents=True, exist_ok=True)
-    (ROOT / "docs/reports/model-evaluation.json").write_text(
+    args.report.parent.mkdir(parents=True, exist_ok=True)
+    args.report.write_text(
         json.dumps(report, indent=2) + "\n"
     )
     print(

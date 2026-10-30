@@ -58,6 +58,63 @@ class WorkspaceIntegrationTest {
 
     static final String TOKEN = "Bearer test-token-for-citypulse-with-32-characters";
 
+    @Test
+    void analyticsDistinguishesMissingSupplyFromObservedZero() throws Exception {
+        var request = get("/api/v1/analytics/metrics")
+            .header("Authorization", TOKEN)
+            .param("cityId", "10000000-0000-0000-0000-000000000001")
+            .param("commodity", "rice")
+            .param("unit", "kg")
+            .param("from", "2026-01-01T00:00:00Z")
+            .param("to", "2026-01-02T00:00:00Z");
+        mvc.perform(request)
+            .andDo(result -> {
+                if (result.getResolvedException() != null) throw result.getResolvedException();
+            })
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.summary[0].demand").value(60))
+            .andExpect(jsonPath("$.summary[0].supply").isEmpty())
+            .andExpect(jsonPath("$.summary[0].shortage").isEmpty())
+            .andExpect(jsonPath("$.summary[0].surplus").isEmpty())
+            .andExpect(jsonPath("$.dailyUtc[0].supply").isEmpty());
+        jdbc.update(
+            """
+            INSERT INTO observation(tenant_id,id,city_id,zone_id,source_id,external_id,kind,commodity,
+              quantity,unit,observed_at,period_end,provenance,payload_sha256,quality_score)
+            SELECT tenant_id,gen_random_uuid(),city_id,zone_id,source_id,'release-zero-'||v.kind,
+              v.kind,'release-zero',v.quantity,unit,observed_at,period_end,provenance,payload_sha256,quality_score
+            FROM observation o CROSS JOIN (VALUES ('demand',10),('supply',0)) v(kind,quantity)
+            WHERE o.id='50000000-0000-0000-0000-000000000001'
+            """
+        );
+        try {
+            mvc.perform(
+                get("/api/v1/analytics/metrics")
+                    .header("Authorization", TOKEN)
+                    .param("cityId", "10000000-0000-0000-0000-000000000001")
+                    .param("commodity", "release-zero")
+                    .param("unit", "kg")
+                    .param("from", "2026-01-01T00:00:00Z")
+                    .param("to", "2026-01-02T00:00:00Z")
+            )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.summary[0].supply").value(0))
+                .andExpect(jsonPath("$.summary[0].shortage").value(10))
+                .andExpect(jsonPath("$.summary[0].demand_supply_ratio").isEmpty());
+            mvc.perform(
+                get("/api/v1/analytics/metrics")
+                    .header("Authorization", TOKEN)
+                    .param("cityId", "10000000-0000-0000-0000-000000000001")
+                    .param("commodity", "rice")
+                    .param("unit", "kg")
+                    .param("from", "2026-01-01T00:00:00Z")
+                    .param("to", "2027-01-02T00:00:01Z")
+            ).andExpect(status().isBadRequest());
+        } finally {
+            jdbc.update("DELETE FROM observation WHERE commodity='release-zero'");
+        }
+    }
+
     @BeforeEach
     void limits() {
         when(

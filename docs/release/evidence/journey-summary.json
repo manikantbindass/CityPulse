@@ -1,0 +1,21 @@
+{
+  "dataMode": "synthetic",
+  "verifiedArtifactRevision": "7d8ce81",
+  "workflow": "https://github.com/manikantbindass/CityPulse/actions/runs/41019017283",
+  "ingestedRecords": 56,
+  "forecastCount": 7,
+  "forecastModel": "ridge",
+  "forecastMode": "synthetic",
+  "explanationStatements": 13,
+  "explanationProvider": "evidence-fallback",
+  "chainId": 31337,
+  "contractVersion": "1.0.0",
+  "reportSha256": "0xb8a536e149c45aa65716c717cf3b1204a94898621fc26f98adf520349cb50caf",
+  "transactionHash": "0xd05764d29653feb4ec64bac2553922620b0d0d5c23ca109d4ac38825233b1799",
+  "gasUsed": "150800",
+  "originalVerified": true,
+  "tamperedVerified": false,
+  "backendStatus": "CHAIN_CONFIRMED",
+  "browserCasesPassed": 2,
+  "limitations": "Ephemeral synthetic CI environment; no public-chain deployment, fees, city intelligence or production performance inference"
+}

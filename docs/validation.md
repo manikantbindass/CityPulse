@@ -1,5 +1,7 @@
 # Validation record
 
+Historical phase log. For current candidate results and remaining gates, read the [release audit](release/README.md). The statements below describe earlier revisions and must not be interpreted as current feature status.
+
 29 October 2026. This branch is a development foundation, not a production release.
 
 ## Observed results
