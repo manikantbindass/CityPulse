@@ -6,18 +6,36 @@
     "node": "24.14.1",
     "python": "3.14.3",
     "java": "25 (compiled with Java release 21)",
-    "webUnit": { "passed": 13 },
-    "browser": { "passed": 18, "scope": "desktop/mobile, accessibility and synthetic workspace" },
+    "webUnit": {
+      "passed": 13
+    },
+    "browser": {
+      "passed": 18,
+      "scope": "desktop/mobile, accessibility and synthetic workspace"
+    },
     "javaTests": {
-      "discovered": 30,
-      "passed": 22,
+      "discovered": 31,
+      "passed": 23,
       "skipped": 8,
       "reason": "Docker engine unavailable"
     },
-    "ai": { "passed": 48, "warnings": 1 },
-    "ingestion": { "passed": 6 },
-    "contracts": { "passed": 4, "solhintErrors": 0, "solhintWarnings": 6 },
-    "training": { "segments": 8, "mode": "synthetic", "report": "evidence/model-evaluation.json" },
+    "ai": {
+      "passed": 48,
+      "warnings": 1
+    },
+    "ingestion": {
+      "passed": 6
+    },
+    "contracts": {
+      "passed": 4,
+      "solhintErrors": 0,
+      "solhintWarnings": 6
+    },
+    "training": {
+      "segments": 8,
+      "mode": "synthetic",
+      "report": "evidence/model-evaluation.json"
+    },
     "runtimeNpmAdvisories": 0,
     "runtimePythonAdvisories": 0,
     "developerAdvisories": {
@@ -36,7 +54,18 @@
       "status": "unavailable",
       "reason": "Docker Desktop startup failed; dockerDesktopLinuxEngine named pipe absent"
     },
-    "slither": { "status": "unavailable", "reason": "not installed" }
+    "slither": {
+      "status": "unavailable",
+      "reason": "not installed"
+    },
+    "trainedInference": {
+      "model": "ridge",
+      "version": "daily-v1-49ffebe53361",
+      "trainingFingerprint": "49ffebe53361be13ce46d58eb1a819a86b1fb9ba1936bc149224e74d7d3ddbff",
+      "predictionLatencyMs": 6.867,
+      "dataMode": "synthetic",
+      "scope": "single local actual prediction; not accuracy or latency-distribution evidence"
+    }
   },
   "finalCandidateCi": {
     "status": "pending",

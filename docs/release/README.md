@@ -45,7 +45,7 @@ The CI browser release test makes a real web → Java → AI request, checks sev
 | Git integrity/metadata | Correct name/description, preserved history; `git fsck` reports only dangling historical trees, no corrupt objects                                              |
 | Frontend               | Clean lockfile installation, production Webpack build, lint/types, 13 unit tests passed                                                                         |
 | Browser                | 18 desktop/mobile tests passed, including axe checks, focus/navigation, light/dark portals and reduced motion                                                   |
-| Java                   | Build passed; 30 tests discovered, 22 executed, eight Docker-dependent tests skipped after the new regression was added                                         |
+| Java                   | Build passed; 31 tests discovered, 23 executed, eight Docker-dependent tests skipped after the analytics and JSON-contract regressions were added               |
 | AI                     | 48 tests passed, Ruff passed; Python compilation succeeded; one upstream Starlette/httpx deprecation warning                                                    |
 | Ingestion              | Six tests passed; deterministic Bengaluru/Amsterdam datasets and duplicate replay demonstrated                                                                  |
 | ML                     | Eight synthetic segments trained/evaluated; actual measured output in [evidence/model-evaluation.json](evidence/model-evaluation.json), no field-accuracy claim |
@@ -80,6 +80,7 @@ Trivy configuration review reports five critical findings (four broad-egress rul
 - [x] Pinned installations, local builds and available suites executed with skips reported.
 - [x] Fix missing-side analytics, ambiguous clustering IDs and exact 366-day duration validation; add PostGIS regression.
 - [x] Add a real imported-data → forecast/explanation → exported-report → local-chain receipt journey.
+- [x] Preserve raw OpenAPI/JSON byte responses by correcting Jackson converter precedence.
 - [x] Fix chain-container write permissions for non-root demo artifacts/compilation and force HTTP/1.1 for Hardhat RPC (the real node rejects h2c upgrades).
 - [x] Refresh PRD/changelog and identify planned module boundaries.
 - [x] Full PDF/PPT merged under explicit user approval; working README downloads.
