@@ -100,7 +100,7 @@ def main():
         'ATTESTATION_EVENT_TOPIC': chain['eventTopic']}}}}
     config = out / 'chain.compose.json'
     config.write_text(json.dumps(override), encoding='utf-8')
-    subprocess.run(compose[:2] + ['-f', 'compose.yaml', '-f', str(config), '--profile', 'chain',
+    subprocess.run(compose + ['-f', str(config),
                    'up', '-d', '--no-deps', '--wait', '--wait-timeout', '180', 'api'], cwd=ROOT, check=True)
     confirmed = api(f"/api/v1/verifications/{receipt['id']}/receipt", {
         'transactionHash': chain['transactionHash'], 'attestationId': chain['attestationId']})
