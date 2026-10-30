@@ -68,8 +68,23 @@
     }
   },
   "finalCandidateCi": {
-    "status": "pending",
-    "note": "Populate with exact final PR/head results; baseline checks do not substitute for candidate verification"
+    "status": "passed",
+    "verifiedArtifactRevision": "7d8ce81",
+    "implementationRevision": "3aeefb3d5b88fc9d912e06464405f35e29c6a356",
+    "ci": "https://github.com/manikantbindass/CityPulse/actions/runs/41019017283",
+    "security": "https://github.com/manikantbindass/CityPulse/actions/runs/41019017325",
+    "documents": "https://github.com/manikantbindass/CityPulse/actions/runs/41019017475",
+    "platform": "https://github.com/manikantbindass/CityPulse/actions/runs/41019017534",
+    "java": {
+      "passed": 31,
+      "skipped": 0
+    },
+    "realStackBrowser": {
+      "passed": 2,
+      "skipped": 0
+    },
+    "journey": "evidence/journey-summary.json",
+    "note": "This ledger is a documentation-only follow-up to the recorded verified code/artifact revision. Current PR checks remain authoritative."
   },
   "release": {
     "published": false,

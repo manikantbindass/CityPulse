@@ -56,9 +56,9 @@ The CI browser release test makes a real web → Java → AI request, checks sev
 | Secret scan            | Trivy source-secret scan reported no findings; pattern-based repository guard also passed                                                                       |
 | Infrastructure scan    | Findings retained below; not asserted clean                                                                                                                     |
 | Local Docker           | Docker Desktop failed to start; Linux named pipe unavailable; explicit Compose up failed. No local container/migration/whole-stack pass claimed                 |
-| PDF/PPT                | Full documents on main; document tests and package checks passed before release changes; refreshed evidence must be checked against the final candidate         |
+| PDF/PPT                | Full documents on main; 79-page PDF and 33-slide deck regenerated, reopened/rendered and passed document CI against the corrected implementation                |
 
-Linux CI results for the final release PR are recorded in the PR checks and [verification ledger](verification.json). Until that exact revision passes, new migration/receipt/browser integration assertions remain pending. Earlier PR #24 passed full Compose, Java/PostGIS, web, AI, contract, platform and security gates; that is baseline evidence, not a substitute for the changed candidate.
+Linux CI verified artifact revision `7d8ce81` in [PR #25](https://github.com/manikantbindass/CityPulse/pull/25): all 31 Java tests passed without skips, along with 48 AI, 13 web unit, 18 regular browser, six ingestion, four contract and seven document tests. The two additional real-stack browser cases passed. Full Compose startup, migrations, tenant/owner tests, least-privilege grants, runtime OpenAPI checks, imported metrics, forecast/explanation/report generation, local-chain attestation and independent Java receipt confirmation passed. [Verification ledger](verification.json) links exact runs; [journey evidence](evidence/journey-summary.json) records actual fingerprints and bounded results. Current PR checks are authoritative for later documentation-only commits.
 
 ## Performance and scalability
 
@@ -84,7 +84,7 @@ Trivy configuration review reports five critical findings (four broad-egress rul
 - [x] Fix chain-container write permissions for non-root demo artifacts/compilation and force HTTP/1.1 for Hardhat RPC (the real node rejects h2c upgrades).
 - [x] Refresh PRD/changelog and identify planned module boundaries.
 - [x] Full PDF/PPT merged under explicit user approval; working README downloads.
-- [ ] Final candidate CI: migrations, isolation, contract, actual chain/API integration, browser and scans.
+- [x] Verified candidate CI: migrations, isolation, runtime contracts, actual chain/API integration, browser and scans (exact recorded revision above).
 - [ ] Successful local Docker run (host engine unavailable).
 - [ ] Owner selects a project license; no license is inferred.
 - [ ] Real IdP/MFA, licensed sources, privacy/legal review, operational recovery and production cloud hardening.
